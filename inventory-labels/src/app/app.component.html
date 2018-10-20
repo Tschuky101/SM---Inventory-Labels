@@ -1,20 +1,26 @@
+<mat-drawer-container class="sidenav-container">
+	<mat-drawer mode="side" opened class="z-depth-1 primaryBG_500 primaryText_500">
+		<mat-toolbar class="app_menu_bar primaryBG_900 primaryText_900">&nbsp;</mat-toolbar>
+		
+		<div id="App_Logo">
+			<svg xmlns="http://www.w3.org/2000/svg" width="154" height="26" viewBox="0 0 154 26">
+			    <path d="M.008 19.653L.82 18.56c1.568 1.206 3.304 1.879 5.123 1.879 1.932 0 3.444-1.065 3.444-2.72v-.057c0-1.682-1.792-2.299-3.78-2.86C3.285 14.13.709 13.428.709 10.877v-.055c0-2.3 1.932-3.954 4.703-3.954 1.708 0 3.64.616 5.067 1.57l-.728 1.15c-1.315-.87-2.883-1.43-4.395-1.43-1.96 0-3.247 1.065-3.247 2.495v.056c0 1.598 1.932 2.187 3.975 2.776 2.296.645 4.703 1.486 4.703 4.01v.055c0 2.552-2.183 4.178-4.927 4.178-2.072 0-4.339-.841-5.85-2.075zm22.24-12.505h1.372V9.7c.924-1.487 2.212-2.888 4.76-2.888 2.49 0 4.03 1.43 4.814 3.084.924-1.598 2.465-3.084 5.152-3.084 3.387 0 5.487 2.383 5.487 5.972v8.664h-1.372v-8.496c0-3.084-1.596-4.878-4.227-4.878-2.408 0-4.508 1.85-4.508 5.046v8.328h-1.371v-8.58c0-2.972-1.624-4.794-4.172-4.794-2.548 0-4.563 2.242-4.563 5.13v8.244H22.25v-14.3zm-5.539 14.3h-1.372v-14.3h1.372v14.3zm-.685-17.563a.843.843 0 0 1 0-1.684.843.843 0 0 1 0 1.684zm40.358 2.923c3.443 0 6.943 2.776 6.943 7.43v.057c0 4.654-3.5 7.486-6.943 7.486-2.855 0-4.703-1.626-5.878-3.421v7.571h-1.372V7.145h1.372v3.197c1.231-1.88 3.051-3.534 5.878-3.534zm5.46 7.546v-.056c0-3.758-2.604-6.169-5.6-6.169-2.967 0-5.823 2.496-5.823 6.141v.056c0 3.673 2.856 6.14 5.823 6.14 3.108 0 5.6-2.27 5.6-6.112zm7.167 7.098h-1.372V.984h1.372v20.468zm3.81 3.946l.476-1.206c.756.365 1.372.533 2.436.533 1.484 0 2.463-.869 3.527-3.364l-6.86-14.216h1.597l5.934 12.785 5.152-12.785h1.511L80.406 21.95c-1.26 3-2.716 4.066-4.76 4.066-1.091 0-1.875-.196-2.827-.617zm68.07-11.044v-.056c0-4.01 3.19-7.487 7.278-7.487 2.688 0 4.367 1.234 5.711 2.636l-.98 1.01c-1.232-1.262-2.632-2.356-4.759-2.356-3.247 0-5.767 2.72-5.767 6.14v.057c0 3.449 2.604 6.197 5.879 6.197 2.015 0 3.583-1.038 4.787-2.384l.952.841c-1.456 1.655-3.191 2.833-5.823 2.833-4.115 0-7.278-3.422-7.278-7.431zM96.936 7.148h1.372V9.7c.924-1.487 2.212-2.888 4.76-2.888 2.49 0 4.03 1.43 4.814 3.084.924-1.598 2.464-3.084 5.151-3.084 3.388 0 5.487 2.383 5.487 5.972v8.664h-1.371v-8.496c0-3.084-1.597-4.878-4.227-4.878-2.408 0-4.508 1.85-4.508 5.046v8.328h-1.371v-8.58c0-2.972-1.624-4.794-4.172-4.794-2.548 0-4.563 2.242-4.563 5.13v8.244h-1.372v-14.3zm38.492 0h1.372v14.3h-1.372V18.25c-1.231 1.88-3.05 3.533-5.878 3.533-3.444 0-6.943-2.775-6.943-7.43v-.056c0-4.655 3.5-7.487 6.943-7.487 2.855 0 4.703 1.626 5.878 3.422V7.148zm.085 7.178v-.056c0-3.673-2.855-6.14-5.823-6.14-3.107 0-5.6 2.27-5.6 6.112v.056c0 3.758 2.605 6.169 5.6 6.169 2.968 0 5.823-2.496 5.823-6.141z"/>
+			</svg>
+		</div>
+		
+		<div id="App_actions">
+			<button mat-flat-button onclick="addLabel()">Add Label</button>
+			<button mat-flat-button>Print {{labels.length}} Label<span *ngIf="labels.length !== 1" style="vertical-align: initial !important">s</span></button>
+		</div>
+		
+		<div id="credits">
+			Designed by: {{author}} <br>App Version {{version}}
+		</div>
+		
+	</mat-drawer>
+	<mat-drawer-content>
+		
+		
+	</mat-drawer-content>
+</mat-drawer-container>
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-
