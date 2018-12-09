@@ -33,19 +33,6 @@ export class AppComponent{
 	DeviceTypechips: Object= this.getheroTypes();
 	cardTypes: Object = this.getCardTypes();
 	removeAllLabels: string;
-	
-/*
-	cardTypes = [
-		{"value":"cpu", "viewValue":"Computer"},
-		{"value":"ipad", "viewValue":"iPad"},
-		{"value":"iphone", "viewValue":"iPhone"},
-		{"value":"watch", "viewValue":"Apple Watch"},
-		{"value":"tv", "viewValue":"Apple Tv"},
-		{"value":"pencil", "viewValue":"Apple Pencil"},
-		{"value":"hpod", "viewValue":"HomePod"}
-	];
-*/
-	
 	labels = [];
 	
 	constructor(
@@ -184,12 +171,3 @@ export class AppComponent{
 	templateUrl: 'clearLabels-dialog.html',
 })
 export class ClearLabelsDialog {constructor(public dialogRef: MatDialogRef<ClearLabelsDialog>, @Inject(MAT_DIALOG_DATA) public data: DialogData) {}}
-
-export class CustomRequestOptions extends BaseRequestOptions {
-	// Disables HTTP cache
-	headers = new Headers({
-        'Cache-Control': 'no-cache',
-        'Pragma': 'no-cache',
-        'Expires': 'Sat, 01 Jan 2000 00:00:00 GMT'
-    });
-}
