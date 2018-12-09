@@ -4,6 +4,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { BaseRequestOptions, Headers } from '@angular/http';
 
 export interface DialogData {
 	removeAllLabels: false;
@@ -49,11 +50,17 @@ export class AppComponent{
 		private http: HttpClient	
 	){}
 
+	// Disables HTTP cache
+	headers = new Headers({
+        'Cache-Control': 'no-cache',
+        'Pragma': 'no-cache',
+        'Expires': 'Sat, 01 Jan 2000 00:00:00 GMT'
+    });
 
 	
 	public getherodevices(){
 		if(this.local == false ){
-			var data = this.http.get('https://raw.githubusercontent.com/Tschuky101/SM-Inventory-Labels/master/inventory-labels/src/assets/devices.json').subscribe(devices => this.devices = devices, err => console.log(err),() => console.log('Completed'));
+			var data = this.http.get('https://raw.githubusercontent.com/Tschuky101/SM-Inventory-Labels/master/inventory-labels/src/assets/devices.json', {cache:false}).subscribe(devices => this.devices = devices, err => console.log(err),() => console.log('Completed'));
 		} else {
 			var data = this.http.get('assets/devices.json').subscribe(devices => this.devices = devices, err => console.log(err),() => console.log('Completed'));
 		}
@@ -62,7 +69,7 @@ export class AppComponent{
 	}
 	public getheroPrices(){
 		if(this.local == false ){
-			var data = this.http.get('https://raw.githubusercontent.com/Tschuky101/SM-Inventory-Labels/master/inventory-labels/src/assets/prices.json').subscribe(prices => this.prices = prices, err => console.log(err),() => console.log('Completed'));
+			var data = this.http.get('https://raw.githubusercontent.com/Tschuky101/SM-Inventory-Labels/master/inventory-labels/src/assets/prices.json', {cache:false}).subscribe(prices => this.prices = prices, err => console.log(err),() => console.log('Completed'));
 		} else {
 			var data = this.http.get('assets/prices.json').subscribe(prices => this.prices = prices, err => console.log(err),() => console.log('Completed'));
 		}
@@ -70,7 +77,7 @@ export class AppComponent{
 	}
 	public getheroTypes(){
 		if(this.local == false ){
-			var data = this.http.get('https://raw.githubusercontent.com/Tschuky101/SM-Inventory-Labels/master/inventory-labels/src/assets/DeviceTypeOptions.json').subscribe(DeviceTypechips => this.DeviceTypechips = DeviceTypechips, err => console.log(err),() => console.log('Completed'));
+			var data = this.http.get('https://raw.githubusercontent.com/Tschuky101/SM-Inventory-Labels/master/inventory-labels/src/assets/DeviceTypeOptions.json', {cache:false}).subscribe(DeviceTypechips => this.DeviceTypechips = DeviceTypechips, err => console.log(err),() => console.log('Completed'));
 		} else {
 			var data = this.http.get('assets/DeviceTypeOptions.json').subscribe(DeviceTypechips => this.DeviceTypechips = DeviceTypechips, err => console.log(err),() => console.log('Completed'));
 		}
