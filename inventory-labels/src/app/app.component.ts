@@ -85,9 +85,9 @@ export class AppComponent{
 	}
 	public getCardTypes(){
 		if(this.local == false ){
-			var data = this.http.get('https://raw.githubusercontent.com/Tschuky101/SM-Inventory-Labels/master/inventory-labels/src/assets/cardTypes.json').subscribe(DeviceTypechips => this.DeviceTypechips = DeviceTypechips, err => console.log(err),() => console.log('Completed'));
+			var data = this.http.get('https://raw.githubusercontent.com/Tschuky101/SM-Inventory-Labels/master/inventory-labels/src/assets/cardtypes.json').subscribe(cardTypes => this.cardTypes = cardTypes, err => console.log(err),() => console.log('Completed'));
 		} else {
-			var data = this.http.get('assets/DeviceTypeOptions.json').subscribe(cardTypes => this.cardTypes = cardTypes, err => console.log(err),() => console.log('Completed'));
+			var data = this.http.get('assets/cardtypes.json').subscribe(cardTypes => this.cardTypes = cardTypes, err => console.log(err),() => console.log('Completed'));
 		}
 		return data;
 	}
