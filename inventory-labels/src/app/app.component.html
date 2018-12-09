@@ -9,18 +9,62 @@
 		</div>
 		
 		<div id="App_actions">
-			<button mat-flat-button onclick="addLabel()">Add Label</button>
-			<button mat-flat-button>Print {{labels.length}} Label<span *ngIf="labels.length !== 1" style="vertical-align: initial !important">s</span></button>
+			<button mat-button (click)="addLabel()"><mat-icon>add</mat-icon> Add Label</button>
+			<button *ngIf="labels.length > 0" mat-button (click)="clearLabelsPrompt()"><mat-icon>clear</mat-icon> Clear Label<span *ngIf="labels.length > 1" style="vertical-align: initial !important">s</span></button>
+			<button *ngIf="labels.length > 0" mat-button><mat-icon>print</mat-icon> Print {{labels.length}} Label<span *ngIf="labels.length > 1" style="vertical-align: initial !important">s</span></button>
 		</div>
 		
 		<div id="credits">
-			Designed by: {{author}} <br>App Version {{version}}
+			Designed by: {{author}} <br>App Version {{version}}<span *ngIf="debug == true"><br>Data Location <span *ngIf="local == true">Local</span><span *ngIf="local == false">Remote</span></span>
 		</div>
 		
 	</mat-drawer>
-	<mat-drawer-content>
-		
-		
-	</mat-drawer-content>
+	
+	<div id="label_container">
+		<span *ngIf="labels.length == 0">
+			<div id="noLabels">
+				<mat-icon>add</mat-icon><br>
+				<span>Add A Label to continue</span>
+			</div>
+		</span>
+		<mat-card id="{{label.id}}" *ngFor="let label of labels">
+			<mat-card-header>
+				<mat-card-title>
+					<mat-form-field>
+						<mat-select [(value)]="label.cardType" placeholder="Select Card Type">
+							<mat-option *ngFor="let card of cardTypes" [(value)]="card.value">{{card.viewValue}}</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</mat-card-title>
+				<mat-card-subtitle>
+					
+				</mat-card-subtitle>
+			</mat-card-header>
+			<mat-card-content>
+				<form class="DeviceType" *ngIf="label.cardType != 'null' && label.cardType == 'cpu' || label.cardType == 'ipad' || label.cardType == 'iphone'">
+					<mat-form-field class="">
+						<mat-select placeholder="New/CPO/etc.." [(ngModel)]="label.deviceType" name="DeviceType">
+							<mat-option *ngFor="let option of DeviceTypechips" [value]="option">
+								{{option}}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</form>
+				<pre *ngIf="debug == true">Label Data = {{label | json}}</pre>
+			</mat-card-content>
+			<mat-card-actions>
+				<button mat-button (click)="duplicatelabel(label)">Duplicate Label</button>
+				<button mat-flat-button (click)="removelabel(label.id)" color="warn">Remove Label</button>
+			</mat-card-actions>
+		</mat-card>
+		<div *ngIf="debug == true" id="data" style="color:#000">
+			<pre>{{chips | json}}</pre>
+		</div>
+
+	</div>
+	
+	
 </mat-drawer-container>
+
+
 <!--The content below is only a placeholder and can be replaced.-->
