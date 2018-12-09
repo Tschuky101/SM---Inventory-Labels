@@ -1,0 +1,15 @@
+<div mat-dialog-content id="removeAllLabels">
+	<span class="warning" style="font-size: 30px"><mat-icon>warning</mat-icon> WARNING</span><br><br>
+	
+	This will remove {{data.labelcount}} <span *ngIf="data.labelcount == 1">label</span><span *ngIf="data.labelcount > 1">labels</span>
+	<br>
+	<br>
+	<mat-slide-toggle [(ngModel)]="removeAllLabels">Confirm Clear</mat-slide-toggle>
+	<br>
+	<br>
+	
+</div>
+<div mat-dialog-actions>
+	<button mat-button (click)="onDecline()" [mat-dialog-close]="clear">No</button>
+	<button mat-button [disabled]="!removeAllLabels" [mat-dialog-close]="this.removeAllLabels">Yes</button>
+</div>

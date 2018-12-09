@@ -1,0 +1,30 @@
+{
+	"devices": [{
+		"device": "cpu",
+		"name":"Macbook Pro",
+		"basePrice" : 1500,
+		"year":"2018",
+		"size":"15inch"
+	},
+	{
+		"device":"cpu",
+		"name":"Macbook Pro",
+		"basePrice" : 1500,
+		"year":"2017",
+		"size":"13inch"	
+	},
+	{
+		"device":"cpu",
+		"name":"Macbook",
+		"basePrice" : 1999.99,
+		"year":"2017",
+		"size":"15inch"	
+	},
+	{
+		"device":"ipad",
+		"name":"iPad",
+		"basePrice" : 329.99,
+		"year":"2017",
+		"size":"9.7inch"
+	}]	
+}

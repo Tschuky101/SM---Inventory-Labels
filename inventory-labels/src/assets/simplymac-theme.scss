@@ -1,0 +1,157 @@
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+$md-smgreen: (
+    50 : #e9f5ea,
+    100 : #c7e6ca,
+    200 : #a2d6a7,
+    300 : #7dc683,
+    400 : #61b969,
+    500 : #45ad4e,
+    600 : #3ea647,
+    700 : #369c3d,
+    800 : #2e9335,
+    900 : #1f8325,
+    A100 : #bfffc2,
+    A200 : #8cff92,
+    A400 : #59ff62,
+    A700 : #40ff49,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$md-smblue: (
+    50 : #e4f4fb,
+    100 : #bbe3f5,
+    200 : #8ed0ee,
+    300 : #61bde7,
+    400 : #3faee1,
+    500 : #1da0dc,
+    600 : #1a98d8,
+    700 : #158ed3,
+    800 : #1184ce,
+    900 : #0a73c5,
+    A100 : #f0f8ff,
+    A200 : #bddfff,
+    A400 : #8ac7ff,
+    A700 : #70bbff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$simplymac-primary: mat-palette($md-smgreen);
+$simplymac-accent:  mat-palette($md-smblue);
+
+// The warn palette is optional (defaults to red).
+$simplymac-warn:    mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$simplymac-theme: mat-light-theme($simplymac-primary, $simplymac-accent, $simplymac-warn);
+
+
+@mixin simplymac-theme($theme){
+	
+	$primary: map-get($theme, primary);
+	$accent: map-get($theme, accent);
+	
+	.primaryBG_100{background-color: mat-color($primary, 100);}
+	.primaryBG_200{background-color: mat-color($primary, 200);}
+	.primaryBG_300{background-color: mat-color($primary, 300);}
+	.primaryBG_400{background-color: mat-color($primary, 400);}
+	.primaryBG_500{background-color: mat-color($primary, 500);}
+	.primaryBG_600{background-color: mat-color($primary, 600);}
+	.primaryBG_700{background-color: mat-color($primary, 700);}
+	.primaryBG_800{background-color: mat-color($primary, 800);}
+	.primaryBG_900{background-color: mat-color($primary, 900);}
+	.primaryBG_A100{background-color: mat-color($primary, A100);}
+	.primaryBG_A200{background-color: mat-color($primary, A200);}
+	.primaryBG_A400{background-color: mat-color($primary, A400);}
+	.primaryBG_A700{background-color: mat-color($primary, A700);}
+	.primaryText_100{color: mat-color($primary, '100-contrast');}
+	.primaryText_200{color: mat-color($primary, '200-contrast');}
+	.primaryText_300{color: mat-color($primary, '300-contrast');}
+	.primaryText_400{color: mat-color($primary, '400-contrast');}
+	.primaryText_500{color: mat-color($primary, '500-contrast');}
+	.primaryText_600{color: mat-color($primary, '600-contrast');}
+	.primaryText_700{color: mat-color($primary, '700-contrast');}
+	.primaryText_800{color: mat-color($primary, '800-contrast');}
+	.primaryText_900{color: mat-color($primary, '900-contrast');}
+	.primaryText_A100{color: mat-color($primary, 'A100-contrast');}
+	.primaryText_A200{color: mat-color($primary, 'A200-contrast');}
+	.primaryText_A400{color: mat-color($primary, 'A400-contrast');}
+	.primaryText_A700{color: mat-color($primary, 'A700-contrast');}
+	
+	.accentBG_100{background-color: mat-color($accent, 100);}
+	.accentBG_200{background-color: mat-color($accent, 200);}
+	.accentBG_300{background-color: mat-color($accent, 300);}
+	.accentBG_400{background-color: mat-color($accent, 400);}
+	.accentBG_500{background-color: mat-color($accent, 500);}
+	.accentBG_600{background-color: mat-color($accent, 600);}
+	.accentBG_700{background-color: mat-color($accent, 700);}
+	.accentBG_800{background-color: mat-color($accent, 800);}
+	.accentBG_900{background-color: mat-color($accent, 900);}
+	.accentBG_A100{background-color: mat-color($accent, A100);}
+	.accentBG_A200{background-color: mat-color($accent, A200);}
+	.accentBG_A400{background-color: mat-color($accent, A400);}
+	.accentBG_A700{background-color: mat-color($accent, A700);}
+	.accentText_100{color: mat-color($accent, '100-contrast');}
+	.accentText_200{color: mat-color($accent, '200-contrast');}
+	.accentText_300{color: mat-color($accent, '300-contrast');}
+	.accentText_400{color: mat-color($accent, '400-contrast');}
+	.accentText_500{color: mat-color($accent, '500-contrast');}
+	.accentText_600{color: mat-color($accent, '600-contrast');}
+	.accentText_700{color: mat-color($accent, '700-contrast');}
+	.accentText_800{color: mat-color($accent, '800-contrast');}
+	.accentText_900{color: mat-color($accent, '900-contrast');}
+	.accentText_A100{color: mat-color($accent, 'A100-contrast');}
+	.accentText_A200{color: mat-color($accent, 'A200-contrast');}
+	.accentText_A400{color: mat-color($accent, 'A400-contrast');}
+	.accentText_A700{color: mat-color($accent, 'A700-contrast');}
+	
+	#App_Logo{
+		fill: mat-color($primary, '500-contrast');
+	}
+	
+}
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($simplymac-theme);
+
+@include simplymac-theme($simplymac-theme);
