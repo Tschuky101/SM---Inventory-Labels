@@ -102,7 +102,7 @@ export class MaterialModule {}
   entryComponents: [
 	ClearLabelsDialog  
   ],
-  providers: [provide: RequestOptions, useClass: CustomRequestOptions],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
