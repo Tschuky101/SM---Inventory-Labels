@@ -53,7 +53,7 @@ export class AppComponent{
 	
 	public getherodevices(){
 		if(this.local == false ){
-			
+			var data = this.http.get('https://raw.githubusercontent.com/Tschuky101/SM-Inventory-Labels/master/inventory-labels/src/assets/devices.json').subscribe(devices => this.devices = devices, err => console.log(err),() => console.log('Completed'));
 		} else {
 			var data = this.http.get('assets/devices.json').subscribe(devices => this.devices = devices, err => console.log(err),() => console.log('Completed'));
 		}
@@ -62,7 +62,7 @@ export class AppComponent{
 	}
 	public getheroPrices(){
 		if(this.local == false ){
-			
+			var data = this.http.get('https://raw.githubusercontent.com/Tschuky101/SM-Inventory-Labels/master/inventory-labels/src/assets/prices.json').subscribe(prices => this.prices = prices, err => console.log(err),() => console.log('Completed'));
 		} else {
 			var data = this.http.get('assets/prices.json').subscribe(prices => this.prices = prices, err => console.log(err),() => console.log('Completed'));
 		}
@@ -70,7 +70,7 @@ export class AppComponent{
 	}
 	public getheroTypes(){
 		if(this.local == false ){
-			
+			var data = this.http.get('https://raw.githubusercontent.com/Tschuky101/SM-Inventory-Labels/master/inventory-labels/src/assets/DeviceTypeOptions.json').subscribe(DeviceTypechips => this.DeviceTypechips = DeviceTypechips, err => console.log(err),() => console.log('Completed'));
 		} else {
 			var data = this.http.get('assets/DeviceTypeOptions.json').subscribe(DeviceTypechips => this.DeviceTypechips = DeviceTypechips, err => console.log(err),() => console.log('Completed'));
 		}
