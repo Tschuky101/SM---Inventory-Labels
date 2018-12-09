@@ -17,6 +17,11 @@ export interface DialogData {
 })
 @Injectable()
 export class AppComponent{
+	
+	/******
+		VARIABLES
+	******/
+	
 	title = 'Inventory-Labels';
 	author = 'Canon Tschikof';
 	version = '3.0.0 - alpha 1';
@@ -26,13 +31,10 @@ export class AppComponent{
 	devices: Object = this.getherodevices();
 	prices: Object = this.getheroPrices();
 	DeviceTypechips: Object= this.getheroTypes();
-/*
-	devices = this.getherodevices();
-	prices  = this.getheroPrices();
-	DeviceTypechips = this.getheroTypes();
-*/
+	cardTypes: Object = this.getCardTypes();
 	removeAllLabels: string;
 	
+/*
 	cardTypes = [
 		{"value":"cpu", "viewValue":"Computer"},
 		{"value":"ipad", "viewValue":"iPad"},
@@ -42,6 +44,7 @@ export class AppComponent{
 		{"value":"pencil", "viewValue":"Apple Pencil"},
 		{"value":"hpod", "viewValue":"HomePod"}
 	];
+*/
 	
 	labels = [];
 	
@@ -51,11 +54,13 @@ export class AppComponent{
 	){}
 
 	
-
+	/******
+		Get Either the local or remote JSON files for loading into the app. This method is determinded by the variable 'this.local'
+	******/
 	
 	public getherodevices(){
 		if(this.local == false ){
-			var data = this.http.get('https://raw.githubusercontent.com/Tschuky101/SM-Inventory-Labels/master/inventory-labels/src/assets/devices.json', {cache:false}).subscribe(devices => this.devices = devices, err => console.log(err),() => console.log('Completed'));
+			var data = this.http.get('https://raw.githubusercontent.com/Tschuky101/SM-Inventory-Labels/master/inventory-labels/src/assets/devices.json').subscribe(devices => this.devices = devices, err => console.log(err),() => console.log('Completed'));
 		} else {
 			var data = this.http.get('assets/devices.json').subscribe(devices => this.devices = devices, err => console.log(err),() => console.log('Completed'));
 		}
@@ -64,7 +69,7 @@ export class AppComponent{
 	}
 	public getheroPrices(){
 		if(this.local == false ){
-			var data = this.http.get('https://raw.githubusercontent.com/Tschuky101/SM-Inventory-Labels/master/inventory-labels/src/assets/prices.json', {cache:false}).subscribe(prices => this.prices = prices, err => console.log(err),() => console.log('Completed'));
+			var data = this.http.get('https://raw.githubusercontent.com/Tschuky101/SM-Inventory-Labels/master/inventory-labels/src/assets/prices.json').subscribe(prices => this.prices = prices, err => console.log(err),() => console.log('Completed'));
 		} else {
 			var data = this.http.get('assets/prices.json').subscribe(prices => this.prices = prices, err => console.log(err),() => console.log('Completed'));
 		}
@@ -72,11 +77,18 @@ export class AppComponent{
 	}
 	public getheroTypes(){
 		if(this.local == false ){
-			var data = this.http.get('https://raw.githubusercontent.com/Tschuky101/SM-Inventory-Labels/master/inventory-labels/src/assets/DeviceTypeOptions.json', {cache:false}).subscribe(DeviceTypechips => this.DeviceTypechips = DeviceTypechips, err => console.log(err),() => console.log('Completed'));
+			var data = this.http.get('https://raw.githubusercontent.com/Tschuky101/SM-Inventory-Labels/master/inventory-labels/src/assets/DeviceTypeOptions.json').subscribe(DeviceTypechips => this.DeviceTypechips = DeviceTypechips, err => console.log(err),() => console.log('Completed'));
 		} else {
 			var data = this.http.get('assets/DeviceTypeOptions.json').subscribe(DeviceTypechips => this.DeviceTypechips = DeviceTypechips, err => console.log(err),() => console.log('Completed'));
 		}
-		
+		return data;
+	}
+	public getCardTypes(){
+		if(this.local == false ){
+			var data = this.http.get('https://raw.githubusercontent.com/Tschuky101/SM-Inventory-Labels/master/inventory-labels/src/assets/cardTypes.json').subscribe(DeviceTypechips => this.DeviceTypechips = DeviceTypechips, err => console.log(err),() => console.log('Completed'));
+		} else {
+			var data = this.http.get('assets/DeviceTypeOptions.json').subscribe(cardTypes => this.cardTypes = cardTypes, err => console.log(err),() => console.log('Completed'));
+		}
 		return data;
 	}
 	
