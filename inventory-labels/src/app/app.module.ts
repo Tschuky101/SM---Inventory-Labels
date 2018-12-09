@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { AppComponent } from './app.component';
+import { AppComponent, ClearLabelsDialog } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { 
 	MatAutocompleteModule,
@@ -40,7 +42,6 @@ import {
 	MatTooltipModule,
 	MatTreeModule,
 } from '@angular/material';
-import { SidenavComponent } from './sidenav/sidenav.component';
 
 @NgModule({
   exports: [
@@ -81,18 +82,25 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 	MatTreeModule,
   ]
 })
+
 export class MaterialModule {}
 @NgModule({
-  declarations: [
-    AppComponent,
-    SidenavComponent
-  ],
   imports: [
+    MaterialModule,
     BrowserModule,
     BrowserAnimationsModule,
-    MaterialModule,
+    HttpClientModule,
     MatButtonModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
+  declarations: [
+    AppComponent,
+    ClearLabelsDialog
+  ],
+  entryComponents: [
+	ClearLabelsDialog  
   ],
   providers: [],
   bootstrap: [AppComponent]
