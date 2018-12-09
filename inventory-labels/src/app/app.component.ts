@@ -50,12 +50,7 @@ export class AppComponent{
 		private http: HttpClient	
 	){}
 
-	// Disables HTTP cache
-	headers = new Headers({
-        'Cache-Control': 'no-cache',
-        'Pragma': 'no-cache',
-        'Expires': 'Sat, 01 Jan 2000 00:00:00 GMT'
-    });
+	
 
 	
 	public getherodevices(){
@@ -177,3 +172,12 @@ export class AppComponent{
 	templateUrl: 'clearLabels-dialog.html',
 })
 export class ClearLabelsDialog {constructor(public dialogRef: MatDialogRef<ClearLabelsDialog>, @Inject(MAT_DIALOG_DATA) public data: DialogData) {}}
+
+export class CustomRequestOptions extends BaseRequestOptions {
+	// Disables HTTP cache
+	headers = new Headers({
+        'Cache-Control': 'no-cache',
+        'Pragma': 'no-cache',
+        'Expires': 'Sat, 01 Jan 2000 00:00:00 GMT'
+    });
+}
