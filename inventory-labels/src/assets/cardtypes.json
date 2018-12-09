@@ -1,0 +1,9 @@
+[
+	{"value":"cpu", "viewValue":"Computer"},
+	{"value":"ipad", "viewValue":"iPad"},
+	{"value":"iphone", "viewValue":"iPhone"},
+	{"value":"watch", "viewValue":"Apple Watch"},
+	{"value":"tv", "viewValue":"Apple Tv"},
+	{"value":"pencil", "viewValue":"Apple Pencil"},
+	{"value":"hpod", "viewValue":"HomePod"}
+]
