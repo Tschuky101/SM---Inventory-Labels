@@ -21,7 +21,7 @@ export class AppComponent{
 	version = '3.0.0 - alpha 1';
 	labelid = 0;
 	debug = true;
-	local = true;
+	local = false;
 	devices: Object = this.getherodevices();
 	prices: Object = this.getheroPrices();
 	DeviceTypechips: Object= this.getheroTypes();
