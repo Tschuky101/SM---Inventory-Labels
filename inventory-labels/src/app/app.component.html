@@ -64,6 +64,11 @@
 						</mat-select>
 						 <!-- <mat-error *ngIf="selected.hasError('required')">You must make a selection</mat-error> -->
 					</mat-form-field>
+					<mat-form-field>
+						<mat-select placeholder="{{label.cardType[0].viewValue}} Year" [value]="label.year" required>
+							<mat-option *ngFor="let option of years">{{option.year}}</mat-option>
+						</mat-select>
+					</mat-form-field>
 
 				</div>
 				<div id="iPad_Data" *ngIf="label.cardType[0].type == 'ipad' && label.condition !== null">
