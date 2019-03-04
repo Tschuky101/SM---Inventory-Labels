@@ -170,7 +170,7 @@ export class AppComponent{
 							if(device.name === this.years[i]['models']){ // Adds current device to this.years[index]['models'] if the device isn't currently in the array
 								console.log("device Exists");
 							} else {
-								this.years[i]['models'].push({"device":device.name});
+								this.years[i]['models'].push(device.name);
 								break;
 							}
 						}
@@ -371,5 +371,36 @@ export class DisplayModels {
 		});
 
 		return tempArray;
+	}
+}
+@Pipe({
+	name: 'FilterYears'
+})
+export class FilterYears {
+	transform(value: any, modelToFilter: any){
+
+		var tempArray = [];
+
+		value.forEach((option, index) => {
+
+			let currentYear = option.year;
+
+			option['models'].forEach(model => {
+
+				if(model == modelToFilter){
+					let template = {
+						"year":currentYear
+					};
+
+					tempArray.push(template);
+
+				}
+
+			})
+
+		})
+
+		return tempArray;
+
 	}
 }
