@@ -21,6 +21,13 @@
 		"size":"15inch",
 		"touchbar": true
 	},{
+		"device": "cpu",
+		"name":"Macbook Pro",
+		"basePrice" : 1500,
+		"year":"2013",
+		"size":"15inch",
+		"touchbar": true
+	},{
 		"device":"cpu",
 		"name":"Macbook Pro",
 		"basePrice" : 1500,
