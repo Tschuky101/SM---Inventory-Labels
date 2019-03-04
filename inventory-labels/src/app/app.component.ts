@@ -175,14 +175,10 @@ export class AppComponent{
 							}
 						}
 					}
-				} else {
-					// console.log("Deivce ("+device.name+") wasn't made in this year: " + device.year);
 				}
-				// console.log(this.years);
 			}
 
 		})
-		// console.log(this.years);
 	}
 
 
