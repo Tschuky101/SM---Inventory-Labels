@@ -38,7 +38,7 @@ export class AppComponent{
 	author = 'Canon Tschikof';
 	version = '3.1.0 - alpha 1';
 	debug = false;
-	local = false;
+	local = true;
 	devices: Array<any>;
 	prices: Array<any>;
 	DeviceConditions: Array<any>;
