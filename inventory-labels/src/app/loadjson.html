@@ -1,0 +1,14 @@
+<div id="dialog" mat-dialog-title>
+
+	<div id="title">Upload Save File</div>
+	<div id="subtitle">Popup window will be auto closed after file is uploaded</div>
+
+</div>
+<div mat-dialog-content id="loadJson">
+
+	<input mat-button id="saveFile" type="file" name="" (change)="upload()">
+
+</div>
+<div mat-dialog-actions>
+	<button mat-button [mat-dialog-close]>Cancel</button>
+</div>

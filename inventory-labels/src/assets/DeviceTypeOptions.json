@@ -1,6 +1,7 @@
-[	"New", 
-	"Special Order", 
-	"CPO", 
-	"Apple Refurbished", 
-	"Demo"
+[	
+	{"viewValue":"New"},
+	{"viewValue":"Certified Pre Owned"},
+	{"viewValue":"Apple Refurbished"},
+	{"viewValue":"Special Order"},
+	{"viewValue":"Demo"}
 ]

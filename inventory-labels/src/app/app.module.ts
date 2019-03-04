@@ -1,11 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FileSaverModule } from 'ngx-filesaver';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { AppComponent, ClearLabelsDialog } from './app.component';
+import { AppComponent, ClearLabelsDialog, loadjson, DisplayModels } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { 
+import {
 	MatAutocompleteModule,
 	MatBadgeModule,
 	MatBottomSheetModule,
@@ -92,15 +93,19 @@ export class MaterialModule {}
     HttpClientModule,
     MatButtonModule,
     MatCheckboxModule,
+    FileSaverModule,
     FormsModule,
     ReactiveFormsModule
   ],
   declarations: [
     AppComponent,
-    ClearLabelsDialog
+    ClearLabelsDialog,
+    loadjson,
+    DisplayModels
   ],
   entryComponents: [
-	ClearLabelsDialog  
+	ClearLabelsDialog,
+	loadjson
   ],
   providers: [],
   bootstrap: [AppComponent]

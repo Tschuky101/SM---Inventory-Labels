@@ -4,6 +4,7 @@
 	{"value":"iphone", "viewValue":"iPhone"},
 	{"value":"watch", "viewValue":"Apple Watch"},
 	{"value":"tv", "viewValue":"Apple Tv"},
-	{"value":"pencil", "viewValue":"Apple Pencil"},
-	{"value":"hpod", "viewValue":"HomePod"}
+	{"value":"other", "viewValue":"Apple Pencil"},
+	{"value":"other", "viewValue":"HomePod"},
+	{"value":"other", "viewValue":"AirPods"}
 ]

@@ -6,6 +6,22 @@
 // Be sure that you only ever include this mixin once!
 @include mat-core();
 
+/******
+     Light Theme VARIABLES
+*****/
+$mainBG: #eaeaea;
+$matcardBG: #ffffff;
+$cardTitle: #eaeaea;
+
+
+/******
+     Dark Theme VARIABLES
+*****/
+$mainBGDark: #262626;
+$matcardBGDark: #484848;
+$cardTitleDark: #eaeaea;
+
+
 $md-smgreen: (
     50 : #e9f5ea,
     100 : #c7e6ca,
@@ -84,11 +100,75 @@ $simplymac-warn:    mat-palette($mat-red);
 $simplymac-theme: mat-light-theme($simplymac-primary, $simplymac-accent, $simplymac-warn);
 
 
+/******
+	Light Theme
+******/
+.light-theme{
+     .sidenav-container{
+     	background: rgba($mainBG, 0.5);
+     }
+     #label_container{
+          mat-card-title{color: darken($cardTitle, 30%);}
+          mat-card-subtitle{color: darken($cardTitle, 15%);}
+     	mat-card{
+     		background: $matcardBG;
+
+     		pre{
+     			color: #000;
+     		}
+     	}
+     }
+     #noLabels{
+     	color: darken($mainBG, 10%);
+     }
+     #AddLabel_ChooseType, #AddLabel_ChooseCondition, #Computer_Data{
+     	mat-grid-tile{
+     		box-shadow: 0px 3px 5px rgba(0,0,0,.3),0px 0px 5px rgba(0,0,0,0.15);
+     		color: lighten(#000, 75%);
+     	}
+     }
+}
+
+/******
+	Light Theme
+******/
+.dark-theme{
+	.sidenav-container{
+		background: lighten($mainBGDark, 10%);
+	}
+	#label_container{
+		mat-card-title{color: darken($cardTitleDark, 5%);}
+		mat-card-subtitle{color: darken($cardTitleDark, 20%);}
+		mat-card{
+			background: $matcardBGDark;
+
+			pre{
+				color: #fff;
+			}
+		}
+	}
+	#noLabels{
+		color: darken($mainBGDark, 0.025%);
+	}
+	#AddLabel_ChooseType, #AddLabel_ChooseCondition, #Computer_Data{
+		mat-grid-tile{
+			box-shadow: 0px 3px 5px rgba(0,0,0,.3),0px 0px 5px rgba(0,0,0,0.15);
+			color: lighten(#000, 75%);
+		}
+	}
+	mat-dialog-container{
+		color: #fff;
+		background: lighten($mainBGDark, 10%);
+	}
+}
+
+
+
 @mixin simplymac-theme($theme){
-	
+
 	$primary: map-get($theme, primary);
 	$accent: map-get($theme, accent);
-	
+
 	.primaryBG_100{background-color: mat-color($primary, 100);}
 	.primaryBG_200{background-color: mat-color($primary, 200);}
 	.primaryBG_300{background-color: mat-color($primary, 300);}
@@ -115,7 +195,7 @@ $simplymac-theme: mat-light-theme($simplymac-primary, $simplymac-accent, $simply
 	.primaryText_A200{color: mat-color($primary, 'A200-contrast');}
 	.primaryText_A400{color: mat-color($primary, 'A400-contrast');}
 	.primaryText_A700{color: mat-color($primary, 'A700-contrast');}
-	
+
 	.accentBG_100{background-color: mat-color($accent, 100);}
 	.accentBG_200{background-color: mat-color($accent, 200);}
 	.accentBG_300{background-color: mat-color($accent, 300);}
@@ -142,11 +222,11 @@ $simplymac-theme: mat-light-theme($simplymac-primary, $simplymac-accent, $simply
 	.accentText_A200{color: mat-color($accent, 'A200-contrast');}
 	.accentText_A400{color: mat-color($accent, 'A400-contrast');}
 	.accentText_A700{color: mat-color($accent, 'A700-contrast');}
-	
+
 	#App_Logo{
 		fill: mat-color($primary, '500-contrast');
 	}
-	
+
 }
 
 // Include theme styles for core and each component used in your app.

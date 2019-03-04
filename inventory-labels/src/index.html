@@ -1,17 +1,50 @@
 <!doctype html>
 <html lang="en">
 <head>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <meta charset="utf-8">
   <title>InventoryLabels</title>
   <base href="/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+     <script>
+    //  var ipcRenderer = require('electron').ipcRenderer;
+    //
+    //
+    //  ipcRenderer.on('addLabel', message => {
+    //       console.log('Add Label Called');
+    //       window.addLabelfromMenu.zone.run(()=>{window.addLabelfromMenu.componentFn();});
+    //       console.log("Add Label Success!");
+    //  });
+    //  ipcRenderer.on('clearLabels', message => {
+    //       console.log('Clear Label Called');
+    //       window.clearLabelsfromMenu.zone.run(()=>{window.clearLabelsfromMenu.componentFn();});
+    //       console.log("Clear Label Success!");
+    //  });
+    //
+    // // When in macOS get the current theme and update the app with either a dark or light mode
+	// 	ipcRenderer.on('OSTheme', function (event, theme){
+	// 		var currentOSTheme = theme;
+    //
+	// 		if(currentOSTheme == 'dark'){
+	// 			console.log('Dark Theme');
+    //                 document.getElementById('body').classList.remove('light-theme');
+	// 			document.getElementById("body").classList.add('dark-theme');
+	// 		}
+	// 		if(currentOSTheme == 'light'){
+	// 			console.log('Dark Theme');
+    //                 document.getElementById('body').classList.add('light-theme');
+	// 			document.getElementById("body").classList.remove('dark-theme');
+	// 		}
+	// 		console.log(theme);
+	// 	})
+	</script>
+
 </head>
-<body id="body">
+<body id="body" class="light-theme">
 	<div class="app_menu_bar_transparent">&nbsp;</div>
 	<app-root></app-root>
 </body>
