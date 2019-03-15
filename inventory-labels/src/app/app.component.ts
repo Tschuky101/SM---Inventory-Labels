@@ -450,6 +450,51 @@ export class AppComponent{
 
 	}
 
+	deviceModelChanged(index, years, sizes, device, year){
+		this.disableInputYears(index);
+		this.disableSizes(index);
+	}
+	disableInputYears(index){
+
+			let device = this.labelsForm.controls.label['controls'][index].get('device').value;
+			let tempdata = this.filterYears.transform(this.years, device);
+			if(this.debug == true){
+				console.log("Input Changed on index: "+index);
+				console.log("Array: ");
+				console.log(this.array);
+				console.log("Device to filter to: "+ device);
+				console.log("Year to change to: "+tempdata[0].year);
+				console.log("Length of years array filtered: "+tempdata.length);
+			}
+
+			if(tempdata.length == 1){
+				console.log("This Device has only been made in 1 year");
+				this.labelsForm.controls.label['controls'][index].get('year').reset();
+				this.labelsForm.controls.label['controls'][index].get('year').setValue(tempdata[0].year);
+				this.disableSizes(index);
+			} else {
+				console.log("This Device has been made in multiple years");
+				this.labelsForm.controls.label['controls'][index].get('year').reset();
+			}
+
+	}
+	disableSizes(index){
+
+			let device = this.labelsForm.controls.label['controls'][index].get('device').value;
+			let year = this.labelsForm.controls.label['controls'][index].get('year').value;
+			let tempdata = this.filterSizes.transform(this.sizes, device, year);
+
+			if(tempdata.length == 1){
+				console.log("There is only one screen size");
+				this.labelsForm.controls.label['controls'][index].get('size').reset();
+				this.labelsForm.controls.label['controls'][index].get('size').setValue(tempdata[0].size);
+			} else {
+				console.log("There is more than one screen size");
+				this.labelsForm.controls.label['controls'][index].get('size').reset();
+			}
+
+		// this.labelsForm.controls.label['controls'][index].get('size').reset();
+	}
 
 
 	/******
