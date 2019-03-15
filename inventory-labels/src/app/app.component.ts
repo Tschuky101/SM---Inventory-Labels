@@ -450,6 +450,60 @@ export class AppComponent{
 
 	}
 
+
+
+	/******
+		Dynamically Change form Validators
+	******/
+	setValidation(index, type, condition){
+		console.log("Set Validators for Label Type");
+		console.log("Index: " + index);
+		console.log("CardType: "+ type);
+		console.log("Condition: "+ condition);
+
+		if(type == 'cpu'){
+			this.computerValidation(index, condition);
+		}
+		if(type == 'ipad'){
+			this.ipadValidation(index, condition);
+		}
+		if(type == 'iphone'){
+			this.iphoneValidation(index, condition);
+		}
+		if(type == 'watch'){
+			this.watchValidation(index, condition);
+		}
+		if(type == 'tv'){
+			this.tvValidation(index, condition);
+		}
+		if(type == 'other'){
+			this.otherValidation(index, condition);
+		}
+	}
+	computerValidation(index, condition){
+		console.log("Setting Validators for Computers");
+		this.labelsForm.controls.label['controls'][index].get('device').setValidators([Validators.required]);
+		this.labelsForm.controls.label['controls'][index].get('year').setValidators([Validators.required]);
+		this.labelsForm.controls.label['controls'][index].get('size').setValidators([Validators.required]);
+	}
+	ipadValidation(index, condition){
+		console.log("Setting Validators for a iPads");
+	}
+	iphoneValidation(index, condition){
+		console.log("Setting Validators for a iPhones");
+	}
+	watchValidation(index, condition){
+		console.log("Setting Validators for Apple Watch");
+	}
+	tvValidation(index, condition){
+		console.log("Setting Validators for Apple TVs");
+	}
+	otherValidation(index, condition){
+		console.log("Setting Validators for Other CardTypes");
+	}
+
+
+
 	/******
 		Save, Load, Print functionallity for the App.
 	******/
