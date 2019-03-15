@@ -116,10 +116,14 @@ export class AppComponent{
 		this.devicesService.getCardTypes(this.local).subscribe((data: Array<any>) => {
 			this.cardTypes = data;
 		});
-
 		/******
 			End data loading section
+
+			Form Creation on page load
 		******/
+		this.labelsForm = new FormGroup({
+			label: new FormArray([])
+		});
 
 	}
 
@@ -209,75 +213,86 @@ export class AppComponent{
 	}
 
 	// Add Label to the Array
-	public addLabel(): any {
+	public addLabel() {
+		const label = this.labelsForm.controls.label as FormArray;
+		let template = new FormGroup({
+			cardType: new FormGroup({
+				type: new FormControl(null),
+				viewValue: new FormControl(null)
+			}),
+			id: new FormControl(this.createID()),
+			condition: new FormControl(null),
+			receivedOn: new FormControl(new Date(), Validators.required),
+			generatedOn: new FormControl(new Date()),
+			device: new FormControl(null),
+			year: new FormControl(null),
+			size: new FormControl(null),
+			price: new FormControl(null, Validators.compose([Validators.required, Validators.pattern(this.priceValidator)])),
+			touchbar: new FormControl(false)
+		});
+		label.push(template);
+		// 	"generation":null,
+		// 	"color":null,
+		// 	"material":null,
+		// 	"touchbar":null,
+		// 	"screenSize":null,
+		// 	"processor":null,
+		// 	"storage":null,
+		// 	"ram":null,
+		// 	"cellular":null,
+		// 	"serial":null
+		// }))
+		// this.labels.push(labeltemplate);
 
-		// console.log(this.devices);
-		var labeltemplate = {
-			"cardType":[{"type":null, "viewValue":null }],
-			"id":this.createID(),
-			"condition":null,
-			"receivedOn":new Date(),
-			"device":[{"name":null, "device":null}],
-			"year":null,
-			"generation":null,
-			"color":null,
-			"material":null,
-			"touchbar":null,
-			"screenSize":null,
-			"processor":null,
-			"storage":null,
-			"ram":null,
-			"cellular":null,
-			"serial":null
-
-		};
-
-		this.labels.push(labeltemplate);
-
+		console.log(this.labelsForm);
 	}
 	// Duplicate the label that the duplcate button was clicked.
-	duplicatelabel(label){
+	duplicatelabel(index){
 
-		var labeltemplate = {
-			"cardType":[{"type":label.cardType, "viewValue":label.cardTypeNice }],
-			"id":this.createID(),
-			"condition":label.condition,
-		}
+		this.addLabel();
+		let addedLabelIndex = this.labelsForm.controls.label['value'].length - 1;
+		console.log(addedLabelIndex);
+		this.labelsForm.controls.label['controls'][addedLabelIndex]['controls']['cardType'].get('type').setValue(this.labelsForm.controls.label['controls'][index]['controls']['cardType'].get('type').value);
+		this.labelsForm.controls.label['controls'][addedLabelIndex]['controls']['cardType'].get('viewValue').setValue(this.labelsForm.controls.label['controls'][index]['controls']['cardType'].get('viewValue').value);
+		this.labelsForm.controls.label['controls'][addedLabelIndex].get('id').setValue(this.createID());
+		this.labelsForm.controls.label['controls'][addedLabelIndex].get('condition').setValue(this.labelsForm.controls.label['controls'][index].get('condition').value);
+		this.labelsForm.controls.label['controls'][addedLabelIndex].get('receivedOn').setValue(this.labelsForm.controls.label['controls'][index].get('receivedOn').value);
+		this.labelsForm.controls.label['controls'][addedLabelIndex].get('generatedOn').setValue(new Date());
+		this.labelsForm.controls.label['controls'][addedLabelIndex].get('device').setValue(this.labelsForm.controls.label['controls'][index].get('device').value);
+		this.labelsForm.controls.label['controls'][addedLabelIndex].get('year').setValue(this.labelsForm.controls.label['controls'][index].get('year').value);
+		this.labelsForm.controls.label['controls'][addedLabelIndex].get('size').setValue(this.labelsForm.controls.label['controls'][index].get('size').value);
+		this.labelsForm.controls.label['controls'][addedLabelIndex].get('price').setValue(this.labelsForm.controls.label['controls'][index].get('price').value);
+		this.labelsForm.controls.label['controls'][addedLabelIndex].get('touchbar').setValue(this.labelsForm.controls.label['controls'][index].get('touchbar').value);
 // 		this.labels.push(labeltemplate);
-		console.log("not Implemented Yet");
+		console.log("Label Added");
 	}
-	// Update Values in Labels Array
-	updateValue(id, key, value){
-		let index = this.labels.map(function(e){return e.id;}).indexOf(id);
-
-		if(this.debug == true){
-			console.log("Changing " + key + " to:");
-			console.log("id: " + id + ", key: " + key + ", value:" + JSON.stringify(value));
-		}
-
-		this.labels[index][key] = value;
-	}
-
 	// Remove the Selected Label
-	removelabel(labelID){
+	removelabel(index){
+		console.log("Removing Label at index: "+index);
 
-		var index = this.getindex(labelID, this.labels, 'id');
+		// var index = this.getindex(labelID, this.labelsForm.controls.labels.value, 'id');
 
-		this.labels.splice(index, 1);
+		(<FormArray>this.labelsForm.controls.label).removeAt(index);
 	}
-
 	// Removes All labels when called by "clearLabelsPrompt()" after a dialog window is opened.
 	public clearLabels(){
-		this.labels = [];
-	}
+		const label = this.labelsForm.controls.label as FormArray;
+		label.reset();
 
+		console.log("Array Status Reset");
+
+		console.log("Clearing Lables");
+		this.labelsForm = new FormGroup({
+			label: new FormArray([])
+		});
+	}
 	// Opens a Dialog window to prompt user to clear all windows by giving a switch to confim removal of all created labels.
 	clearLabelsPrompt() {
 
 		let dialogRef = this.dialog.open(ClearLabelsDialog, {
 			width: '400px',
 			height: '300px;',
-			data: {labelcount: this.labels.length, removeAllLabels: new FormControl(false)},
+			data: {labelcount: this.labelsForm.controls.label.value.length, removeAllLabels: new FormControl(false)},
 		});
 
 		dialogRef.afterClosed().subscribe(result => {
