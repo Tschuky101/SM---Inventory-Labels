@@ -472,6 +472,12 @@ export class AppComponent{
 
 	}
 
+	printLabels(){
+
+		console.log("Not Yet Implimented");
+
+	}
+
 };
 
 // Clear Labels Dialog Prompt
