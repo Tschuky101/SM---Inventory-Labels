@@ -10,10 +10,10 @@
 
 		<div id="App_actions">
 			<button mat-button (click)="addLabel()"><mat-icon>add</mat-icon> Add Label</button>
-			<button *ngIf="labels.length > 0" mat-button (click)="clearLabelsPrompt()"><mat-icon>clear</mat-icon> Clear Label<span *ngIf="labels.length > 1" style="vertical-align: initial !important">s</span></button>
-			<button *ngIf="labels.length > 0" mat-button name="save" (click)="save('json', false)"><mat-icon>save</mat-icon> Save Labels</button>
+			<button *ngIf="labelsForm.controls.label.value.length > 0" mat-button (click)="clearLabelsPrompt()"><mat-icon>clear</mat-icon> Clear {{labelsForm.controls.label.value.length}} Label<span *ngIf="labelsForm.controls.label.value.length > 1" style="vertical-align: initial !important">s</span></button>
+			<button *ngIf="labelsForm.controls.label.value.length > 0" mat-button name="save" (click)="save('json', false)"><mat-icon>save</mat-icon> Save Labels</button>
 			<button mat-button name="load" (click)="load()"><mat-icon>publish</mat-icon> Load Labels</button>
-			<button *ngIf="labels.length > 0" mat-button><mat-icon>print</mat-icon> Print {{labels.length}} Label<span *ngIf="labels.length > 1" style="vertical-align: initial !important">s</span></button>
+			<button *ngIf="labelsForm.controls.label.value.length > 0" mat-button (click)="printLabels()"><mat-icon>print</mat-icon> Print {{labelsForm.controls.label.value.length}} Label<span *ngIf="labelsForm.controls.label.value.length > 1" style="vertical-align: initial !important">s</span></button>
 		</div>
 
 		<div id="credits">
@@ -21,119 +21,151 @@
 		</div>
 
 	</mat-drawer>
+		<div id="label_container">
+			<span *ngIf="labelsForm.controls.label.value.length == 0">
+				<div id="noLabels">
+					<span class="center" (click)="addLabel()">
+						<mat-icon>add</mat-icon><br>
+						<span>Add A Label to continue</span>
+					</span>
+				</div>
+			</span>
+			<div>
+				<mat-card *ngFor="let label of labelsForm.controls.label.controls; let i = index">
+					<form [formGroup]="labelsForm">
+						<div formArrayName="label">
+							<div formGroupName="{{i}}">
+								<mat-card-header>
+									<mat-card-title id="CardType" *ngIf="labelsForm.value.label[i].condition != null">
+										<span id="Form_Invalid" [ngClass]="[labelsForm.controls.label.controls[i].status == 'INVALID' && labelsForm.controls.label.controls[i].touched == true ? 'invalid' : 'valid']">
+											<mat-icon *ngIf="labelsForm.controls.label.controls[i].status == 'INVALID' && labelsForm.controls.label.controls[i].touched === true">priority_high</mat-icon>
+											<span id="title">{{labelsForm.value.label[i].cardType.viewValue}}</span>
+										</span>
+									</mat-card-title>
+									<mat-card-title id="price" *ngIf="labelsForm.value.label[i].condition != null">
+										<mat-form-field>
+											<span matPrefix>$&nbsp;</span>
+											<input matInput type="text" placeholder="{{labelsForm.value.label[i].cardType.viewValue}} Price" formControlName="price">
+											<mat-error id="priceError" *ngIf="label.controls.price.errors && (label.controls.price.dirty || label.controls.price.touched)">
+												<span *ngIf="label.controls.price.errors.required">This is a <i>Required</i> field</span>
+												<span *ngIf="label.controls.price.errors.pattern">You <i>must</i> enter in price format of: "XXX.9X"</span>
+											</mat-error>
+										</mat-form-field>
+									</mat-card-title>
+									<mat-card-subtitle *ngIf="labelsForm.value.label[i].condition != null">
+										{{labelsForm.value.label[i].condition}}<br>
+										Received on - {{labelsForm.value.label[i].receivedOn | date:'shortDate'}}<br>
+										Generated on - {{labelsForm.value.label[i].generatedOn | date:'shortDate'}}
+									</mat-card-subtitle>
+								</mat-card-header>
+								<mat-card-content >
+									<div id="AddLabel_ChooseType" formGroupName="cardType" *ngIf="labelsForm.value.label[i].cardType.type == null">
 
-	<div id="label_container">
-		<span *ngIf="labels.length == 0">
-			<div id="noLabels">
-				<span class="center" (click)="addLabel()">
-					<mat-icon>add</mat-icon><br>
-					<span>Add A Label to continue</span>
-				</span>
-			</div>
-		</span>
-		<mat-card id="{{label.id}}" *ngFor="let label of labels">
-			<mat-card-header>
-				<mat-card-title id="CardType" *ngIf="label.condition != null">
-					{{label.cardType[0].viewValue}}
-				</mat-card-title>
-				<mat-card-title id="price" *ngIf="label.condition != null">
-					$1,499.99
-				</mat-card-title>
-				<mat-card-subtitle *ngIf="label.cardType[0].type != null && label.condition != null">
-					{{label.condition}}<br>
-					Received on - {{label.receivedOn | date:'shortDate'}}
-				</mat-card-subtitle>
-			</mat-card-header>
-			<mat-card-content>
-				<!-- Device Model -->
-				<div id="AddLabel_ChooseType" *ngIf="label.cardType[0].type == null">
-					<mat-grid-list cols="5" gutterSize="15px" rowHeight="1:1.25">
-						<mat-grid-tile *ngFor="let option of cardTypes" id="{{option.value}}" (click)="updateValue(label.id, 'cardType', [{'type':option.value,'viewValue':option.viewValue}])">{{option.viewValue}}</mat-grid-tile>
-					</mat-grid-list>
-				</div>
-				<div id="AddLabel_ChooseCondition" *ngIf="label.cardType[0].type != null && label.condition == null">
-					<mat-grid-list cols="5" gutterSize="15px" rowHeight="1:1">
-						<mat-grid-tile *ngFor="let option of DeviceConditions" id="{{option.value}}" (click)="updateValue(label.id, 'condition', option.viewValue)">{{option.viewValue}}</mat-grid-tile>
-					</mat-grid-list>
-				</div>
-				<div id="Computer_Data" *ngIf="label.cardType[0].type == 'cpu' && label.condition !== null">
-					<mat-form-field style="width: 125px;">
-						<mat-select placeholder="{{label.cardType[0].viewValue}} Model" [value]="label.device[0].name" required>
-							<mat-option disabled> -- Select {{label.cardType[0].viewValue}} --</mat-option>
-							<mat-option *ngFor="let option of models | DisplayModels:'cpu'" (click)="updateValue(label.id, 'device', [{'name':option.name,'device':option.device}])" [value]="option.name">{{option.name}}</mat-option>
-						</mat-select>
-						 <!-- <mat-error *ngIf="selected.hasError('required')">You must make a selection</mat-error> -->
-					</mat-form-field>
-					<mat-form-field>
-						<mat-select placeholder="{{label.cardType[0].viewValue}} Year" [value]="label.year" required>
-							<mat-option *ngFor="let option of years">{{option.year}}</mat-option>
-						</mat-select>
-					</mat-form-field>
+										<mat-grid-list cols="5" gutterSize="15px" rowHeight="1:1.25">
+											<mat-grid-tile *ngFor="let option of cardTypes" id="{{option.value}}" (click)="updateValue(i, 'cardType', 'type', option.value); updateValue(i, 'cardType', 'viewValue', option.viewValue)">{{option.viewValue}}</mat-grid-tile>
+										</mat-grid-list>
+									</div>
+									<div id="AddLabel_ChooseCondition" *ngIf="labelsForm.value.label[i].cardType.type != null && labelsForm.value.label[i].condition == null">
+										<mat-grid-list cols="5" gutterSize="15px" rowHeight="1:1">
+											<mat-grid-tile *ngFor="let option of DeviceConditions" id="{{option.value}}" (click)="updateValue(i, 'condition', undefined, option.viewValue); setValidation(i, labelsForm.value.label[i].cardType.type, option.value)">{{option.viewValue}}</mat-grid-tile>
+										</mat-grid-list>
+									</div>
+									<div id="form_container" *ngIf="labelsForm.value.label[i].condition != null">
+										<div id="Computer" *ngIf="labelsForm.value.label[i].cardType.type == 'cpu'">
+											<mat-form-field id="Device" style="width: 135px">
+												<mat-select placeholder="Select {{labelsForm.value.label[i].cardType.viewValue}}" formControlName="device" (selectionChange)="deviceModelChanged(i, years, sizes, labelsForm.value.label[i].device, labelsForm.value.label[i].year)">
+													<mat-option disabled>-- Select {{labelsForm.value.label[i].cardType.viewValue}} --</mat-option>
+													<mat-option *ngFor="let option of models | DisplayModels:'cpu'" [value]="option.name">{{option.name}}</mat-option>
+												</mat-select>
+												<mat-error *ngIf="label.controls.device.errors && (label.controls.device.dirty || label.controls.device.touched)">
+													<span *ngIf="label.controls.device.errors.required">This is Required</span>
+												</mat-error>
+											</mat-form-field>
+											<mat-form-field id="Year" style="width: 135px;">
+												<mat-select placeholder="{{labelsForm.value.label[i].cardType.viewValue}} Year" formControlName="year" (selectionChange)="disableSizes(i)" [disabled]="(years | FilterYears:labelsForm.value.label[i].device).length == 1 || labelsForm.value.label[i].device == null">
+													<mat-option disabled>-- Select {{labelsForm.value.label[i].device}} Year --</mat-option>
+													<mat-option *ngFor="let option of years | FilterYears:labelsForm.value.label[i].device" [value]="option.year">{{option.year}}</mat-option>
+												</mat-select>
+												<mat-error *ngIf="label.controls.year.errors && (label.controls.year.dirty || label.controls.year.touched)">
+													<span *ngIf="label.controls.year.errors.required">This is Required</span>
+												</mat-error>
+											</mat-form-field>
+											<mat-form-field id="ScreenSize" style="width: 120px">
+												<mat-select placeholder="{{labelsForm.value.label[i].cardType.viewValue}} Size" formControlName="size" [disabled]="(sizes | FilterSizes:labelsForm.value.label[i].device:labelsForm.value.label[i].year).length == 1 || (labelsForm.value.label[i].device == null || labelsForm.value.label[i].year == null)">
+													<mat-option>-- Select {{labelsForm.value.label[i].device}} Size --</mat-option>
+													<mat-option *ngFor="let option of sizes | FilterSizes:labelsForm.value.label[i].device:labelsForm.value.label[i].year" [value]="option.size">{{option.size}}</mat-option>
+												</mat-select>
+												<mat-error *ngIf="label.controls.size.errors && (label.controls.size.dirty || label.controls.size.touched)">
+													<span *ngIf="label.controls.size.errors.required">This is Required</span>
+												</mat-error>
+											</mat-form-field>
+										</div>
+										<div id="iPad" *ngIf="labelsForm.value.label[i].cardType.type == 'ipad'">
+											<mat-form-field style="width: 135px">
+												<mat-select placeholder="Select {{labelsForm.value.label[i].cardType.viewValue}}" formControlName="device">
+													<mat-option disabled>-- Select {{labelsForm.value.label[i].cardType.viewValue}} --</mat-option>
+													<mat-option *ngFor="let option of models | DisplayModels:'ipad'" [value]="option.name">{{option.name}}</mat-option>
+												</mat-select>
+												<mat-error *ngIf="label.controls.device.errors && (label.controls.device.dirty || label.controls.device.touched)">
+													<span *ngIf="label.controls.device.errors.required">This is Required</span>
+												</mat-error>
+											</mat-form-field>
+										</div>
+										<div id="iPhone" *ngIf="labelsForm.value.label[i].cardType.type == 'iphone'">
+											<mat-form-field style="width: 135px">
+												<mat-select placeholder="Select {{labelsForm.value.label[i].cardType.viewValue}}" formControlName="device">
+													<mat-option disabled>-- Select {{labelsForm.value.label[i].cardType.viewValue}} --</mat-option>
+													<mat-option *ngFor="let option of models | DisplayModels:'iphone'" [value]="option.name">{{option.name}}</mat-option>
+												</mat-select>
+												<mat-error *ngIf="label.controls.device.errors && (label.controls.device.dirty || label.controls.device.touched)">
+													<span *ngIf="label.controls.device.errors.required">This is Required</span>
+												</mat-error>
+											</mat-form-field>
+										</div>
+										<div id="Watch" *ngIf="labelsForm.value.label[i].cardType.type == 'watch'">
+											<mat-form-field style="width: 135px">
+												<mat-select placeholder="Select {{labelsForm.value.label[i].cardType.viewValue}}" formControlName="device">
+													<mat-option disabled>-- Select {{labelsForm.value.label[i].cardType.viewValue}} --</mat-option>
+													<mat-option *ngFor="let option of models | DisplayModels:'watch'" [value]="option.name">{{option.name}}</mat-option>
+												</mat-select>
+												<mat-error *ngIf="label.controls.device.errors && (label.controls.device.dirty || label.controls.device.touched)">
+													<span *ngIf="label.controls.device.errors.required">This is Required</span>
+												</mat-error>
+											</mat-form-field>
+											<mat-form-field>
+												<mat-select placeholder="Testing">
+													<mat-option disabled>-- Select {{labelsForm.value.label[i].cardType.viewValue}} Carrier --</mat-option>
+													<mat-option *ngFor="let option of carriers" [value]="option">{{option}}</mat-option>
+												</mat-select>
+											</mat-form-field>
+										</div>
+										<div id="TV" *ngIf="labelsForm.value.label[i].cardType.type == 'tv'">
+											{{labelsForm.value.label[i].cardType.viewValue}}
+										</div>
+										<div id="Other" *ngIf="labelsForm.value.label[i].cardType.type == 'other'">
+											{{labelsForm.value.label[i].cardType.viewValue}}
+										</div>
+									</div>
+							</mat-card-content>
+						</div>
+					</div>
+				</form>
+				<mat-card-actions>
+					<button mat-button (click)="duplicatelabel(i)">Duplicate Label</button>
+					<button mat-flat-button (click)="removelabel(i)"  color="warn">Remove Label</button>
+				</mat-card-actions>
 
-				</div>
-				<div id="iPad_Data" *ngIf="label.cardType[0].type == 'ipad' && label.condition !== null">
-					<mat-form-field>
-						<mat-select placeholder="{{label.cardType[0].viewValue}} Model" [value]="label.device[0].name" required>
-							<mat-option disabled> -- Select {{label.cardType[0].viewValue}} --</mat-option>
-							<mat-option *ngFor="let option of models | DisplayModels:'ipad'" (click)="updateValue(label.id, 'device', [{'name':option.name,'device':option.device}])" [value]="option.name">{{option.name}}</mat-option>
-						</mat-select>
-						 <!-- <mat-error *ngIf="selected.hasError('required')">You must make a selection</mat-error> -->
-					</mat-form-field>
-
-				</div>
-				<div id="iPhone_Data" *ngIf="label.cardType[0].type == 'iphone' && label.condition !== null">
-					<mat-form-field>
-						<mat-select placeholder="{{label.cardType[0].viewValue}} Model" [value]="label.device[0].name" required>
-							<mat-option disabled> -- Select {{label.cardType[0].viewValue}} --</mat-option>
-							<mat-option *ngFor="let option of models | DisplayModels:'iphone'" (click)="updateValue(label.id, 'device', [{'name':option.name,'device':option.device}])" [value]="option.name">{{option.name}}</mat-option>
-						</mat-select>
-						 <!-- <mat-error *ngIf="selected.hasError('required')">You must make a selection</mat-error> -->
-					</mat-form-field>
-
-				</div>
-				<div id="iPhone_Data" *ngIf="label.cardType[0].type == 'watch' && label.condition !== null">
-					<mat-form-field>
-						<mat-select placeholder="{{label.cardType[0].viewValue}} Model" [value]="label.device[0].name" required>
-							<mat-option disabled> -- Select {{label.cardType[0].viewValue}} --</mat-option>
-							<mat-option *ngFor="let option of models | DisplayModels:'watch'" (click)="updateValue(label.id, 'device', [{'name':option.name,'device':option.device}])" [value]="option.name">{{option.name}}</mat-option>
-						</mat-select>
-						 <!-- <mat-error *ngIf="selected.hasError('required')">You must make a selection</mat-error> -->
-					</mat-form-field>
-
-				</div>
-<!--
-				<mat-form-field *ngIf="label.cardType != null" style="width: 150px;">
-					<mat-select placeholder="Selct Model" [(ngModel)]="label.device">
-						<mat-option *ngFor="let option of model(label.cardType, label.id)" [(value)]="option">
-							{{option}}
-						</mat-option>
-					</mat-select>
-				</mat-form-field>
--->
-				<!-- Is device New/CPO/Demo/etc -->
-<!--
-				<mat-form-field class="DeviceType" *ngIf="label.cardType != 'null' && label.cardType == 'cpu' || label.cardType == 'ipad' || label.cardType == 'iphone'">
-					<mat-select placeholder="New/CPO/etc.." [(ngModel)]="label.deviceType" name="DeviceType">
-						<mat-option *ngFor="let option of DeviceTypechips" [value]="option">
-							{{option}}
-						</mat-option>
-					</mat-select>
-				</mat-form-field>
--->
 				<pre *ngIf="debug == true">Label Data = {{label | json}}</pre>
-			</mat-card-content>
-			<mat-card-actions>
-				<button mat-button disabled (click)="duplicatelabel(label)">Duplicate Label</button>
-				<button mat-flat-button (click)="removelabel(label.id)" color="warn">Remove Label</button>
-			</mat-card-actions>
-		</mat-card>
-		<div *ngIf="debug == true" id="data" style="color:#000">
-			<pre>{{chips | json}}</pre>
+				<!-- <pre *ngIf="debug == true">Form Data[{{i}}] = {{label | json}}</pre> -->
+			</mat-card>
 		</div>
 
+
+		<pre *ngIf="debug">{{labelsForm.value | json}}</pre>
+		
 	</div>
 
-
 </mat-drawer-container>
+
 
 <!--The content below is only a placeholder and can be replaced.-->

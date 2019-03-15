@@ -4,7 +4,8 @@ import { FileSaverModule } from 'ngx-filesaver';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { AppComponent, ClearLabelsDialog, loadjson, DisplayModels } from './app.component';
+import { AppComponent, ClearLabelsDialog, loadjson } from './app.component';
+import { DisplayModels, FilterYears, FilterSizes } from './services/pipes';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
 	MatAutocompleteModule,
@@ -101,7 +102,9 @@ export class MaterialModule {}
     AppComponent,
     ClearLabelsDialog,
     loadjson,
-    DisplayModels
+    DisplayModels,
+    FilterYears,
+    FilterSizes
   ],
   entryComponents: [
 	ClearLabelsDialog,
