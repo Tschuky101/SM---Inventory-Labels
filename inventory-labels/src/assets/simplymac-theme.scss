@@ -97,70 +97,57 @@ $simplymac-accent:  mat-palette($md-smblue);
 $simplymac-warn:    mat-palette($mat-red);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$simplymac-theme: mat-light-theme($simplymac-primary, $simplymac-accent, $simplymac-warn);
+$simplymac-light-theme: mat-light-theme($simplymac-primary, $simplymac-accent, $simplymac-warn);
+$simplymac-dark-theme: mat-dark-theme($simplymac-primary, $simplymac-accent, $simplymac-warn);
 
 
-/******
-	Light Theme
-******/
-.light-theme{
-     .sidenav-container{
-     	background: rgba($mainBG, 0.5);
-     }
-     #label_container{
-          mat-card-title{color: darken($cardTitle, 30%);}
-          mat-card-subtitle{color: darken($cardTitle, 15%);}
-     	mat-card{
-     		background: $matcardBG;
 
-     		pre{
-     			color: #000;
-     		}
-     	}
-     }
-     #noLabels{
-     	color: darken($mainBG, 10%);
-     }
-     #AddLabel_ChooseType, #AddLabel_ChooseCondition, #Computer_Data{
-     	mat-grid-tile{
-     		box-shadow: 0px 3px 5px rgba(0,0,0,.3),0px 0px 5px rgba(0,0,0,0.15);
-     		color: lighten(#000, 75%);
-     	}
-     }
-}
+     // #label_container{
+     //      mat-card-title{color: darken($cardTitle, 30%);}
+     //      mat-card-subtitle{color: darken($cardTitle, 15%);}
+     // 	mat-card{
+     // 		background: $matcardBG;
+     //
+     // 		pre{
+     // 			color: #000;
+     // 		}
+     // 	}
+     // }
 
-/******
-	Light Theme
-******/
-.dark-theme{
-	.sidenav-container{
-		background: lighten($mainBGDark, 10%);
-	}
-	#label_container{
-		mat-card-title{color: darken($cardTitleDark, 5%);}
-		mat-card-subtitle{color: darken($cardTitleDark, 20%);}
-		mat-card{
-			background: $matcardBGDark;
 
-			pre{
-				color: #fff;
-			}
-		}
-	}
-	#noLabels{
-		color: darken($mainBGDark, 0.025%);
-	}
-	#AddLabel_ChooseType, #AddLabel_ChooseCondition, #Computer_Data{
-		mat-grid-tile{
-			box-shadow: 0px 3px 5px rgba(0,0,0,.3),0px 0px 5px rgba(0,0,0,0.15);
-			color: lighten(#000, 75%);
-		}
-	}
-	mat-dialog-container{
-		color: #fff;
-		background: lighten($mainBGDark, 10%);
-	}
-}
+
+
+	// #label_container{
+	// 	mat-card-title{color: darken($cardTitleDark, 5%);}
+	// 	mat-card-subtitle{color: darken($cardTitleDark, 20%);}
+	// 	mat-card{
+	// 		background: $matcardBGDark;
+     //
+	// 		pre{
+	// 			color: #fff;
+	// 		}
+	// 	}
+	// }
+	// #noLabels{
+	// 	color: darken($mainBGDark, 0.025%);
+	// }
+
+	// mat-dialog-container{
+	// 	color: #fff;
+	// 	background: lighten($mainBGDark, 10%);
+	// }
+     // .mat-select-panel{
+     //      background: lighten($mainBGDark, 20%);
+     //
+     //      .mat-option{
+     //           color: darken($cardTitleDark, 20%);
+     //
+     //           &[aria-disabled="true"]{
+     //                color: darken($cardTitleDark, 35%);
+     //           }
+     //      }
+     //
+     // }
 
 
 
@@ -232,6 +219,44 @@ $simplymac-theme: mat-light-theme($simplymac-primary, $simplymac-accent, $simply
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include angular-material-theme($simplymac-theme);
+// @include angular-material-theme($simplymac-light-theme);
+/******
+	Light Theme
+******/
+.light-theme{
+     .sidenav-container{
+          background: rgba($mainBG, 0.5);
+     }
+     #noLabels{
+     	color: darken($mainBG, 10%);
+     }
+     #AddLabel_ChooseType, #AddLabel_ChooseCondition, #Computer_Data{
+     	mat-grid-tile{
+     		box-shadow: 0px 3px 5px rgba(0,0,0,.3),0px 0px 5px rgba(0,0,0,0.15);
+     		// color: lighten(#000, 75%);
+     	}
+     }
+     @include angular-material-theme($simplymac-light-theme);
+     @include simplymac-theme($simplymac-light-theme);
 
-@include simplymac-theme($simplymac-theme);
+}
+/******
+	Dark Theme
+******/
+.dark-theme{
+     .sidenav-container{
+		background: lighten($mainBGDark, 10%);
+	}
+     #noLabels{
+		color: darken($matcardBGDark, 0%);
+	}
+     #AddLabel_ChooseType, #AddLabel_ChooseCondition, #Computer_Data{
+		mat-grid-tile{
+			box-shadow: 0px 3px 5px rgba(0,0,0,.3),0px 0px 5px rgba(0,0,0,0.15);
+			color: lighten(#000, 75%);
+		}
+	}
+     @include angular-material-theme($simplymac-dark-theme);
+     @include simplymac-theme($simplymac-dark-theme);
+
+}
