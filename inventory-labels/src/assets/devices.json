@@ -1,45 +1,115 @@
 [
 	{
 		"device":"cpu",
+		"name":"Macbook Air",
+		"basePrice" : 1999.99,
+		"year":"2017",
+		"size":"13 inch",
+		"touchbar": false
+	},{
+		"device":"cpu",
+		"name":"Macbook Air",
+		"basePrice" : 1999.99,
+		"year":"2018",
+		"size":"13 inch",
+		"touchbar": false
+	},{
+		"device":"cpu",
 		"name":"Macbook",
 		"basePrice" : 1999.99,
 		"year":"2017",
-		"size":"15inch",
+		"size":"12 inch",
 		"touchbar": false
 	},{
 		"device": "cpu",
 		"name":"Macbook Pro",
 		"basePrice" : 1500,
 		"year":"2018",
-		"size":"15inch",
+		"size":"15 inch",
+		"touchbar": true
+	},{
+		"device": "cpu",
+		"name":"Macbook Pro",
+		"basePrice" : 1500,
+		"year":"2014",
+		"size":"15 inch",
+		"touchbar": true
+	},{
+		"device": "cpu",
+		"name":"Macbook Pro",
+		"basePrice" : 1500,
+		"year":"2018",
+		"size":"13 inch",
 		"touchbar": true
 	},{
 		"device": "cpu",
 		"name":"Macbook Pro",
 		"basePrice" : 1500,
 		"year":"2015",
-		"size":"15inch",
+		"size":"15 inch",
 		"touchbar": true
 	},{
 		"device": "cpu",
 		"name":"Macbook Pro",
 		"basePrice" : 1500,
 		"year":"2013",
-		"size":"15inch",
+		"size":"15 inch",
 		"touchbar": true
 	},{
 		"device":"cpu",
 		"name":"Macbook Pro",
 		"basePrice" : 1500,
 		"year":"2017",
-		"size":"13inch",
+		"size":"13 inch",
 		"touchbar": false
 	},{
 		"device": "cpu",
 		"name":"iMac",
 		"basePrice" : 1500,
-		"year":"2018",
-		"size":"21.5inch",
+		"year":"2017",
+		"size":"21.5 inch",
+		"touchbar": false
+	},{
+		"device": "cpu",
+		"name":"iMac Pro",
+		"basePrice" : 1500,
+		"year":"2017",
+		"size":"27 inch",
+		"touchbar": false
+	},{
+		"device": "cpu",
+		"name":"iMac",
+		"basePrice" : 1500,
+		"year":"Early 2015",
+		"size":"21.5 inch",
+		"touchbar": false
+	},{
+		"device": "cpu",
+		"name":"iMac",
+		"basePrice" : 1500,
+		"year":"Mid 2015",
+		"size":"21.5 inch",
+		"touchbar": false
+	},{
+		"device": "cpu",
+		"name":"iMac",
+		"basePrice" : 1500,
+		"year":"Late 2015",
+		"size":"21.5 inch",
+		"touchbar": false
+	},{
+		"device": "cpu",
+		"name":"iMac",
+		"basePrice" : 1500,
+		"year":"2014",
+		"size":"21.5 inch",
+		"touchbar": false
+	},{
+		"device": "cpu",
+		"name":"iMac",
+		"basePrice" : 1500,
+		"year":"2014",
+		"size":"27 inch",
 		"touchbar": false
 	},{
 		"device": "cpu",
@@ -50,59 +120,91 @@
 		"touchbar": false
 	},{
 		"device": "cpu",
+		"name":"Mac Mini",
+		"basePrice" : 1500,
+		"year":"2014",
+		"size":"No monitor",
+		"touchbar": false
+	},{
+		"device": "cpu",
+		"name":"Mac Mini",
+		"basePrice" : 1500,
+		"year":"2012",
+		"size":"No monitor",
+		"touchbar": false
+	},{
+		"device": "cpu",
 		"name":"Mac Pro",
 		"basePrice" : 1500,
-		"year":"2018",
-		"size":"21.5inch",
+		"year":"2013",
+		"size":"No monitor",
 		"touchbar": true
 	},{
 		"device":"ipad",
 		"name":"iPad",
 		"basePrice" : 329.99,
 		"year":"2017",
-		"size":"9.7inch"
+		"size":"9.7 inch"
 	},{
 		"device":"ipad",
 		"name":"iPad Air",
 		"basePrice" : 329.99,
 		"year":"2017",
-		"size":"9.7inch"
+		"size":"9.7 inch"
 	},{
 		"device":"iphone",
 		"name":"iPhone SE",
 		"basePrice" : 329.99,
 		"year":"2016",
-		"size":"4inch"
+		"size":"4 inch"
 	},{
 		"device":"iphone",
 		"name":"iPhone X",
 		"basePrice" : 329.99,
 		"year":"2017",
-		"size":"4inch"
+		"size":"4 inch"
 	},{
 		"device":"ipad",
 		"name":"iPad Mini",
 		"basePrice" : 329.99,
 		"year":"2017",
-		"size":"4inch"
+		"size":"7 inch"
 	},{
 		"device":"watch",
 		"name":"1st Gen",
 		"basePrice" : 329.99,
 		"year":"2017",
-		"size":["38mm","42mm"]
+		"size":"38mm"
+	},{
+		"device":"watch",
+		"name":"1st Gen",
+		"basePrice" : 329.99,
+		"year":"2017",
+		"size":"42mm"
 	},{
 		"device":"watch",
 		"name":"Sieres 1",
 		"basePrice" : 329.99,
 		"year":"2017",
-		"size":["38mm","42mm"]
+		"size":"38mm"
+	},{
+		"device":"watch",
+		"name":"Sieres 1",
+		"basePrice" : 329.99,
+		"year":"2017",
+		"size":"42mm"
 	},{
 		"device":"watch",
 		"name":"Sieres 2",
 		"basePrice" : 329.99,
 		"year":"2017",
-		"size":["38mm","42mm"]
+		"size":"38mm"
+	},{
+		"device":"watch",
+		"name":"Sieres 2",
+		"basePrice" : 329.99,
+		"year":"2017",
+		"size":"42mm"
 	}
 
 ]
