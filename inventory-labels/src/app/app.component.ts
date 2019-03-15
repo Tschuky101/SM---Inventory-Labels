@@ -94,12 +94,12 @@ export class AppComponent{
 		/******
 			Get Either the local or remote JSON files for loading into the app. This method is determinded by the variable 'this.local'. this is defined in app.component.ts
 		******/
-
 		// Load Devices and initialize dropdown arrays, and pass along if we are loading from local or remote data
 		this.devicesService.getDevices(this.local).subscribe((data: Array<any>) => {
 			this.devices = data;
 			this.getModel();
 			this.getYears();
+			this.getSizes();
 		});
 
 		// Load Pricing information and pass along if we are loading from local or remote data
