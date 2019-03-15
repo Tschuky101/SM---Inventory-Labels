@@ -159,6 +159,20 @@ export class AppComponent{
 				this.models.push(template);
 			}
 		});
+		// Sort Function to sort devices alphanumericly
+		this.models.sort(function(a,b){
+			let nameA = a['name'].toUpperCase();
+			let nameB = b['name'].toUpperCase();
+
+			if(nameA < nameB){
+				return - 1;
+			}
+			if(nameA > nameB){
+				return 1;
+			}
+			return 0;
+		});
+
 		if(this.debug == true){
 			console.log("After ForEach loop");
 			console.log(this.models);
