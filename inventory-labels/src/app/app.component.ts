@@ -444,9 +444,28 @@ export class AppComponent{
 
 		dialogRef.afterClosed().subscribe(result => {
 
-			this.parsedResult = JSON.parse(result);
+			let parsedResult = JSON.parse(result);
 
-			this.labels = this.parsedResult;
+			this.clearLabels();
+
+			parsedResult.label.forEach((label, index) => {
+				this.addLabel();
+				this.labelsForm.controls.label['controls'][index]['controls']['cardType'].get('type').setValue(label['cardType']['type']);
+				this.labelsForm.controls.label['controls'][index]['controls']['cardType'].get('viewValue').setValue(label['cardType']['viewValue']);
+				this.setValidation(index, label['cardType']['type'], label['condition']);
+				this.labelsForm.controls.label['controls'][index].get('id').setValue(label['id']);
+				this.labelsForm.controls.label['controls'][index].get('condition').setValue(label['condition']);
+				this.labelsForm.controls.label['controls'][index].get('receivedOn').setValue(label['receivedOn']);
+				this.labelsForm.controls.label['controls'][index].get('generatedOn').setValue(new Date());
+				this.labelsForm.controls.label['controls'][index].get('device').setValue(label['device']);
+				this.labelsForm.controls.label['controls'][index].get('year').setValue(label['year']);
+				this.labelsForm.controls.label['controls'][index].get('size').setValue(label['size']);
+				this.labelsForm.controls.label['controls'][index].get('price').setValue(label['price']);
+				this.labelsForm.controls.label['controls'][index].get('touchbar').setValue(label['touchbar']);
+
+			});
+
+			// this.labelsForm.setValue(parsedResult);
 
 		});
 
