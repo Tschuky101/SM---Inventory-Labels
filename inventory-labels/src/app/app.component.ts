@@ -1,13 +1,15 @@
-import { Component, Input, HostListener, Inject, Injectable, OnInit, NgZone,  Pipe, PipeTransform } from '@angular/core';
-import { FormsModule, FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { Component, Input, HostListener, Inject, Injectable, OnInit, NgZone, } from '@angular/core';
+import { FormsModule, FormControl, FormGroup, FormBuilder, FormArray, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FileSaverService } from 'ngx-filesaver';
 import { Observable } from 'rxjs';
 import { map, filter, scan, startWith, retry, catchError } from 'rxjs/operators';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { BaseRequestOptions, Headers } from '@angular/http';
 
-import { Devices, DevicesService} from './services/dataservices.service'
+import { Devices, DevicesService } from './services/dataservices.service';
+import { FilterYears, FilterSizes } from './services/pipes';
 //import { ElectronService } from 'ngx-electron';
 
 // Used to import ClearDialog confirmation
@@ -52,24 +54,30 @@ export class AppComponent{
 	DeviceConditions: Array<any>;
 	cardTypes: Array<any>;
 	removeAllLabels: string;
-	labels = [];
 	parsedResult: any;
 	array: any;
 	models: Object[] = [];
 	years: Object[] = [];
+	sizes: Object[] = [];
+	carriers: Object[] = ["Unlocked","Verizon","AT&T","Sprint","T-Mobile"];
 
-	//isAnElectronApp: boolean = this._electronService.runningInElectron;
-
-
+	/******
+		Form Creation & Validation for labels
+	******/
+	priceValidator = "^\\\$?([0-9]{1,3},([0-9]{3},)*[0-9]{3}|[0-9]+)*\\.[9][0-9]$";
+	labelsForm: FormGroup;
+	matcher = new MyErrorStateMatcher();
 
 	public constructor(
 		private _FileSaverService: FileSaverService,
 		private devicesService: DevicesService,
 		public dialog: MatDialog,
 		private http: HttpClient,
-		private zone: NgZone
+		private zone: NgZone,
+		private filterYears: FilterYears,
+		private filterSizes: FilterSizes,
+		// private fb: FormBuilder,
 	){
-
 		// Functions exposed outside of App.
 		// to call function run "window.nameoffunction.zone.run(() => {window.nameoffunction.componentFn();})"
 		window['addLabelfromMenu'] = {
