@@ -193,16 +193,18 @@ export class AppComponent{
 
 		// Add Devices to the years that they were made in. These are added at this.years[index][models].
 		this.devices.forEach(device=>{
-			let index = this.getindex(device.year, this.years, 'year');
 			for(let i=0; i<this.years.length; i++){
 				if(device.year == this.years[i]['year']){ // Check to see if the device year is equal to the year that the for loop is on.
 					if(this.years[i]['models'].length == 0){ // Checks to see if there is any data in this.years[index]['models']. If not pushes current device into array.
 						this.years[i]['models'].push(device.name);
+						// break;
 					} else {
 						for(let j=0; j<this.years[i]['models'].length; j++){ // Loops through each device in this.years[index]['modes']
 
-							if(device.name === this.years[i]['models']){ // Adds current device to this.years[index]['models'] if the device isn't currently in the array
-								console.log("device Exists");
+							let doesModelExistInArray = this.years[i]['models'].includes(device.name);
+
+							if(doesModelExistInArray == true){ // Adds current device to this.years[index]['models'] if the device isn't currently in the array
+								console.log("Device Exists");
 							} else {
 								this.years[i]['models'].push(device.name);
 								break;
