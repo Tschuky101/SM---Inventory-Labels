@@ -212,12 +212,116 @@ export class AppComponent{
 				}
 			}
 
-		})
+		});
+
+		this.years.sort(function(a,b){
+			let yearA = a['year'];
+			let yearB = b['year'];
+			let valueA = parseInt(yearA.match(/[0-9]+/));
+			let valueB = parseInt(yearB.match(/[0-9]+/));
+
+			if(valueA < valueB){
+				return 1;
+			}
+			if(valueA > valueB){
+				return -1;
+			}
+			return 0;
+		});
+		console.log(this.years);
+	}
+	getSizes(){
+		// Generate all Sizes for all devices in devices.json
+		this.devices.forEach(device => {
+			var template = {
+				"size": device.size,
+				"models": [],
+				"years": []
+			}
+			if(this.isInArray(device.size, this.sizes, 'size') == false){
+				this.sizes.push(template);
+			}
+		});
+
+		// Match all devices to their size and add them to the models array for that size
+		this.devices.forEach(device => {
+			let index = this.getindex(device.size, this.sizes, 'size');
+			for(let i=0; i<this.sizes.length; i++){
+				if(device.size == this.sizes[i]['size']){
+					// console.log("Current Device Size == "+device.size);
+					if(this.sizes[i]['models'].length == 0){
+						// console.log("Current Size of this.sizes["+i+"]['models']: "+this.sizes[i]['models'].length);
+						this.sizes[i]['models'].push(device.name);
+						break;
+					} else {
+						for(let j=0; j<this.sizes[i]['models'].length; j++){
+
+							let doesModelExistInArray = this.sizes[i]['models'].includes(device.name);
+
+							if(doesModelExistInArray == true){
+								// console.log("Current Device: "+device.name);
+								// console.log("Device Exists on size: "+device.size);
+							} else {
+								// console.log("Current Device: "+device.name);
+								// console.log("Device doesn't exist on size: "+device.size);
+								this.sizes[i]['models'].push(device.name);
+								break;
+							}
+						}
+					}
+				}
+			}
+		});
+
+		// Match all devices to their size and add them to the years array for that size
+		this.devices.forEach(device => {
+			for(let i=0; i<this.sizes.length; i++){
+				let currentSizeToCheck = this.sizes[i]['size']; // Used for Debugging Purposes
+				let currentDevice = device.name;
+				let deviceBeingCheckedSize = device.size;
+				let deviceSizeMatchesCurrentSizeBeingChecked = false;
+				let yearExistsOnSize = false;
+				console.log("Device info loaded");
+
+
+				if(deviceBeingCheckedSize == currentSizeToCheck){
+
+					deviceSizeMatchesCurrentSizeBeingChecked = true;
+					console.log("Device Matches Size Being Checked");
+					// if(this.sizes[i]['years'].length == 0){
+					// 	this.sizes[i]['years'].push(device.year);
+					// 	break;
+					// } else {
+						for(let j=0; j<=this.sizes[i]['years'].length; j++){
+
+							let currentYearToCheck = this.sizes[i]['years'][j];
+							let deviceBeingCheckedYear = device.year;
+							let doesCurrentDeviceExistInArray = this.sizes[i]['years'].includes(deviceBeingCheckedYear);
+
+							if(this.sizes[i]['years'].includes(deviceBeingCheckedYear) == true){
+								yearExistsOnSize = true;
+								console.log("Year Exists on size being Checked.");
+
+								// console.log(this.sizes[0]);
+							}
+							if(this.sizes[i]['years'].includes(deviceBeingCheckedYear) == false) {
+								yearExistsOnSize = false;
+								console.log("Year doesn't exists on size being Checked.");
+								this.sizes[i]['years'].push(device.year);
+								break;
+							}
+						}
+					// }
+				}
+			}
+		});
+
+		console.log(this.sizes);
 	}
 
 
 	/******
-		Add and Remove Label functions
+		Add, Remove, and Duplicate Functions Label functions
 	******/
 	// Generate Random ID for Labels
 	// Length of ID is defined when the function is called.
