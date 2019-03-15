@@ -21,10 +21,18 @@ export interface JsonDialogData {
 	saveFileData: string;
 }
 
+/** Error when invalid control is dirty, touched, or submitted. */
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  providers: [ DevicesService ],
+  providers: [ DevicesService, FilterYears, FilterSizes ],
   styleUrls: ['./app.component.scss']
 })
 @Injectable()
