@@ -449,11 +449,17 @@ export class AppComponent{
 		// console.log(this.labelsForm)
 
 	}
+
+	/******
+		Save, Load, Print functionallity for the App.
+	******/
 	save(type: string, fromRemote: boolean) {
+
+		// console.log(this.labelsForm);
 
 		var filenameDate = new Date();
 		let filename =  filenameDate + `.${type}`;
-		var parsedJson = JSON.stringify(this.labels);
+		var parsedJson = JSON.stringify(this.labelsForm.value);
 		var fileType = this._FileSaverService.genType(filename);
 		var txtBlob = new Blob([parsedJson], { type: fileType });
 		this._FileSaverService.save(txtBlob, filename);
