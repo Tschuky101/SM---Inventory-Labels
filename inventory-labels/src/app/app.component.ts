@@ -425,6 +425,30 @@ export class AppComponent{
 
 	}
 
+
+
+	/******
+		Data Validation and Update Functions
+	******/
+	// Update Values in Labels Array
+	updateValue(index, key1, key2, value){
+		// console.log(this.labelsForm);
+
+		if(this.debug == true){
+			console.log(this.labelsForm);
+			console.log("setting Value: ["+key1+"]["+key2+"] to: ["+value+"]");
+		}
+		if(key2 == null){
+			this.labelsForm.controls.label['controls'][index]['controls'][key1].value = value;
+			this.labelsForm.controls.label.value[index][key1] = value;
+		} else {
+			this.labelsForm.controls.label['controls'][index]['controls'][key1]['controls'][key2].value = value;
+			this.labelsForm.controls.label.value[index][key1][key2] = value;
+		}
+
+		// console.log(this.labelsForm)
+
+	}
 	save(type: string, fromRemote: boolean) {
 
 		var filenameDate = new Date();
