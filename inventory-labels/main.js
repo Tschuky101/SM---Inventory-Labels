@@ -7,8 +7,14 @@ const url = require("url");
 
 let win;
 
-function createWindow(){
-	win = new BrowserWindow({width: 1200, height: 600, titleBarStyle: 'hiddenInset'});
+function createWindow() {
+  win = new BrowserWindow({
+    width: 1200,
+    height: 600,
+    titleBarStyle: "hiddenInset",
+    transparent: true,
+    vibrancy: "light"
+  });
 
 	win.setMinimumSize(1200, 600);
 	win.setMaximumSize(1200, 600);
