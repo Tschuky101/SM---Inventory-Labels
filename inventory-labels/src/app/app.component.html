@@ -154,8 +154,9 @@
 													(
 														labelsForm.value.label[i].device == null ||
 														labelsForm.value.label[i].year == null
-													)
-											">
+													)"
+												(selectionChange)="disableColors(i)"
+											>
 												<mat-option>
 													-- Select {{ labelsForm.value.label[i].device }} Size --
 												</mat-option>
@@ -189,9 +190,12 @@
 												<mat-option
 													[value]="option['name']"
 													*ngFor="
-														let option of colors
-												">
-													{{ option["name"] }}
+														let option of colors | FilterColors:
+															labelsForm.value.label[i].device:
+															labelsForm.value.label[i].year:
+															labelsForm.value.label[i].size"
+												>
+													{{ option.name }}
 												</mat-option>
 											</mat-select>
 											<mat-error
