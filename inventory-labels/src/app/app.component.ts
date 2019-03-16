@@ -676,7 +676,7 @@ export class AppComponent {
 				this.labelsForm.controls.label['controls'][index].get('year').setValue(label['year']);
 				this.labelsForm.controls.label['controls'][index].get('size').setValue(label['size']);
 				this.labelsForm.controls.label['controls'][index].get('price').setValue(label['price']);
-				this.labelsForm.controls.label['controls'][index].get('colors').setValue(label['price']);
+				this.labelsForm.controls.label['controls'][index].get('colors').setValue(label['colors']);
 				this.labelsForm.controls.label['controls'][index].get('touchbar').setValue(label['touchbar']);
 			});
 		});
