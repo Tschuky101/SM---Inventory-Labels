@@ -4,7 +4,9 @@ import { FileSaverModule } from 'ngx-filesaver';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { AppComponent, ClearLabelsDialog, loadjson } from './app.component';
+import { AppComponent, } from './app.component';
+import { ClearLabelsDialogComponent } from './dialogs/clear-labels.component';
+import { LoadJsonComponent } from './dialogs/load-json.component';
 import { DisplayModels, FilterYears, FilterSizes } from './services/pipes';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
@@ -100,15 +102,15 @@ export class MaterialModule {}
   ],
   declarations: [
     AppComponent,
-    ClearLabelsDialog,
-    loadjson,
+    ClearLabelsDialogComponent,
+    LoadJsonComponent,
     DisplayModels,
     FilterYears,
     FilterSizes
   ],
   entryComponents: [
-	ClearLabelsDialog,
-	loadjson
+	ClearLabelsDialogComponent,
+	LoadJsonComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
