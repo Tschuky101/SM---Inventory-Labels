@@ -138,7 +138,7 @@ export class AppComponent {
 	}
 
 	/******
-	 * Dynamically Pull Data from Array for form fields
+	 * Dynamically Pull Data from Array, and build dropdown lists
 	 ******/
 	getModel() {
 		if (this.debug === true) {
