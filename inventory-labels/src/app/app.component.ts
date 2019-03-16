@@ -285,15 +285,15 @@ export class AppComponent {
 		});
 
 		this.sizes.sort(function (a, b) {
-			const yearA = a['year'];
-			const yearB = b['year'];
+			const yearA = a['size'];
+			const yearB = b['size'];
 			const valueA = parseInt(yearA.match(/[0-9]+/), 10);
 			const valueB = parseInt(yearB.match(/[0-9]+/), 10);
 
-			if (valueA < valueB) {
+			if (valueA > valueB) {
 				return 1;
 			}
-			if (valueA > valueB) {
+			if (valueA < valueB) {
 				return -1;
 			}
 			return 0;
@@ -437,7 +437,6 @@ export class AppComponent {
 	duplicatelabel(index) {
 		this.addLabel();
 		const addedLabelIndex = this.labelsForm.controls.label["value"].length - 1;
-		console.log(addedLabelIndex);
 		this.labelsForm.controls.label['controls'][addedLabelIndex]['controls']['cardType'].get('type').setValue(
 			this.labelsForm.controls.label['controls'][index]['controls']['cardType'].get('type').value);
 		this.labelsForm.controls.label['controls'][addedLabelIndex]['controls']['cardType'].get('viewValue').setValue(
@@ -469,7 +468,6 @@ export class AppComponent {
 			this.labelsForm.controls.label['controls'][index].get('color').value);
 		this.labelsForm.controls.label['controls'][addedLabelIndex].get('touchbar').setValue(
 			this.labelsForm.controls.label['controls'][index].get('touchbar').value);
-		console.log("Label Duplicated");
 	}
 
 	// Remove the Selected Label
@@ -551,12 +549,10 @@ export class AppComponent {
 		}
 
 		if (tempdata.length == 1) {
-			console.log("This Device has only been made in 1 year");
 			this.labelsForm.controls.label['controls'][index].get('year').reset();
 			this.labelsForm.controls.label['controls'][index].get('year').setValue(tempdata[0].year);
 			this.disableSizes(index);
 		} else {
-			console.log("This Device has been made in multiple years");
 			this.labelsForm.controls.label['controls'][index].get('year').reset();
 		}
 	}
@@ -566,11 +562,9 @@ export class AppComponent {
 		const tempdata = this.filterSizes.transform(this.sizes, device, year);
 
 		if (tempdata.length == 1) {
-			console.log("There is only one screen size");
 			this.labelsForm.controls.label['controls'][index].get('size').reset();
 			this.labelsForm.controls.label['controls'][index].get('size').setValue(tempdata[0].size);
 		} else {
-			console.log("There is more than one screen size");
 			this.labelsForm.controls.label['controls'][index].get('size').reset();
 		}
 	}
@@ -638,8 +632,6 @@ export class AppComponent {
 	 * Save, Load, Print functionallity for the App.
 	 ******/
 	save(type: string) {
-		// console.log(this.labelsForm);
-
 		const filenameDate = new Date();
 		const filename = filenameDate + `.${type}`;
 		const parsedJson = JSON.stringify(this.labelsForm.value);
