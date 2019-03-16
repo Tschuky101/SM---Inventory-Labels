@@ -11,7 +11,9 @@ import { ErrorStateMatcher } from "@angular/material/core";
  * Load Services and other compoents for app.component.ts
  ******/
 import { DevicesService } from "./services/dataservices.service";
-import { FilterYears, FilterSizes } from "./services/pipes";
+import { FilterYears } from "./pipes/filteryears.pipe";
+import { FilterSizes } from "./pipes/filtersizes.pipe";
+import { FilterColors } from "./pipes/filtercolors.pipe";
 import { LoadJsonComponent } from "./dialogs/load-json.component";
 import { ClearLabelsDialogComponent } from "./dialogs/clear-labels.component";
 
@@ -26,7 +28,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
-	providers: [ DevicesService, FilterYears, FilterSizes ],
+	providers: [ DevicesService, FilterYears, FilterSizes, FilterColors ],
 	styleUrls: ['./app.component.scss']
 })
 @Injectable()
@@ -66,7 +68,8 @@ export class AppComponent {
 		public dialog: MatDialog,
 		private zone: NgZone,
 		private filterYears: FilterYears,
-		private filterSizes: FilterSizes
+		private filterSizes: FilterSizes,
+		private filterColors: FilterColors
 	) {
 		// Functions exposed outside of App.
 		// to call function run "window.nameoffunction.zone.run(() => {window.nameoffunction.componentFn();})"
@@ -534,6 +537,7 @@ export class AppComponent {
 	deviceModelChanged(index) {
 		this.disableInputYears(index);
 		this.disableSizes(index);
+		this.disableColors(index);
 	}
 	disableInputYears(index) {
 		const device = this.labelsForm.controls.label['controls'][index].get('device').value;
@@ -552,6 +556,7 @@ export class AppComponent {
 			this.labelsForm.controls.label['controls'][index].get('year').reset();
 			this.labelsForm.controls.label['controls'][index].get('year').setValue(tempdata[0].year);
 			this.disableSizes(index);
+			this.disableColors(index);
 		} else {
 			this.labelsForm.controls.label['controls'][index].get('year').reset();
 		}
@@ -564,6 +569,7 @@ export class AppComponent {
 		if (tempdata.length == 1) {
 			this.labelsForm.controls.label['controls'][index].get('size').reset();
 			this.labelsForm.controls.label['controls'][index].get('size').setValue(tempdata[0].size);
+			this.disableColors(index);
 		} else {
 			this.labelsForm.controls.label['controls'][index].get('size').reset();
 		}
