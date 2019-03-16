@@ -185,7 +185,7 @@ export class AppComponent {
 		// Add Devices to the years that they were made in. These are added at this.years[index][models].
 		this.devices.forEach(device => {
 			for (let i = 0; i < this.years.length; i++) {
-				if (device.year == this.years[i]'year']) {
+				if (device.year == this.years[i]['year']) {
 					// Check to see if the device year is equal to the year that the for loop is on.
 					if (this.years[i]['models'].length == 0) {
 						// Checks to see if there is any data in this.years[index]['models']. If not pushes current device into array.
