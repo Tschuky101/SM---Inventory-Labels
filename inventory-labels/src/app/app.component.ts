@@ -288,32 +288,87 @@ export class AppComponent{
 					// } else {
 						for(let j=0; j<=this.sizes[i]['years'].length; j++){
 
-							let currentYearToCheck = this.sizes[i]['years'][j];
-							let deviceBeingCheckedYear = device.year;
-							let doesCurrentDeviceExistInArray = this.sizes[i]['years'].includes(deviceBeingCheckedYear);
+  getColors() {
+    // Add Color to this.colors array if the color doesn't already exist
+    this.devices.forEach(device => {
+      // console.log(device.colors);
+      device.colors.forEach((color) => {
+        const template = {
+          name: color,
+          models: [],
+          years: [],
+          sizes: []
+        };
+        if (this.isInArray(color, this.colors, "name") == false) {
+			// tslint:disable-next-line: quotemark
+			// console.log("Color Doesn't Exist");
+			this.colors.push(template);
+        }
+        // console.log(color);
+      });
+    });
 
-							if(this.sizes[i]['years'].includes(deviceBeingCheckedYear) == true){
-								yearExistsOnSize = true;
-								console.log("Year Exists on size being Checked.");
+    // Add Models to the color array if the model doesn't already exist on this.colors[index]['models'] array
+    this.devices.forEach(device => {
+      device.colors.forEach(deviceColor => {
 
-								// console.log(this.sizes[0]);
+        this.colors.forEach((color, index) => {
+			if (deviceColor == color['name']) {
+				const isDeviceinArray = this.colors[index]['models'].includes(device.name);
+				if (isDeviceinArray == false || this.colors[index]['models'].length == 0) {
+					this.colors[index]['models'].push(device.name);
 							}
-							if(this.sizes[i]['years'].includes(deviceBeingCheckedYear) == false) {
-								yearExistsOnSize = false;
-								console.log("Year doesn't exists on size being Checked.");
-								this.sizes[i]['years'].push(device.year);
-								break;
+			} else {
 							}
+        });
+      });
+    });
+
+    // Add Size to the color array if the model doesn't already exist on this.colors[index]['Size'] array
+	this.devices.forEach(device => {
+		device.colors.forEach(deviceColor => {
+			this.colors.forEach((color, index) => {
+				if (deviceColor == color['name']) {
+					const isDeviceYearInArray = this.colors[index]['years'].includes(device.year);
+					if (isDeviceYearInArray == false || this.colors[index]['years'].length == 0) {
+						this.colors[index]['years'].push(device.year);
 						}
-					// }
 				}
-			}
+			});
 		});
+	});
 
-		console.log(this.sizes);
+    // Add Year to the color array if the model doesn't already exist on this.colors[index]['Year'] array
+	this.devices.forEach(device => {
+		device.colors.forEach(deviceColor => {
+			this.colors.forEach((color, index) => {
+				if (deviceColor == color['name']) {
+					const isDeviceSizeInArray = this.colors[index]['sizes'].includes(device.size);
+					if (isDeviceSizeInArray == false || this.colors[index]['sizes'].lenght == 0) {
+						this.colors[index]['sizes'].push(device.size);
+			}
+				}
+		});
+		});
+	});
+
+	this.colors.sort(function(a, b) {
+		const nameA = a['name'].toUpperCase();
+		const nameB = b['name'].toUpperCase();
+
+		if (nameA < nameB) {
+			return -1;
 	}
+		if (nameA > nameB) {
+			return 1;
+		}
+		return 0;
 
+	});
 
+    console.log("Colors Array");
+    console.log(this.colors);
+  }
 	/******
 		Add, Remove, and Duplicate Functions Label functions
 	******/
