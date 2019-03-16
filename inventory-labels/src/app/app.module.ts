@@ -7,7 +7,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent, } from './app.component';
 import { ClearLabelsDialogComponent } from './dialogs/clear-labels.component';
 import { LoadJsonComponent } from './dialogs/load-json.component';
-import { DisplayModels, FilterYears, FilterSizes } from './services/pipes';
+import { DisplayModels } from './pipes/displaymodels.pipe';
+import { FilterYears } from './pipes/filteryears.pipe';
+import { FilterSizes } from './pipes/filtersizes.pipe';
+import { FilterColors } from './pipes/filtercolors.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
 	MatAutocompleteModule,
@@ -106,7 +109,8 @@ export class MaterialModule {}
     LoadJsonComponent,
     DisplayModels,
     FilterYears,
-    FilterSizes
+	FilterSizes,
+	FilterColors
   ],
   entryComponents: [
 	ClearLabelsDialogComponent,
