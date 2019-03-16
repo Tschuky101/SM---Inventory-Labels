@@ -94,7 +94,6 @@ mat-drawer{
 	}
 }
 mat-card-title{
-	&#CardType{}
 	&#price{
 		position: absolute;
 	    top: 16px;
@@ -103,60 +102,4 @@ mat-card-title{
     }
 }
 
-.mat-dialog-title{
-	#subtitle{
-		font-size: 12px !important;
-	}
 
-}
-// All materialdesign Card Styles
-mat-card{
-
-	div#accordion{
-		position: relative;
-		display: block;
-
-		div#accordionitem{
-
-			position: relative;
-			top: 0;
-			margin: 0 10px;
-
-			&:first-child{
-				margin-left: 0px;
-				margin-right: 10px;
-			}
-			&:last-child{
-				margin-right: 0px;
-				margin-left: 10px;
-			}
-
-			display: inline-block;
-
-			&.active{
-				span#title{}
-				span#content{
-					display: block;
-				}
-			}
-			span#title{
-				position: initial;
-				box-shadow: #eaeaea 0px 3px 10px;
-				border: 1px solid #000;
-				padding: 10px;
-			}
-			span#content{
-				display: none;
-			}
-
-		}
-
-	}
-
-
-}
-
-#AddLabel_ChooseType, #AddLabel_ChooseCondition, #Computer_Data{
-
-
-}
