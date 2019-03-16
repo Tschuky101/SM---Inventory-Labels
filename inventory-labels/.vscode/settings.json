@@ -1,0 +1,7 @@
+{
+    "search.useGlobalIgnoreFiles": true,
+    "prettier.useTabs": true,
+    "editor.autoIndent": false,
+    "editor.detectIndentation": false,
+    "editor.insertSpaces": false
+}

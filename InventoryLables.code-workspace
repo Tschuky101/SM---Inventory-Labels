@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "Inventory-Labels"
+		}
+	],
+	"settings": {
+        "workbench.colorTheme": "Material Theme Darker",
+	"prettier.useTabs": true,
+    "editor.autoIndent": false,
+    "editor.detectIndentation": false
+	}
+}
