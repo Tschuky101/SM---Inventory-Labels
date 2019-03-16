@@ -653,53 +653,5 @@ export class AppComponent{
 	printLabels(){
 
 		console.log("Not Yet Implimented");
-
 	}
-
-};
-
-// Clear Labels Dialog Prompt
-@Component({
-	selector: 'ClearLabelsDialog',
-	templateUrl: 'clearLabels-dialog.html',
-})
-export class ClearLabelsDialog {
-	constructor(public dialogRef: MatDialogRef<ClearLabelsDialog>, @Inject(MAT_DIALOG_DATA) public data: DialogData, private formBuilder: FormBuilder) {}
-}
-
-@Component({
-	selector: 'loadjson',
-	templateUrl: 'loadjson.html',
-	styleUrls: ['./app.component.scss']
-})
-export class loadjson {
-
-	file: string;
-	public saveFileData;
-
-	constructor(
-		public dialogRef: MatDialogRef<loadjson>,
-		@Inject(MAT_DIALOG_DATA) public data: JsonDialogData
-	) {}
-
-	upload(): void{
-
-		var files = (document.getElementById('saveFile') as HTMLInputElement).files[0];
-
-		var fr: FileReader = new FileReader();
-
-		fr.onload = (e) => {
-			console.log("Starting File Read");
-
-			this.dialogRef.close(fr.result);
-
-		}
-
-		var data = fr.readAsText(files);
-
-		//this.dialogRef.close(fr.result);
-
-	}
-
-
 }
