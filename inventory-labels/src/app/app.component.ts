@@ -1,19 +1,19 @@
+/******
+ * Load in Library Files for app.component.ts
+ ******/
+import { Component, Injectable, NgZone } from "@angular/core";
 import { MatDialog } from "@angular/material";
+import { FormControl, FormGroup, FormArray, FormGroupDirective, NgForm, Validators } from "@angular/forms";
+import { FileSaverService } from "ngx-filesaver";
+import { ErrorStateMatcher } from "@angular/material/core";
 
-import { Devices, DevicesService } from './services/dataservices.service';
-import { FilterYears, FilterSizes } from './services/pipes';
-//import { ElectronService } from 'ngx-electron';
-
-// Used to import ClearDialog confirmation
-export interface DialogData {
-	removeAllLabels: false;
-}
-
-// Used to import Json Data
-export interface JsonDialogData {
-	file: string;
-	saveFileData: string;
-}
+/******
+ * Load Services and other compoents for app.component.ts
+ ******/
+import { DevicesService } from "./services/dataservices.service";
+import { FilterYears, FilterSizes } from "./services/pipes";
+import { LoadJsonComponent } from "./dialogs/load-json.component";
+import { ClearLabelsDialogComponent } from "./dialogs/clear-labels.component";
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -24,16 +24,15 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 }
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  providers: [ DevicesService, FilterYears, FilterSizes ],
-  styleUrls: ['./app.component.scss']
+	selector: 'app-root',
+	templateUrl: './app.component.html',
+	providers: [ DevicesService, FilterYears, FilterSizes ],
+	styleUrls: ['./app.component.scss']
 })
 @Injectable()
-export class AppComponent{
-
+export class AppComponent {
 	/******
-		VARIABLES
+	 * VARIABLES
 	******/
 
 	title = 'Simply Mac Inventory Labels';
@@ -51,12 +50,13 @@ export class AppComponent{
 	models: Object[] = [];
 	years: Object[] = [];
 	sizes: Object[] = [];
-	carriers: Object[] = ["Unlocked","Verizon","AT&T","Sprint","T-Mobile"];
+	colors: Object[] = [];
+	carriers: Object[] = [ "Unlocked", "Verizon", "AT&T", "Sprint", "T-Mobile"];
 
 	/******
-		Form Creation & Validation for labels
-	******/
-	priceValidator = "^\\\$?([0-9]{1,3},([0-9]{3},)*[0-9]{3}|[0-9]+)*\\.[9][0-9]$";
+	 * Form Creation & Validation for labels
+	 ******/
+	priceValidator = "^\\$?([0-9]{1,3},([0-9]{3},)*[0-9]{3}|[0-9]+)*\\.[9][0-9]$";
 	labelsForm: FormGroup;
 	matcher = new MyErrorStateMatcher();
 
@@ -64,12 +64,10 @@ export class AppComponent{
 		private _FileSaverService: FileSaverService,
 		private devicesService: DevicesService,
 		public dialog: MatDialog,
-		private http: HttpClient,
 		private zone: NgZone,
 		private filterYears: FilterYears,
-		private filterSizes: FilterSizes,
-		// private fb: FormBuilder,
-	){
+		private filterSizes: FilterSizes
+	) {
 		// Functions exposed outside of App.
 		// to call function run "window.nameoffunction.zone.run(() => {window.nameoffunction.componentFn();})"
 		window['addLabelfromMenu'] = {
@@ -84,14 +82,16 @@ export class AppComponent{
 		};
 
 		/******
-			Get Either the local or remote JSON files for loading into the app. This method is determinded by the variable 'this.local'. this is defined in app.component.ts
-		******/
+		 * Get Either the local or remote JSON files for loading into the app.
+		 * This method is determinded by the variable 'this.local'. this is defined in app.component.ts
+		 ******/
 		// Load Devices and initialize dropdown arrays, and pass along if we are loading from local or remote data
 		this.devicesService.getDevices(this.local).subscribe((data: Array<any>) => {
 			this.devices = data;
 			this.getModel();
 			this.getYears();
 			this.getSizes();
+			this.getColors();
 		});
 
 		// Load Pricing information and pass along if we are loading from local or remote data
@@ -109,95 +109,95 @@ export class AppComponent{
 			this.cardTypes = data;
 		});
 		/******
-			End data loading section
-
-			Form Creation on page load
-		******/
+		 * End data loading section
+		 *
+		 * Form Creation on page load
+		 ******/
 		this.labelsForm = new FormGroup({
 			label: new FormArray([])
 		});
-
 	}
 
 	/******
-		Helper Functions
-	******/
+	 * Helper Functions
+	 ******/
 	// Checks if value is in Array
 	isInArray(value, array, key) {
-		var search = array.filter(function(e) {return e[key] === value});
+		const search = array.filter(function(e) {
+			return e[key] === value;
+		});
 		return search;
 	}
 	// Gets Index of item
-	getindex(search, array, key){
-		var index = array.map(function(e){return e[key];}).indexOf(search);
+	getindex(search, array, key) {
+		const index = array.map(function(e) {return e[key]; }).indexOf(search);
 		return index;
 	}
 
 	/******
-		Dynamically Pull Data from Array for form fields
-	******/
-	getModel(){
-		if(this.debug == true){
+	 * Dynamically Pull Data from Array for form fields
+	 ******/
+	getModel() {
+		if (this.debug === true) {
 			console.log("GetModel()");
 			console.log(this.devices);
 			console.log("this.devices length = " + this.devices.length);
 		}
 		this.devices.forEach(device => {
-			var template = {
-				"name": device.name,
-				"device": device.device
+			const template = {
+				name: device.name,
+				device: device.device
 			};
-			if (this.isInArray(device.name, this.models, 'name') == false){
+			if (this.isInArray(device.name, this.models, "name") == false) {
 				this.models.push(template);
 			}
 		});
 		// Sort Function to sort devices alphanumericly
-		this.models.sort(function(a,b){
-			let nameA = a['name'].toUpperCase();
-			let nameB = b['name'].toUpperCase();
+		this.models.sort(function(a, b) {
+			const nameA = a["name"].toUpperCase();
+			const nameB = b["name"].toUpperCase();
 
-			if(nameA < nameB){
-				return - 1;
+			if (nameA < nameB) {
+				return -1;
 			}
-			if(nameA > nameB){
+			if (nameA > nameB) {
 				return 1;
 			}
 			return 0;
 		});
 
-		if(this.debug == true){
-			console.log("After ForEach loop");
-			console.log(this.models);
-		}
+		console.log("Models Array");
+		console.log(this.models);
 	}
-	getYears(){
+	getYears() {
 		// Generate All the Possible Years that exits in devices.json
 		this.devices.forEach(device => {
-			if(this.isInArray(device.year, this.years, 'year') == false){ // Checks to see if current year is in the array this.years and adds the year if it is not in the array.
-				let template = {
-					"year":device.year,
-					"models": [],
-				}
+			if (this.isInArray(device.year, this.years, "year") == false) {
+				// Checks to see if current year is in the array this.years and adds the year if it is not in the array.
+				const template = {
+					year: device.year,
+					models: []
+				};
 				this.years.push(template);
-
 			}
 		});
 
 		// Add Devices to the years that they were made in. These are added at this.years[index][models].
-		this.devices.forEach(device=>{
-			for(let i=0; i<this.years.length; i++){
-				if(device.year == this.years[i]['year']){ // Check to see if the device year is equal to the year that the for loop is on.
-					if(this.years[i]['models'].length == 0){ // Checks to see if there is any data in this.years[index]['models']. If not pushes current device into array.
+		this.devices.forEach(device => {
+			for (let i = 0; i < this.years.length; i++) {
+				if (device.year == this.years[i]'year']) {
+					// Check to see if the device year is equal to the year that the for loop is on.
+					if (this.years[i]['models'].length == 0) {
+						// Checks to see if there is any data in this.years[index]['models']. If not pushes current device into array.
 						this.years[i]['models'].push(device.name);
 						// break;
 					} else {
-						for(let j=0; j<this.years[i]['models'].length; j++){ // Loops through each device in this.years[index]['modes']
+						for (let j = 0; j < this.years[i]['models'].length; j++) {
+							// Loops through each device in this.years[index]['modes']
 
-							let doesModelExistInArray = this.years[i]['models'].includes(device.name);
+							const doesModelExistInArray = this.years[i]['models'].includes(device.name);
 
-							if(doesModelExistInArray == true){ // Adds current device to this.years[index]['models'] if the device isn't currently in the array
-								console.log("Device Exists");
-							} else {
+							if (doesModelExistInArray == false) {
 								this.years[i]['models'].push(device.name);
 								break;
 							}
@@ -205,59 +205,52 @@ export class AppComponent{
 					}
 				}
 			}
-
 		});
 
-		this.years.sort(function(a,b){
-			let yearA = a['year'];
-			let yearB = b['year'];
-			let valueA = parseInt(yearA.match(/[0-9]+/));
-			let valueB = parseInt(yearB.match(/[0-9]+/));
+		this.years.sort(function(a, b) {
+			const yearA = a['year'];
+			const yearB = b['year'];
+			const valueA = parseInt(yearA.match(/[0-9]+/), 10);
+			const valueB = parseInt(yearB.match(/[0-9]+/), 10);
 
-			if(valueA < valueB){
+			if (valueA < valueB) {
 				return 1;
 			}
-			if(valueA > valueB){
+			if (valueA > valueB) {
 				return -1;
 			}
 			return 0;
 		});
+		console.log('Years Array');
 		console.log(this.years);
 	}
-	getSizes(){
+	getSizes() {
 		// Generate all Sizes for all devices in devices.json
 		this.devices.forEach(device => {
-			var template = {
-				"size": device.size,
-				"models": [],
-				"years": []
-			}
-			if(this.isInArray(device.size, this.sizes, 'size') == false){
+			const template = {
+				size: device.size,
+				models: [],
+				years: []
+			};
+			if (this.isInArray(device.size, this.sizes, 'size') == false) {
 				this.sizes.push(template);
 			}
 		});
 
 		// Match all devices to their size and add them to the models array for that size
 		this.devices.forEach(device => {
-			let index = this.getindex(device.size, this.sizes, 'size');
-			for(let i=0; i<this.sizes.length; i++){
-				if(device.size == this.sizes[i]['size']){
+			for (let i = 0; i < this.sizes.length; i++) {
+				if (device.size == this.sizes[i]['size']) {
 					// console.log("Current Device Size == "+device.size);
-					if(this.sizes[i]['models'].length == 0){
+					if (this.sizes[i]['models'].length == 0) {
 						// console.log("Current Size of this.sizes["+i+"]['models']: "+this.sizes[i]['models'].length);
 						this.sizes[i]['models'].push(device.name);
 						break;
 					} else {
-						for(let j=0; j<this.sizes[i]['models'].length; j++){
+						for (let j = 0; j < this.sizes[i]['models'].length; j++) {
+							const doesModelExistInArray = this.sizes[i]['models'].includes(device.name);
 
-							let doesModelExistInArray = this.sizes[i]['models'].includes(device.name);
-
-							if(doesModelExistInArray == true){
-								// console.log("Current Device: "+device.name);
-								// console.log("Device Exists on size: "+device.size);
-							} else {
-								// console.log("Current Device: "+device.name);
-								// console.log("Device doesn't exist on size: "+device.size);
+							if (doesModelExistInArray == false) {
 								this.sizes[i]['models'].push(device.name);
 								break;
 							}
@@ -269,120 +262,126 @@ export class AppComponent{
 
 		// Match all devices to their size and add them to the years array for that size
 		this.devices.forEach(device => {
-			for(let i=0; i<this.sizes.length; i++){
-				let currentSizeToCheck = this.sizes[i]['size']; // Used for Debugging Purposes
-				let currentDevice = device.name;
-				let deviceBeingCheckedSize = device.size;
+			for (let i = 0; i < this.sizes.length; i++) {
+				const currentSizeToCheck = this.sizes[i]['size']; // Used for Debugging Purposes
+				const deviceBeingCheckedSize = device.size;
 				let deviceSizeMatchesCurrentSizeBeingChecked = false;
 				let yearExistsOnSize = false;
-				console.log("Device info loaded");
 
-
-				if(deviceBeingCheckedSize == currentSizeToCheck){
-
+				if (deviceBeingCheckedSize == currentSizeToCheck) {
 					deviceSizeMatchesCurrentSizeBeingChecked = true;
-					console.log("Device Matches Size Being Checked");
-					// if(this.sizes[i]['years'].length == 0){
-					// 	this.sizes[i]['years'].push(device.year);
-					// 	break;
-					// } else {
-						for(let j=0; j<=this.sizes[i]['years'].length; j++){
 
-  getColors() {
-    // Add Color to this.colors array if the color doesn't already exist
-    this.devices.forEach(device => {
-      // console.log(device.colors);
-      device.colors.forEach((color) => {
-        const template = {
-          name: color,
-          models: [],
-          years: [],
-          sizes: []
-        };
-        if (this.isInArray(color, this.colors, "name") == false) {
-			// tslint:disable-next-line: quotemark
-			// console.log("Color Doesn't Exist");
-			this.colors.push(template);
-        }
-        // console.log(color);
-      });
-    });
+					for (let j = 0; j <= this.sizes[i]['years'].length; j++) {
+						const deviceBeingCheckedYear = device.year;
 
-    // Add Models to the color array if the model doesn't already exist on this.colors[index]['models'] array
-    this.devices.forEach(device => {
-      device.colors.forEach(deviceColor => {
-
-        this.colors.forEach((color, index) => {
-			if (deviceColor == color['name']) {
-				const isDeviceinArray = this.colors[index]['models'].includes(device.name);
-				if (isDeviceinArray == false || this.colors[index]['models'].length == 0) {
-					this.colors[index]['models'].push(device.name);
-							}
-			} else {
-							}
-        });
-      });
-    });
-
-    // Add Size to the color array if the model doesn't already exist on this.colors[index]['Size'] array
-	this.devices.forEach(device => {
-		device.colors.forEach(deviceColor => {
-			this.colors.forEach((color, index) => {
-				if (deviceColor == color['name']) {
-					const isDeviceYearInArray = this.colors[index]['years'].includes(device.year);
-					if (isDeviceYearInArray == false || this.colors[index]['years'].length == 0) {
-						this.colors[index]['years'].push(device.year);
+						if (this.sizes[i]['years'].includes(deviceBeingCheckedYear) == false) {
+							yearExistsOnSize = false;
+							this.sizes[i]['years'].push(device.year);
+							break; // DO NOT REMOVE. This is required to prevent an infinite loop
 						}
+					}
 				}
+			}
+		});
+
+		console.log('Sizes array');
+		console.log(this.sizes);
+	}
+	getColors() {
+		// Add Color to this.colors array if the color doesn't already exist
+		this.devices.forEach(device => {
+			// console.log(device.colors);
+			device.colors.forEach((color) => {
+				const template = {
+					name: color,
+					models: [],
+					years: [],
+					sizes: []
+				};
+				if (this.isInArray(color, this.colors, "name") == false) {
+					// tslint:disable-next-line: quotemark
+					// console.log("Color Doesn't Exist");
+					this.colors.push(template);
+				}
+				// console.log(color);
 			});
 		});
-	});
 
-    // Add Year to the color array if the model doesn't already exist on this.colors[index]['Year'] array
-	this.devices.forEach(device => {
-		device.colors.forEach(deviceColor => {
-			this.colors.forEach((color, index) => {
-				if (deviceColor == color['name']) {
-					const isDeviceSizeInArray = this.colors[index]['sizes'].includes(device.size);
-					if (isDeviceSizeInArray == false || this.colors[index]['sizes'].lenght == 0) {
-						this.colors[index]['sizes'].push(device.size);
+		// Add Models to the color array if the model doesn't already exist on this.colors[index]['models'] array
+		this.devices.forEach(device => {
+			device.colors.forEach(deviceColor => {
+				this.colors.forEach((color, index) => {
+					if (deviceColor == color['name']) {
+						const isDeviceinArray = this.colors[index]['models'].includes(device.name);
+						if (isDeviceinArray == false || this.colors[index]['models'].length == 0) {
+							this.colors[index]['models'].push(device.name);
+						}
+					} else {
+					}
+				});
+			});
+		});
+
+		// Add Size to the color array if the model doesn't already exist on this.colors[index]['Size'] array
+		this.devices.forEach(device => {
+			device.colors.forEach(deviceColor => {
+				this.colors.forEach((color, index) => {
+					if (deviceColor == color['name']) {
+						const isDeviceYearInArray = this.colors[index]['years'].includes(device.year);
+						if (isDeviceYearInArray == false || this.colors[index]['years'].length == 0) {
+							this.colors[index]['years'].push(device.year);
+						}
+					}
+				});
+			});
+		});
+
+		// Add Year to the color array if the model doesn't already exist on this.colors[index]['Year'] array
+		this.devices.forEach(device => {
+			device.colors.forEach(deviceColor => {
+				this.colors.forEach((color, index) => {
+					if (deviceColor == color['name']) {
+						const isDeviceSizeInArray = this.colors[index]['sizes'].includes(device.size);
+						if (isDeviceSizeInArray == false || this.colors[index]['sizes'].lenght == 0) {
+							this.colors[index]['sizes'].push(device.size);
+						}
+					}
+				});
+			});
+		});
+
+		this.colors.sort(function(a, b) {
+			const nameA = a['name'].toUpperCase();
+			const nameB = b['name'].toUpperCase();
+
+			if (nameA < nameB) {
+				return -1;
 			}
-				}
-		});
-		});
-	});
+			if (nameA > nameB) {
+				return 1;
+			}
+			return 0;
 
-	this.colors.sort(function(a, b) {
-		const nameA = a['name'].toUpperCase();
-		const nameB = b['name'].toUpperCase();
+		});
 
-		if (nameA < nameB) {
-			return -1;
+		console.log("Colors Array");
+		console.log(this.colors);
 	}
-		if (nameA > nameB) {
-			return 1;
-		}
-		return 0;
 
-	});
-
-    console.log("Colors Array");
-    console.log(this.colors);
-  }
 	/******
-		Add, Remove, and Duplicate Functions Label functions
-	******/
+	 * Add, Remove, and Duplicate Functions Label functions
+	 ******/
 	// Generate Random ID for Labels
 	// Length of ID is defined when the function is called.
-	createID(){
-		var length = 15;
-		return Math.round((Math.pow(36, length + 1) - Math.random() * Math.pow(36, length))).toString(36).slice(1);
+	createID() {
+		const length = 15;
+		return Math.round(Math.pow(36, length + 1) - Math.random() * Math.pow(36, length)).toString(36).slice(1);
 	}
 
 	// Add Label to the Array
 	public addLabel() {
 		const label = this.labelsForm.controls.label as FormArray;
-		let template = new FormGroup({
+		const template = new FormGroup({
 			cardType: new FormGroup({
 				type: new FormControl(null),
 				viewValue: new FormControl(null)
@@ -394,12 +393,18 @@ export class AppComponent{
 			device: new FormControl(null),
 			year: new FormControl(null),
 			size: new FormControl(null),
-			price: new FormControl(null, Validators.compose([Validators.required, Validators.pattern(this.priceValidator)])),
+			price: new FormControl(
+				null,
+				Validators.compose([
+					Validators.required,
+					Validators.pattern(this.priceValidator)
+				])
+			),
+			color: new FormControl(null),
 			touchbar: new FormControl(false)
 		});
 		label.push(template);
 		// 	"generation":null,
-		// 	"color":null,
 		// 	"material":null,
 		// 	"touchbar":null,
 		// 	"screenSize":null,
@@ -414,215 +419,233 @@ export class AppComponent{
 		console.log(this.labelsForm);
 	}
 	// Duplicate the label that the duplcate button was clicked.
-	duplicatelabel(index){
-
+	duplicatelabel(index) {
 		this.addLabel();
-		let addedLabelIndex = this.labelsForm.controls.label['value'].length - 1;
+		const addedLabelIndex = this.labelsForm.controls.label["value"].length - 1;
 		console.log(addedLabelIndex);
-		this.labelsForm.controls.label['controls'][addedLabelIndex]['controls']['cardType'].get('type').setValue(this.labelsForm.controls.label['controls'][index]['controls']['cardType'].get('type').value);
-		this.labelsForm.controls.label['controls'][addedLabelIndex]['controls']['cardType'].get('viewValue').setValue(this.labelsForm.controls.label['controls'][index]['controls']['cardType'].get('viewValue').value);
+		this.labelsForm.controls.label['controls'][addedLabelIndex]['controls']['cardType'].get('type').setValue(
+			this.labelsForm.controls.label['controls'][index]['controls']['cardType'].get('type').value);
+		this.labelsForm.controls.label['controls'][addedLabelIndex]['controls']['cardType'].get('viewValue').setValue(
+			this.labelsForm.controls.label['controls'][index]['controls']['cardType'].get('viewValue').value);
 		this.labelsForm.controls.label['controls'][addedLabelIndex].get('id').setValue(this.createID());
-		this.labelsForm.controls.label['controls'][addedLabelIndex].get('condition').setValue(this.labelsForm.controls.label['controls'][index].get('condition').value);
-		this.labelsForm.controls.label['controls'][addedLabelIndex].get('receivedOn').setValue(this.labelsForm.controls.label['controls'][index].get('receivedOn').value);
+		this.labelsForm.controls.label['controls'][addedLabelIndex].get('condition').setValue(
+			this.labelsForm.controls.label['controls'][index].get('condition').value);
+
+		// Set Validatoin for FormContols after label type and device condition have been set
+		this.setValidation(
+			addedLabelIndex,
+			this.labelsForm.controls.label['controls'][addedLabelIndex]['controls']['cardType'].get('type').value,
+			this.labelsForm.controls.label['controls'][addedLabelIndex].get('condition').value
+		);
+
+		// Continue Setting label data
+		this.labelsForm.controls.label['controls'][addedLabelIndex].get('receivedOn').setValue(
+			this.labelsForm.controls.label['controls'][index].get('receivedOn').value);
 		this.labelsForm.controls.label['controls'][addedLabelIndex].get('generatedOn').setValue(new Date());
-		this.labelsForm.controls.label['controls'][addedLabelIndex].get('device').setValue(this.labelsForm.controls.label['controls'][index].get('device').value);
-		this.labelsForm.controls.label['controls'][addedLabelIndex].get('year').setValue(this.labelsForm.controls.label['controls'][index].get('year').value);
-		this.labelsForm.controls.label['controls'][addedLabelIndex].get('size').setValue(this.labelsForm.controls.label['controls'][index].get('size').value);
-		this.labelsForm.controls.label['controls'][addedLabelIndex].get('price').setValue(this.labelsForm.controls.label['controls'][index].get('price').value);
-		this.labelsForm.controls.label['controls'][addedLabelIndex].get('touchbar').setValue(this.labelsForm.controls.label['controls'][index].get('touchbar').value);
-// 		this.labels.push(labeltemplate);
-		console.log("Label Added");
+		this.labelsForm.controls.label['controls'][addedLabelIndex].get('device').setValue(
+			this.labelsForm.controls.label['controls'][index].get('device').value);
+		this.labelsForm.controls.label['controls'][addedLabelIndex].get('year').setValue(
+			this.labelsForm.controls.label['controls'][index].get('year').value);
+		this.labelsForm.controls.label['controls'][addedLabelIndex].get('size').setValue(
+			this.labelsForm.controls.label['controls'][index].get('size').value);
+		this.labelsForm.controls.label['controls'][addedLabelIndex].get('price').setValue(
+			this.labelsForm.controls.label['controls'][index].get('price').value);
+		this.labelsForm.controls.label['controls'][addedLabelIndex].get('color').setValue(
+			this.labelsForm.controls.label['controls'][index].get('color').value);
+		this.labelsForm.controls.label['controls'][addedLabelIndex].get('touchbar').setValue(
+			this.labelsForm.controls.label['controls'][index].get('touchbar').value);
+		console.log("Label Duplicated");
 	}
+
 	// Remove the Selected Label
-	removelabel(index){
-		console.log("Removing Label at index: "+index);
-
-		// var index = this.getindex(labelID, this.labelsForm.controls.labels.value, 'id');
-
+	removelabel(index) {
+		if (this.debug == true) {
+			console.log("Removing Label at index: " + index);
+		}
 		(<FormArray>this.labelsForm.controls.label).removeAt(index);
 	}
+
 	// Removes All labels when called by "clearLabelsPrompt()" after a dialog window is opened.
-	public clearLabels(){
+	public clearLabels() {
 		const label = this.labelsForm.controls.label as FormArray;
 		label.reset();
 
-		console.log("Array Status Reset");
+		if (this.debug == true) {
+			console.log("Array Status Reset");
+			console.log("Clearing Lables");
+		}
 
-		console.log("Clearing Lables");
 		this.labelsForm = new FormGroup({
 			label: new FormArray([])
 		});
 	}
+
 	// Opens a Dialog window to prompt user to clear all windows by giving a switch to confim removal of all created labels.
 	clearLabelsPrompt() {
-
-		let dialogRef = this.dialog.open(ClearLabelsDialog, {
+		const dialogRef = this.dialog.open(ClearLabelsDialogComponent, {
 			width: '400px',
 			height: '300px;',
-			data: {labelcount: this.labelsForm.controls.label.value.length, removeAllLabels: new FormControl(false)},
+			data: {
+				labelcount: this.labelsForm.controls.label.value.length,
+				removeAllLabels: new FormControl(false)
+			}
 		});
 
 		dialogRef.afterClosed().subscribe(result => {
-			if (result == true){
+			if (result == true) {
 				this.clearLabels();
 			} else {
 				return null;
 			}
 		});
-
 	}
 
-
-
 	/******
-		Data Validation and Update Functions
-	******/
+	 * Data Validation and Update Functions
+	 ******/
 	// Update Values in Labels Array
-	updateValue(index, key1, key2, value){
-		// console.log(this.labelsForm);
-
-		if(this.debug == true){
+	updateValue(index, key1, key2, value) {
+		if (this.debug == true) {
 			console.log(this.labelsForm);
-			console.log("setting Value: ["+key1+"]["+key2+"] to: ["+value+"]");
+			console.log("setting Value: [" + key1 + "][" + key2 + "] to: [" + value + "]");
 		}
-		if(key2 == null){
+		if (key2 == null) {
 			this.labelsForm.controls.label['controls'][index]['controls'][key1].value = value;
 			this.labelsForm.controls.label.value[index][key1] = value;
 		} else {
 			this.labelsForm.controls.label['controls'][index]['controls'][key1]['controls'][key2].value = value;
 			this.labelsForm.controls.label.value[index][key1][key2] = value;
 		}
-
-		// console.log(this.labelsForm)
-
 	}
 
-	deviceModelChanged(index, years, sizes, device, year){
+	deviceModelChanged(index) {
 		this.disableInputYears(index);
 		this.disableSizes(index);
 	}
-	disableInputYears(index){
+	disableInputYears(index) {
+		const device = this.labelsForm.controls.label['controls'][index].get('device').value;
+		const tempdata = this.filterYears.transform(this.years, device);
 
-			let device = this.labelsForm.controls.label['controls'][index].get('device').value;
-			let tempdata = this.filterYears.transform(this.years, device);
-			if(this.debug == true){
-				console.log("Input Changed on index: "+index);
-				console.log("Array: ");
-				console.log(this.array);
-				console.log("Device to filter to: "+ device);
-				console.log("Year to change to: "+tempdata[0].year);
-				console.log("Length of years array filtered: "+tempdata.length);
-			}
+		if (this.debug == true) {
+			console.log("Input Changed on index: " + index);
+			console.log("Array: ");
+			console.log(this.array);
+			console.log("Device to filter to: " + device);
+			console.log("Year to change to: " + tempdata[0].year);
+			console.log("Length of years array filtered: " + tempdata.length);
+		}
 
-			if(tempdata.length == 1){
-				console.log("This Device has only been made in 1 year");
-				this.labelsForm.controls.label['controls'][index].get('year').reset();
-				this.labelsForm.controls.label['controls'][index].get('year').setValue(tempdata[0].year);
-				this.disableSizes(index);
-			} else {
-				console.log("This Device has been made in multiple years");
-				this.labelsForm.controls.label['controls'][index].get('year').reset();
-			}
-
+		if (tempdata.length == 1) {
+			console.log("This Device has only been made in 1 year");
+			this.labelsForm.controls.label['controls'][index].get('year').reset();
+			this.labelsForm.controls.label['controls'][index].get('year').setValue(tempdata[0].year);
+			this.disableSizes(index);
+		} else {
+			console.log("This Device has been made in multiple years");
+			this.labelsForm.controls.label['controls'][index].get('year').reset();
+		}
 	}
-	disableSizes(index){
+	disableSizes(index) {
+		const device = this.labelsForm.controls.label['controls'][index].get('device').value;
+		const year = this.labelsForm.controls.label['controls'][index].get('year').value;
+		const tempdata = this.filterSizes.transform(this.sizes, device, year);
 
-			let device = this.labelsForm.controls.label['controls'][index].get('device').value;
-			let year = this.labelsForm.controls.label['controls'][index].get('year').value;
-			let tempdata = this.filterSizes.transform(this.sizes, device, year);
-
-			if(tempdata.length == 1){
-				console.log("There is only one screen size");
-				this.labelsForm.controls.label['controls'][index].get('size').reset();
-				this.labelsForm.controls.label['controls'][index].get('size').setValue(tempdata[0].size);
-			} else {
-				console.log("There is more than one screen size");
-				this.labelsForm.controls.label['controls'][index].get('size').reset();
-			}
-
-		// this.labelsForm.controls.label['controls'][index].get('size').reset();
+		if (tempdata.length == 1) {
+			console.log("There is only one screen size");
+			this.labelsForm.controls.label['controls'][index].get('size').reset();
+			this.labelsForm.controls.label['controls'][index].get('size').setValue(tempdata[0].size);
+		} else {
+			console.log("There is more than one screen size");
+			this.labelsForm.controls.label['controls'][index].get('size').reset();
+		}
 	}
 
 
 	/******
-		Dynamically Change form Validators
-	******/
-	setValidation(index, type, condition){
-		console.log("Set Validators for Label Type");
-		console.log("Index: " + index);
-		console.log("CardType: "+ type);
-		console.log("Condition: "+ condition);
+	 * Dynamically Change form Validators
+	 ******/
+	setValidation(index, type, condition) {
+		if (this.debug == true) {
+			console.log("Set Validators for Label Type");
+			console.log("Index: " + index);
+			console.log("CardType: " + type);
+			console.log("Condition: " + condition);
+		}
 
-		if(type == 'cpu'){
-			this.computerValidation(index, condition);
+		if (type == 'cpu') {
+			this.computerValidation(index);
 		}
-		if(type == 'ipad'){
-			this.ipadValidation(index, condition);
+		if (type == 'ipad') {
+			this.ipadValidation(index);
 		}
-		if(type == 'iphone'){
-			this.iphoneValidation(index, condition);
+		if (type == 'iphone') {
+			this.iphoneValidation(index);
 		}
-		if(type == 'watch'){
-			this.watchValidation(index, condition);
+		if (type == 'watch') {
+			this.watchValidation(index);
 		}
-		if(type == 'tv'){
-			this.tvValidation(index, condition);
+		if (type == 'tv') {
+			this.tvValidation(index);
 		}
-		if(type == 'other'){
-			this.otherValidation(index, condition);
+		if (type == 'other') {
+			this.otherValidation(index);
 		}
 	}
-	computerValidation(index, condition){
+	computerValidation(index) {
 		console.log("Setting Validators for Computers");
 		this.labelsForm.controls.label['controls'][index].get('device').setValidators([Validators.required]);
 		this.labelsForm.controls.label['controls'][index].get('year').setValidators([Validators.required]);
 		this.labelsForm.controls.label['controls'][index].get('size').setValidators([Validators.required]);
+		this.labelsForm.controls.label['controls'][index].get('color').setValidators([Validators.required]);
 	}
-	ipadValidation(index, condition){
+	ipadValidation(index) {
 		console.log("Setting Validators for a iPads");
+		this.labelsForm.controls.label['controls'][index].get("device").setValidators([Validators.required]);
 	}
-	iphoneValidation(index, condition){
+	iphoneValidation(index) {
 		console.log("Setting Validators for a iPhones");
+		this.labelsForm.controls.label['controls'][index].get('device').setValidators([Validators.required]);
 	}
-	watchValidation(index, condition){
+	watchValidation(index) {
 		console.log("Setting Validators for Apple Watch");
+		this.labelsForm.controls.label['controls'][index].get('device').setValidators([Validators.required]);
 	}
-	tvValidation(index, condition){
+	tvValidation(index) {
 		console.log("Setting Validators for Apple TVs");
+	this.labelsForm.controls.label['controls'][index].get('device').setValidators([Validators.required]);
 	}
-	otherValidation(index, condition){
+	otherValidation(index) {
 		console.log("Setting Validators for Other CardTypes");
+		this.labelsForm.controls.label['controls'][index].get('device').setValidators([Validators.required]);
 	}
-
-
 
 	/******
-		Save, Load, Print functionallity for the App.
-	******/
-	save(type: string, fromRemote: boolean) {
-
+	 * Save, Load, Print functionallity for the App.
+	 ******/
+	save(type: string) {
 		// console.log(this.labelsForm);
 
-		var filenameDate = new Date();
-		let filename =  filenameDate + `.${type}`;
-		var parsedJson = JSON.stringify(this.labelsForm.value);
-		var fileType = this._FileSaverService.genType(filename);
-		var txtBlob = new Blob([parsedJson], { type: fileType });
+		const filenameDate = new Date();
+		const filename = filenameDate + `.${type}`;
+		const parsedJson = JSON.stringify(this.labelsForm.value);
+		const fileType = this._FileSaverService.genType(filename);
+		const txtBlob = new Blob([parsedJson], { type: fileType });
 		this._FileSaverService.save(txtBlob, filename);
-
 	}
 
-	load() : void{
+	load(): void {
 		// Used to load saved json file data for saved labels.
-		let dialogRef = this.dialog.open(loadjson, {
+		const dialogRef = this.dialog.open(LoadJsonComponent, {
 			width: '400px',
 			height: '400px;',
-			data: {file: new FormControl(), saveFileData: new FormControl()},
+			data: {
+				file: new FormControl(),
+				saveFileData: new FormControl()
+			}
 		});
 
 		dialogRef.afterClosed().subscribe(result => {
-
-			let parsedResult = JSON.parse(result);
+			const parsedResult = JSON.parse(result);
 
 			this.clearLabels();
 
@@ -630,7 +653,14 @@ export class AppComponent{
 				this.addLabel();
 				this.labelsForm.controls.label['controls'][index]['controls']['cardType'].get('type').setValue(label['cardType']['type']);
 				this.labelsForm.controls.label['controls'][index]['controls']['cardType'].get('viewValue').setValue(label['cardType']['viewValue']);
-				this.setValidation(index, label['cardType']['type'], label['condition']);
+
+				// Set validators for each of the added lables from save file
+				this.setValidation(
+					index,
+					label['cardType']['type'],
+					label['condition']
+				);
+
 				this.labelsForm.controls.label['controls'][index].get('id').setValue(label['id']);
 				this.labelsForm.controls.label['controls'][index].get('condition').setValue(label['condition']);
 				this.labelsForm.controls.label['controls'][index].get('receivedOn').setValue(label['receivedOn']);
@@ -639,19 +669,13 @@ export class AppComponent{
 				this.labelsForm.controls.label['controls'][index].get('year').setValue(label['year']);
 				this.labelsForm.controls.label['controls'][index].get('size').setValue(label['size']);
 				this.labelsForm.controls.label['controls'][index].get('price').setValue(label['price']);
+				this.labelsForm.controls.label['controls'][index].get('colors').setValue(label['price']);
 				this.labelsForm.controls.label['controls'][index].get('touchbar').setValue(label['touchbar']);
-
 			});
-
-			// this.labelsForm.setValue(parsedResult);
-
 		});
-
-
 	}
 
-	printLabels(){
-
+	printLabels() {
 		console.log("Not Yet Implimented");
 	}
 }

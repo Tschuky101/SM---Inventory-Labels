@@ -1,101 +1,93 @@
-import { Pipe, PipeTransform, } from '@angular/core';
-import { map, filter, scan, startWith, retry, catchError } from 'rxjs/operators';
-import { Devices, DevicesService} from './dataservices.service'
+import { Pipe, PipeTransform } from '@angular/core';
+import {
+  map,
+  filter,
+  scan,
+  startWith,
+  retry,
+  catchError
+} from 'rxjs/operators';
+import { Devices, DevicesService } from './dataservices.service';
 
 @Pipe({
-	name: 'DisplayModels'
+  name: 'DisplayModels'
 })
-export class DisplayModels {
+export class DisplayModels implements PipeTransform {
+  transform(value: any, type: any) {
+    const tempArray = [];
 
-	transform(value: any, type: any){
-		let tempArray = []
+    value.forEach((option, index) => {
+      if (value[index].device == type) {
+        const template = {
+          name: value[index].name,
+          device: value[index].device
+        };
+        tempArray.push(template);
+      }
+    });
 
-		value.forEach((option, index) =>{
-			if (value[index].device == type){
-				let template = {
-					"name": value[index].name,
-					"device": value[index].device
-				};
-				tempArray.push(template);
-			}
-		});
-
-		return tempArray;
-	}
+    return tempArray;
+  }
 }
 @Pipe({
-	name: 'FilterYears'
+  name: 'FilterYears'
 })
-export class FilterYears {
-	transform(value: any, modelToFilter: any){
+export class FilterYears implements PipeTransform {
+  transform(value: any, modelToFilter: any) {
+    const tempArray = [];
 
-		var tempArray = [];
+    value.forEach((option, index) => {
+      const currentYear = option.year;
 
-		value.forEach((option, index) => {
+      option['models'].forEach(model => {
+        if (model == modelToFilter) {
+          const template = {
+            year: currentYear
+          };
 
-			let currentYear = option.year;
+          tempArray.push(template);
+        }
+      });
+    });
 
-			option['models'].forEach(model => {
-
-				if(model == modelToFilter){
-					let template = {
-						"year":currentYear
-					};
-
-					tempArray.push(template);
-
-				}
-
-			})
-
-		})
-
-		return tempArray;
-
-	}
+    return tempArray;
+  }
 }
 
 @Pipe({
-     name: 'FilterSizes'
+  name: 'FilterSizes'
 })
-export class FilterSizes {
-     transform(value: any, modelToFilter: any, yearToFilter: any){
-          
-          var tempArray = [];
+export class FilterSizes implements PipeTransform {
+  transform(value: any, modelToFilter: any, yearToFilter: any) {
+    const tempArray = [];
 
-          // console.log("Value to be Filltered");
-          // console.log(value);
-          // console.log("Model to Filter to: "+modelToFilter);
-          // console.log("Year to Filter to: "+yearToFilter);
+    // console.log("Value to be Filltered");
+    // console.log(value);
+    // console.log("Model to Filter to: "+modelToFilter);
+    // console.log("Year to Filter to: "+yearToFilter);
 
-          value.forEach(option =>{
+    value.forEach(option => {
+      const currentYear = yearToFilter;
+      const currentDevice = modelToFilter;
 
-               let currentYear = yearToFilter;
-               let currentDevice = modelToFilter;
+      // console.log("Current Device & Year: " + currentDevice + " ("+currentYear+")");
+      // console.log("Option Currently Being looked at:");
+      // console.log(option);
 
-               // console.log("Current Device & Year: " + currentDevice + " ("+currentYear+")");
-               // console.log("Option Currently Being looked at:");
-               // console.log(option);
+      for (let i = 0; i < option.models.length; i++) {
+        if (currentDevice == option.models[i]) {
+          for (let j = 0; j < option.years.length; j++) {
+            if (currentYear == option.years[j]) {
+              const template = {
+                size: option.size
+              };
+              tempArray.push(template);
+            }
+          }
+        }
+      }
+    });
 
-               for(let i=0; i<option.models.length; i++){
-
-                    if(currentDevice == option.models[i]){
-
-                         for(let j=0; j<option.years.length; j++){
-                              if(currentYear == option.years[j]){
-
-                                   let template = {
-                                        "size":option.size,
-                                   }
-                                   tempArray.push(template);
-                              }
-                         }
-                    }
-               }
-
-          });
-
-          return tempArray;
-
-     }
+    return tempArray;
+  }
 }
