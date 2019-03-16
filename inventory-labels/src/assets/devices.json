@@ -5,7 +5,7 @@
 		"basePrice" : 1999.99,
 		"year":"2017",
 		"size":"13 inch",
-    "colors": ["Silver"],
+    	"colors": ["Silver"],
 		"touchbar": false
 	},{
 		"device":"cpu",
@@ -13,7 +13,7 @@
 		"basePrice" : 1999.99,
 		"year":"2018",
 		"size":"13 inch",
-    "colors": ["Silver", "Gold", "Space Gray"],
+    	"colors": ["Silver", "Gold", "Space Gray"],
 		"touchbar": false
 	},{
 		"device":"cpu",
@@ -21,7 +21,7 @@
 		"basePrice" : 1999.99,
 		"year":"2017",
 		"size":"12 inch",
-    "colors": ["Silver", "Gold", "Space Gray"],
+    	"colors": ["Silver", "Gold", "Space Gray"],
 		"touchbar": false
 	},{
 		"device": "cpu",
@@ -29,7 +29,7 @@
 		"basePrice" : 1500,
 		"year":"2018",
 		"size":"15 inch",
-    "colors":["Silver","Space Gray"],
+    	"colors":["Silver","Space Gray"],
 		"touchbar": true
 	},{
 		"device": "cpu",
@@ -37,7 +37,7 @@
 		"basePrice" : 1500,
 		"year":"2014",
 		"size":"15 inch",
-    "colors": ["Silver"],
+    	"colors": ["Silver"],
 		"touchbar": true
 	},{
 		"device": "cpu",
@@ -45,7 +45,7 @@
 		"basePrice" : 1500,
 		"year":"2018",
 		"size":"13 inch",
-    "colors": ["Silver","Space Gray"],
+    	"colors": ["Silver","Space Gray"],
 		"touchbar": true
 	},{
 		"device": "cpu",
@@ -53,14 +53,14 @@
 		"basePrice" : 1500,
 		"year":"2015",
 		"size":"15 inch",
-    "colors":["Silver"],
+    	"colors":["Silver"],
 		"touchbar": true
 	},{
 		"device": "cpu",
 		"name":"Macbook Pro",
 		"basePrice" : 1500,
 		"year":"2013",
-    "colors":["Silver"],
+		"colors":["Silver"],
 		"size":"15 inch",
 		"touchbar": true
 	},{
@@ -69,7 +69,7 @@
 		"basePrice" : 1500,
 		"year":"2017",
 		"size":"13 inch",
-    "colors":["Silver","Space Gray"],
+		"colors":["Silver","Space Gray"],
 		"touchbar": false
 	},{
 		"device": "cpu",
@@ -77,7 +77,7 @@
 		"basePrice" : 1500,
 		"year":"2017",
 		"size":"21.5 inch",
-    "colors":["Silver"],
+		"colors":["Silver"],
 		"touchbar": false
 	},{
 		"device": "cpu",
@@ -85,7 +85,7 @@
 		"basePrice" : 1500,
 		"year":"2017",
 		"size":"27 inch",
-    "colors":["Space Gray"],
+		"colors":["Space Gray"],
 		"touchbar": false
 	},{
 		"device": "cpu",
@@ -93,7 +93,7 @@
 		"basePrice" : 1500,
 		"year":"Early 2015",
 		"size":"21.5 inch",
-    "colors":["Silver"],
+		"colors":["Silver"],
 		"touchbar": false
 	},{
 		"device": "cpu",
@@ -101,7 +101,7 @@
 		"basePrice" : 1500,
 		"year":"Mid 2015",
 		"size":"21.5 inch",
-    "colors":["Silver"],
+		"colors":["Silver"],
 		"touchbar": false
 	},{
 		"device": "cpu",
@@ -109,7 +109,7 @@
 		"basePrice" : 1500,
 		"year":"Late 2015",
 		"size":"21.5 inch",
-    "colors":["Silver"],
+		"colors":["Silver"],
 		"touchbar": false
 	},{
 		"device": "cpu",
@@ -117,7 +117,7 @@
 		"basePrice" : 1500,
 		"year":"2014",
 		"size":"21.5 inch",
-    "colors":["Silver"],
+		"colors":["Silver"],
 		"touchbar": false
 	},{
 		"device": "cpu",
@@ -125,7 +125,7 @@
 		"basePrice" : 1500,
 		"year":"2014",
 		"size":"27 inch",
-    "colors":["Silver"],
+		"colors":["Silver"],
 		"touchbar": false
 	},{
 		"device": "cpu",
@@ -133,7 +133,7 @@
 		"basePrice" : 1500,
 		"year":"2018",
 		"size":"No monitor",
-    "colors":["Space Gray"],
+		"colors":["Space Gray"],
 		"touchbar": false
 	},{
 		"device": "cpu",
@@ -141,7 +141,7 @@
 		"basePrice" : 1500,
 		"year":"2014",
 		"size":"No monitor",
-    "colors":["Silver"],
+		"colors":["Silver"],
 		"touchbar": false
 	},{
 		"device": "cpu",
@@ -149,7 +149,7 @@
 		"basePrice" : 1500,
 		"year":"2012",
 		"size":"No monitor",
-    "colors":["Silver"],
+		"colors":["Silver"],
 		"touchbar": false
 	},{
 		"device": "cpu",
@@ -157,7 +157,7 @@
 		"basePrice" : 1500,
 		"year":"2013",
 		"size":"No monitor",
-    "colors":["Space Black"],
+		"colors":["Space Black"],
 		"touchbar": true
 	},{
 		"device":"ipad",
@@ -165,129 +165,130 @@
 		"basePrice" : 329.99,
 		"year":"2017",
 		"size":"9.7 inch",
-    "colors":["Space Gray","Silver","Gold","Rose Gold"],
-    "touchbar":false
+		"colors":["Space Gray","Silver","Gold","Rose Gold"],
+		"touchbar":false
 	},{
 		"device":"ipad",
 		"name":"iPad Air",
 		"basePrice" : 329.99,
 		"year":"2013",
 		"size":"9.7 inch",
-    "colors":["Space Gray","Silver"],
-    "touchbar":false
+		"colors":["Space Gray","Silver"],
+		"touchbar":false
 	},{
 		"device":"iphone",
 		"name":"iPhone SE",
 		"basePrice" : 329.99,
 		"year":"2016",
 		"size":"4 inch",
-    "colors":["Space Gray","Silver","Gold","Rose Gold"],
-    "touchbar":false
+		"colors":["Space Gray","Silver","Gold","Rose Gold"],
+		"touchbar":false
 	},{
 		"device":"iphone",
 		"name":"iPhone X",
 		"basePrice" : 329.99,
 		"year":"2017",
 		"size":"4 inch",
-    "colors":["Space Gray", "Silver"],
-    "touchbar":false
+		"colors":["Space Gray", "Silver"],
+		"touchbar":false
 	},{
 		"device":"ipad",
 		"name":"iPad Mini",
 		"basePrice" : 329.99,
 		"year":"2013",
 		"size":"7 inch",
-    "colors":["Black and Slate", "White and Slate", "Space Gray"]
+		"colors":["Black and Slate", "White and Slate", "Space Gray"],
+		"touchbar": false
 	},{
 		"device":"watch",
 		"name":"1st Gen",
 		"basePrice" : 329.99,
 		"year":"2015",
 		"size":"38mm",
-    "material":"Stainless Steel",
-    "colors":["Silver","Black"],
-    "touchbar":false
+		"material":"Stainless Steel",
+		"colors":["Silver","Black"],
+		"touchbar":false
 	},{
 		"device":"watch",
 		"name":"1st Gen",
 		"basePrice" : 329.99,
 		"year":"2015",
 		"size":"42mm",
-    "material":"Stainless Steel",
-    "colors":["Silver","Black"],
-    "touchbar":false
+		"material":"Stainless Steel",
+		"colors":["Silver","Black"],
+		"touchbar":false
 	},{
 		"device":"watch",
 		"name":"Sieres 1",
 		"basePrice" : 329.99,
 		"year":"2016",
 		"size":"38mm",
-    "material":"Aluminum",
-    "colors":["Silver","Space Gray","Gold","Rose Gold"],
-    "touchbar":false
+		"material":"Aluminum",
+		"colors":["Silver","Space Gray","Gold","Rose Gold"],
+		"touchbar":false
 	},{
 		"device":"watch",
 		"name":"Sieres 1",
 		"basePrice" : 329.99,
 		"year":"2016",
 		"size":"42mm",
-    "material":"Aluminum",
-    "colors":["Silver","Space Gray","Gold","Rose Gold"],
-    "touchbar":false
+		"material":"Aluminum",
+		"colors":["Silver","Space Gray","Gold","Rose Gold"],
+		"touchbar":false
 	},{
 		"device":"watch",
 		"name":"Sieres 2",
 		"basePrice" : 329.99,
 		"year":"2017",
 		"size":"38mm",
-    "material":"Aluminum",
-    "colors":["Silver","Space Gray","Gold","Rose Gold"],
-    "touchbar":false
+		"material":"Aluminum",
+		"colors":["Silver","Space Gray","Gold","Rose Gold"],
+		"touchbar":false
 	},{
 		"device":"watch",
 		"name":"Sieres 2",
 		"basePrice" : 329.99,
 		"year":"2017",
 		"size":"42mm",
-    "material":"Aluminum",
-    "colors":["Silver","Space Gray","Gold","Rose Gold"],
-    "touchbar":false
+		"material":"Aluminum",
+		"colors":["Silver","Space Gray","Gold","Rose Gold"],
+		"touchbar":false
 	},{
 		"device":"watch",
 		"name":"Sieres 2",
 		"basePrice" : 329.99,
 		"year":"2017",
 		"size":"38mm",
-    "material":"Stainless Steel",
-    "colors":["Silver", "Space Black"],
-    "touchbar":false
+		"material":"Stainless Steel",
+		"colors":["Silver", "Space Black"],
+		"touchbar":false
 	},{
 		"device":"watch",
 		"name":"Sieres 2",
 		"basePrice" : 329.99,
 		"year":"2017",
 		"size":"42mm",
-    "material":"Stainless Steel",
-    "colors":["Silver", "Space Black"],
-    "touchbar":false
+		"material":"Stainless Steel",
+		"colors":["Silver", "Space Black"],
+		"touchbar":false
 	},{
 		"device":"watch",
 		"name":"Sieres 2",
 		"basePrice" : 329.99,
 		"year":"2017",
 		"size":"38mm",
-    "material":"Ceramic",
-    "colors":["White"],
-    "touchbar":false
+		"material":"Ceramic",
+		"colors":["White"],
+		"touchbar":false
 	},{
 		"device":"watch",
 		"name":"Sieres 2",
 		"basePrice" : 329.99,
 		"year":"2017",
 		"size":"42mm",
-    "material":"Ceramic",
-    "colors":["White"],
-    "touchbar":false
+		"material":"Ceramic",
+		"colors":["White"],
+		"touchbar":false
 	}
 
 ]
