@@ -568,6 +568,20 @@ export class AppComponent {
 			this.labelsForm.controls.label['controls'][index].get('size').reset();
 		}
 	}
+	disableColors(index) {
+		const device = this.labelsForm.controls.label['controls'][index].get('device').value;
+		const year = this.labelsForm.controls.label['controls'][index].get('year').value;
+		const size = this.labelsForm.controls.label['controls'][index].get('size').value;
+		const tempdata = this.filterColors.transform(this.colors, device, year, size);
+
+		if (tempdata.length == 1) {
+			this.labelsForm.controls.label['controls'][index].get('color').reset();
+			this.labelsForm.controls.label['controls'][index].get('color').setValue(tempdata[0].name);
+		} else {
+			this.labelsForm.controls.label['controls'][index].get('color').reset();
+		}
+
+	}
 
 
 	/******
