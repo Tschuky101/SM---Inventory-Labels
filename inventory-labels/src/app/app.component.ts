@@ -284,6 +284,21 @@ export class AppComponent {
 			}
 		});
 
+		this.sizes.sort(function (a, b) {
+			const yearA = a['year'];
+			const yearB = b['year'];
+			const valueA = parseInt(yearA.match(/[0-9]+/), 10);
+			const valueB = parseInt(yearB.match(/[0-9]+/), 10);
+
+			if (valueA < valueB) {
+				return 1;
+			}
+			if (valueA > valueB) {
+				return -1;
+			}
+			return 0;
+		});
+
 		console.log('Sizes array');
 		console.log(this.sizes);
 	}
