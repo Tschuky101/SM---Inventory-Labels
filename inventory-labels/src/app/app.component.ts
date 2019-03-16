@@ -1,12 +1,4 @@
-import { Component, Input, HostListener, Inject, Injectable, OnInit, NgZone, } from '@angular/core';
-import { FormsModule, FormControl, FormGroup, FormBuilder, FormArray, FormGroupDirective, NgForm, Validators} from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { FileSaverService } from 'ngx-filesaver';
-import { Observable } from 'rxjs';
-import { map, filter, scan, startWith, retry, catchError } from 'rxjs/operators';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { ErrorStateMatcher } from '@angular/material/core';
-import { BaseRequestOptions, Headers } from '@angular/http';
+import { MatDialog } from "@angular/material";
 
 import { Devices, DevicesService } from './services/dataservices.service';
 import { FilterYears, FilterSizes } from './services/pipes';
