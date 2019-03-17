@@ -4,42 +4,27 @@ import { Pipe, PipeTransform } from "@angular/core";
 	name: 'FilterColors'
 })
 export class FilterColors implements PipeTransform {
-	transform(value: any, modelToFilter: any, yearToFilter: any, sizeToFilter: any) {
+	transform(value: any, modelToFilter: any, yearToFilter: any, sizeToFilter: any, materialToFilter: any) {
 		const tempArray = [];
+
+		console.log("Filter Colors");
+		// console.log(value);
 
 		value.forEach((option, indexMain) => {
 			// console.log(option);
 
-			if (modelToFilter != null && yearToFilter != null && sizeToFilter != null) {
-				console.log("All Variables are filled");
-				console.log("Device: " + modelToFilter);
-				console.log("Year: " + yearToFilter);
-				console.log("Size: " + sizeToFilter);
-			}
+			option['models'].forEach(model => {
+				const doesYearExist = model.years.includes(yearToFilter);
+				const doesSizeExist = model.sizes.includes(sizeToFilter);
+				const doesMaterialExist = model.materials.includes(materialToFilter);
 
-			for (let i = 0; i < option.models.length; i++) {
-
-				if (modelToFilter == option.models[i]) {
-					console.log("Devices exists in color: " + option.name + "'s array");
-					for (let j = 0; j < option.years.length; j++) {
-						if (yearToFilter == option.years[j]) {
-							console.log("Device: " + modelToFilter + " year of: " + yearToFilter + " exists on color: " + option.name + "'s array");
-							for (let k = 0; k < option.sizes.length; k++) {
-								if (sizeToFilter == option.sizes[k]) {
-									console.log("Device " + sizeToFilter + " size of: " + sizeToFilter + " exists on color: " + option.name + "'s array");
-
-									const template = {
-										name: option.name
-									};
-
-									tempArray.push(template);
-								}
-							}
-						}
-					}
+				if (model.device === modelToFilter && doesYearExist == true && doesSizeExist == true && doesMaterialExist == true) {
+					const template = {
+						name: option.name
+					};
+					tempArray.push(template);
 				}
-
-			}
+			});
 		});
 		console.log(tempArray);
 		return tempArray;

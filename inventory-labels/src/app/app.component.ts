@@ -312,9 +312,7 @@ export class AppComponent {
 			device.colors.forEach((color) => {
 				const template = {
 					name: color,
-					models: [],
-					years: [],
-					sizes: []
+					models: []
 				};
 				if (this.isInArray(color, this.colors, "name") == false) {
 					// tslint:disable-next-line: quotemark
@@ -327,42 +325,59 @@ export class AppComponent {
 
 		// Add Models to the color array if the model doesn't already exist on this.colors[index]['models'] array
 		this.devices.forEach(device => {
+			const deviceName = device.name;
+
 			device.colors.forEach(deviceColor => {
 				this.colors.forEach((color, index) => {
 					if (deviceColor == color['name']) {
-						const isDeviceinArray = this.colors[index]['models'].includes(device.name);
-						if (isDeviceinArray == false || this.colors[index]['models'].length == 0) {
-							this.colors[index]['models'].push(device.name);
+						if (this.colors[index]['models'].length == 0) {
+							const template = {
+								device: deviceName,
+								years: [],
+								sizes: [],
+								materials: []
+							};
+							this.colors[index]['models'].push(template);
+						} else {
+							if (this.colors[index]['models'].findIndex(item => item.device === deviceName) > -1) {
+							} else {
+								const template = {
+									device: deviceName,
+									years: [],
+									sizes: [],
+									materials: []
+								};
+								this.colors[index]['models'].push(template);
+							}
 						}
-					} else {
+
 					}
 				});
 			});
 		});
 
-		// Add Size to the color array if the model doesn't already exist on this.colors[index]['Size'] array
+		// // Add Size to the color array if the model doesn't already exist on this.colors[index]['Size'] array
 		this.devices.forEach(device => {
-			device.colors.forEach(deviceColor => {
-				this.colors.forEach((color, index) => {
-					if (deviceColor == color['name']) {
-						const isDeviceYearInArray = this.colors[index]['years'].includes(device.year);
-						if (isDeviceYearInArray == false || this.colors[index]['years'].length == 0) {
-							this.colors[index]['years'].push(device.year);
-						}
-					}
-				});
-			});
-		});
+			const deviceName = device.name;
 
-		// Add Year to the color array if the model doesn't already exist on this.colors[index]['Year'] array
-		this.devices.forEach(device => {
 			device.colors.forEach(deviceColor => {
 				this.colors.forEach((color, index) => {
 					if (deviceColor == color['name']) {
-						const isDeviceSizeInArray = this.colors[index]['sizes'].includes(device.size);
-						if (isDeviceSizeInArray == false || this.colors[index]['sizes'].lenght == 0) {
-							this.colors[index]['sizes'].push(device.size);
-						}
+						this.colors[index]['models'].forEach((model, index2) => {
+							const DoesSizeEsist = this.colors[index]['models'][index2]['sizes'].includes(device.size);
+							const DoesYearExist = this.colors[index]['models'][index2]['years'].includes(device.year);
+							const DoesMaterialExist = this.colors[index]['models'][index2]['materials'].includes(device.material);
+
+							if (DoesSizeEsist != true && this.colors[index]['models'][index2]['device'] === deviceName) {
+								this.colors[index]['models'][index2]['sizes'].push(device.size);
+							}
+							if (DoesYearExist != true && this.colors[index]['models'][index2]['device'] === deviceName) {
+								this.colors[index]['models'][index2]['years'].push(device.year);
+							}
+							if (DoesMaterialExist != true && this.colors[index]['models'][index2]['device'] === deviceName) {
+								this.colors[index]['models'][index2]['materials'].push(device.material);
+							}
+						});
 					}
 				});
 			});
@@ -419,6 +434,7 @@ export class AppComponent {
 				])
 			),
 			color: new FormControl(null),
+			material: new FormControl(null),
 			touchbar: new FormControl(false)
 		});
 		label.push(template);
@@ -559,6 +575,8 @@ export class AppComponent {
 			this.disableColors(index);
 		} else {
 			this.labelsForm.controls.label['controls'][index].get('year').reset();
+			this.disableSizes(index);
+			this.disableColors(index);
 		}
 	}
 	disableSizes(index) {
@@ -572,13 +590,14 @@ export class AppComponent {
 			this.disableColors(index);
 		} else {
 			this.labelsForm.controls.label['controls'][index].get('size').reset();
+			this.disableColors(index);
 		}
 	}
 	disableColors(index) {
 		const device = this.labelsForm.controls.label['controls'][index].get('device').value;
 		const year = this.labelsForm.controls.label['controls'][index].get('year').value;
 		const size = this.labelsForm.controls.label['controls'][index].get('size').value;
-		const tempdata = this.filterColors.transform(this.colors, device, year, size);
+		const tempdata = this.filterColors.transform(this.colors, device, year, size, null);
 
 		if (tempdata.length == 1) {
 			this.labelsForm.controls.label['controls'][index].get('color').reset();

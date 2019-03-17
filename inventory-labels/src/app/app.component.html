@@ -189,7 +189,19 @@
 											<mat-select
 												id="Colors"
 												placeholder="{{ labelsForm.value.label[i].cardType.viewValue }} Color"
-												formControlName="color">
+												formControlName="color"
+												[disabled]="(
+													colors | FilterColors:
+																labelsForm.value.label[i].device:
+																labelsForm.value.label[i].year:
+																labelsForm.value.label[i].size:
+																null
+													).length == 1 || (
+														labelsForm.value.label[i].device == null ||
+														labelsForm.value.label[i].year == null ||
+														labelsForm.value.label[i].size == null
+													)"
+											>
 												<mat-option>
 													-- Select {{ labelsForm.value.label[i].cardType.viewValue }} Color --
 												</mat-option>
@@ -199,7 +211,8 @@
 														let option of colors | FilterColors:
 															labelsForm.value.label[i].device:
 															labelsForm.value.label[i].year:
-															labelsForm.value.label[i].size"
+															labelsForm.value.label[i].size:
+															null"
 												>
 													{{ option.name }}
 												</mat-option>
