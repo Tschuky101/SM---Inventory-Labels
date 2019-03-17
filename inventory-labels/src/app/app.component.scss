@@ -23,21 +23,33 @@ mat-drawer{
 			margin-top: 50px;
 		}
 		#CardType{
-			.valid{
-				padding: 5px 5px 5px 0;
+			&.valid{
+				span#Form_Invalid{
+					padding: 5px 5px 5px 0;
+				}
 			}
-			.invalid{
-				padding: 5px;
-				background-color: #f44336;
-				color: #fff;
-				border-radius: 5px;
+			&.invalid{
+				span#Form_Invalid{
+					padding: 5px;
+					background-color: #f44336;
+					color: #fff;
+					border-radius: 5px;
 
-				mat-icon{
-					position: absolute;
+					mat-icon{
+						position: absolute;
+					}
+					span#title{
+						margin-left: 24px;
+					}
 				}
-				span#title{
-					margin-left: 24px;
+				#conditionSubTitle{
+					&::before{
+						content: ' ';
+					}
 				}
+			}
+			#conditionSubTitle{
+				font-size: 0.75em;
 			}
 
 		}

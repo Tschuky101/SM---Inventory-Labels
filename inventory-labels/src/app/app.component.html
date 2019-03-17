@@ -42,11 +42,12 @@
 					<div formArrayName="label">
 						<div formGroupName="{{ i }}">
 							<mat-card-header>
-								<mat-card-title id="CardType" *ngIf="labelsForm.value.label[i].condition != null">
-									<span id="Form_Invalid" [ngClass]="[labelsForm['controls'].label.controls[i].status == 'INVALID' && labelsForm['controls'].label.controls[i].touched == true? 'invalid': 'valid']">
+								<mat-card-title id="CardType" *ngIf="labelsForm.value.label[i].condition != null" [ngClass]="[labelsForm['controls'].label.controls[i].status == 'INVALID' && labelsForm['controls'].label.controls[i].touched == true? 'invalid': 'valid']">
+									<span id="Form_Invalid" >
 										<mat-icon *ngIf="labelsForm['controls'].label.controls[i].status == 'INVALID' && labelsForm['controls'].label.controls[i].touched === true">priority_high</mat-icon>
 										<span id="title">{{ labelsForm.value.label[i].cardType.viewValue }}</span>
 									</span>
+									<span id="conditionSubTitle">- {{ labelsForm.value.label[i].condition }}</span>
 								</mat-card-title>
 								<mat-card-title id="price" *ngIf="labelsForm.value.label[i].condition != null">
 									<mat-form-field>
@@ -59,8 +60,13 @@
 									</mat-form-field>
 								</mat-card-title>
 								<mat-card-subtitle *ngIf="labelsForm.value.label[i].condition != null">
-									{{ labelsForm.value.label[i].condition }}<br />
-									Received on - <i>{{ labelsForm.value.label[i].receivedOn | date: "shortDate" }}</i><br />
+									Received on - <i>
+										<mat-form-field id="date">
+											<input matInput [matDatepickerFilter]="sundayFilter" [matDatepicker]="ReceivedDate" formControlName="receivedOn" (click)="ReceivedDate.open()">
+											<mat-datepicker-toggle [for]="ReceivedDate" matSuffix></mat-datepicker-toggle>
+											<mat-datepicker #ReceivedDate touchUi></mat-datepicker>
+										</mat-form-field>
+									</i><br />
 									Generated on - <i>{{ labelsForm.value.label[i].generatedOn | date: "shortDate" }}</i>
 								</mat-card-subtitle>
 							</mat-card-header>
