@@ -12,8 +12,8 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
      <script>
      var ipcRenderer = require('electron').ipcRenderer;
-    
-    
+
+
      ipcRenderer.on('addLabel', message => {
           console.log('Add Label Called');
           window.addLabelfromMenu.zone.run(()=>{window.addLabelfromMenu.componentFn();});
@@ -24,11 +24,11 @@
           window.clearLabelsfromMenu.zone.run(()=>{window.clearLabelsfromMenu.componentFn();});
           console.log("Clear Label Success!");
      });
-    
+
     // When in macOS get the current theme and update the app with either a dark or light mode
 		ipcRenderer.on('OSTheme', function (event, theme){
 			var currentOSTheme = theme;
-    
+
 			if(currentOSTheme == 'dark'){
 				console.log('Dark Theme');
                     document.getElementById('body').classList.remove('light-theme');
@@ -42,6 +42,18 @@
 			console.log(theme);
 		})
 	</script>
+	<style>
+		#date > div.mat-form-field-wrapper{
+			padding: 0 !important;
+		}
+		#date > div.mat-form-field-wrapper > div.mat-form-field-underline{
+			top: 20px !important;
+		}
+		#date > div.mat-form-field-wrapper > div > div.mat-form-field-infix{
+			padding: 0 !important;
+			border-top: 0 !important;
+		}
+	</style>
 
 </head>
 <body id="body" class="light-theme">
