@@ -5,6 +5,7 @@
 		"basePrice" : 1999.99,
 		"year":"2017",
 		"size":"13 inch",
+		"material": null,
     	"colors": ["Silver"],
 		"touchbar": false
 	},{
@@ -13,6 +14,7 @@
 		"basePrice" : 1999.99,
 		"year":"2018",
 		"size":"13 inch",
+		"material": null,
     	"colors": ["Silver", "Gold", "Space Gray"],
 		"touchbar": false
 	},{
@@ -21,6 +23,7 @@
 		"basePrice" : 1999.99,
 		"year":"2017",
 		"size":"12 inch",
+		"material": null,
     	"colors": ["Silver", "Gold", "Space Gray"],
 		"touchbar": false
 	},{
@@ -29,6 +32,7 @@
 		"basePrice" : 1500,
 		"year":"2018",
 		"size":"15 inch",
+		"material": null,
     	"colors":["Silver","Space Gray"],
 		"touchbar": true
 	},{
@@ -37,6 +41,7 @@
 		"basePrice" : 1500,
 		"year":"2014",
 		"size":"15 inch",
+		"material": null,
     	"colors": ["Silver"],
 		"touchbar": true
 	},{
@@ -45,6 +50,7 @@
 		"basePrice" : 1500,
 		"year":"2018",
 		"size":"13 inch",
+		"material": null,
     	"colors": ["Silver","Space Gray"],
 		"touchbar": true
 	},{
@@ -53,6 +59,7 @@
 		"basePrice" : 1500,
 		"year":"2015",
 		"size":"15 inch",
+		"material": null,
     	"colors":["Silver"],
 		"touchbar": true
 	},{
@@ -60,8 +67,9 @@
 		"name":"Macbook Pro",
 		"basePrice" : 1500,
 		"year":"2013",
-		"colors":["Silver"],
 		"size":"15 inch",
+		"colors":["Silver"],
+		"material": null,
 		"touchbar": true
 	},{
 		"device":"cpu",
@@ -69,6 +77,7 @@
 		"basePrice" : 1500,
 		"year":"2017",
 		"size":"13 inch",
+		"material": null,
 		"colors":["Silver","Space Gray"],
 		"touchbar": false
 	},{
@@ -77,6 +86,7 @@
 		"basePrice" : 1500,
 		"year":"2017",
 		"size":"21.5 inch",
+		"material": null,
 		"colors":["Silver"],
 		"touchbar": false
 	},{
@@ -85,6 +95,7 @@
 		"basePrice" : 1500,
 		"year":"2017",
 		"size":"27 inch",
+		"material":null,
 		"colors":["Space Gray"],
 		"touchbar": false
 	},{
@@ -93,6 +104,7 @@
 		"basePrice" : 1500,
 		"year":"Early 2015",
 		"size":"21.5 inch",
+		"material":null,
 		"colors":["Silver"],
 		"touchbar": false
 	},{
@@ -101,6 +113,7 @@
 		"basePrice" : 1500,
 		"year":"Mid 2015",
 		"size":"21.5 inch",
+		"material": null,
 		"colors":["Silver"],
 		"touchbar": false
 	},{
@@ -109,6 +122,7 @@
 		"basePrice" : 1500,
 		"year":"Late 2015",
 		"size":"21.5 inch",
+		"material": null,
 		"colors":["Silver"],
 		"touchbar": false
 	},{
@@ -117,6 +131,7 @@
 		"basePrice" : 1500,
 		"year":"2014",
 		"size":"21.5 inch",
+		"material": null,
 		"colors":["Silver"],
 		"touchbar": false
 	},{
@@ -125,6 +140,7 @@
 		"basePrice" : 1500,
 		"year":"2014",
 		"size":"27 inch",
+		"material": null,
 		"colors":["Silver"],
 		"touchbar": false
 	},{
@@ -133,6 +149,7 @@
 		"basePrice" : 1500,
 		"year":"2018",
 		"size":"No monitor",
+		"material": null,
 		"colors":["Space Gray"],
 		"touchbar": false
 	},{
@@ -141,6 +158,7 @@
 		"basePrice" : 1500,
 		"year":"2014",
 		"size":"No monitor",
+		"material": null,
 		"colors":["Silver"],
 		"touchbar": false
 	},{
@@ -149,6 +167,7 @@
 		"basePrice" : 1500,
 		"year":"2012",
 		"size":"No monitor",
+		"material": null,
 		"colors":["Silver"],
 		"touchbar": false
 	},{
@@ -157,6 +176,7 @@
 		"basePrice" : 1500,
 		"year":"2013",
 		"size":"No monitor",
+		"material": null,
 		"colors":["Space Black"],
 		"touchbar": true
 	},{
@@ -165,6 +185,7 @@
 		"basePrice" : 329.99,
 		"year":"2017",
 		"size":"9.7 inch",
+		"material": null,
 		"colors":["Space Gray","Silver","Gold","Rose Gold"],
 		"touchbar":false
 	},{
@@ -173,6 +194,7 @@
 		"basePrice" : 329.99,
 		"year":"2013",
 		"size":"9.7 inch",
+		"material": null,
 		"colors":["Space Gray","Silver"],
 		"touchbar":false
 	},{
@@ -181,6 +203,7 @@
 		"basePrice" : 329.99,
 		"year":"2016",
 		"size":"4 inch",
+		"material": null,
 		"colors":["Space Gray","Silver","Gold","Rose Gold"],
 		"touchbar":false
 	},{
@@ -189,6 +212,7 @@
 		"basePrice" : 329.99,
 		"year":"2017",
 		"size":"4 inch",
+		"material": null,
 		"colors":["Space Gray", "Silver"],
 		"touchbar":false
 	},{
@@ -197,6 +221,7 @@
 		"basePrice" : 329.99,
 		"year":"2013",
 		"size":"7 inch",
+		"material": null,
 		"colors":["Black and Slate", "White and Slate", "Space Gray"],
 		"touchbar": false
 	},{
