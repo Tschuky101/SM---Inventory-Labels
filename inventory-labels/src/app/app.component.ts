@@ -365,7 +365,7 @@ export class AppComponent {
 			});
 		});
 
-		// // Add Size to the color array if the model doesn't already exist on this.colors[index]['Size'] array
+		// Add Size to the color array if the model doesn't already exist on this.colors[index]['Size'] array
 		this.devices.forEach(device => {
 			const deviceName = device.name;
 
@@ -459,7 +459,6 @@ export class AppComponent {
 		// }))
 		// this.labels.push(labeltemplate);
 
-		console.log(this.labelsForm);
 	}
 	// Duplicate the label that the duplcate button was clicked.
 	duplicatelabel(index) {
