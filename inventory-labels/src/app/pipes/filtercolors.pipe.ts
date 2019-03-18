@@ -7,7 +7,6 @@ export class FilterColors implements PipeTransform {
 	transform(value: any, modelToFilter: any, yearToFilter: any, sizeToFilter: any, materialToFilter: any) {
 		const tempArray = [];
 
-		console.log("Filter Colors");
 		// console.log(value);
 
 		value.forEach((option, indexMain) => {
@@ -26,7 +25,6 @@ export class FilterColors implements PipeTransform {
 				}
 			});
 		});
-		console.log(tempArray);
 		return tempArray;
 	}
 }
