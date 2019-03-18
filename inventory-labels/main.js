@@ -10,14 +10,15 @@ let win;
 function createWindow() {
   win = new BrowserWindow({
     width: 1200,
-    height: 600,
+	height: 600,
+	minHeight: 600,
+	maxWidth: 1200,
     titleBarStyle: "hiddenInset",
     transparent: true,
     vibrancy: "light"
   });
 
   win.setMinimumSize(1200, 600);
-  win.setMaximumSize(1200, 600);
 
   // load the dist folder from Angular
   win.loadURL(
