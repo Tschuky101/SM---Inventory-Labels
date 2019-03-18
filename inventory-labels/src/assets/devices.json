@@ -2,16 +2,6 @@
 	{
 		"device":"cpu",
 		"name":"Macbook Air",
-		"basePrice" : 1999.99,
-		"year":"2017",
-		"size":"13 inch",
-		"material": null,
-    	"colors": ["Silver"],
-		"touchbar": false
-	},{
-		"device":"cpu",
-		"name":"Macbook Air",
-		"basePrice" : 1999.99,
 		"year":"2018",
 		"size":"13 inch",
 		"material": null,
@@ -19,8 +9,15 @@
 		"touchbar": false
 	},{
 		"device":"cpu",
+		"name":"Macbook Air",
+		"year":"2017",
+		"size":"13 inch",
+		"material": null,
+    	"colors": ["Silver"],
+		"touchbar": false
+	},{
+		"device":"cpu",
 		"name":"Macbook",
-		"basePrice" : 1999.99,
 		"year":"2017",
 		"size":"12 inch",
 		"material": null,
@@ -29,7 +26,6 @@
 	},{
 		"device": "cpu",
 		"name":"Macbook Pro",
-		"basePrice" : 1500,
 		"year":"2018",
 		"size":"15 inch",
 		"material": null,
@@ -37,62 +33,23 @@
 		"touchbar": true
 	},{
 		"device": "cpu",
-		"name": "Macbook Pro",
-		"basePrice": 1500,
-		"year": "2016",
-		"size": "15 inch",
-		"material": null,
-		"colors": ["Silver","Space Gray"],
-		"touchbar": true
-	},{
-		"device": "cpu",
-		"name": "Macbook Pro",
-		"basePrice": 1500,
-		"year": "2016",
-		"size": "13 inch",
-		"material": null,
-		"colors": ["Silver","Space Gray"],
-		"touchbar": true
-	},{
-		"device": "cpu",
 		"name":"Macbook Pro",
-		"basePrice" : 1500,
-		"year":"2014",
-		"size":"15 inch",
-		"material": null,
-    	"colors": ["Silver"],
-		"touchbar": false
-	},{
-		"device": "cpu",
-		"name":"Macbook Pro",
-		"basePrice" : 1500,
 		"year":"2018",
 		"size":"13 inch",
 		"material": null,
     	"colors": ["Silver","Space Gray"],
 		"touchbar": true
 	},{
-		"device": "cpu",
+		"device":"cpu",
 		"name":"Macbook Pro",
-		"basePrice" : 1500,
-		"year":"2015",
+		"year":"2017",
 		"size":"15 inch",
 		"material": null,
-    	"colors":["Silver"],
-		"touchbar": false
-	},{
-		"device": "cpu",
-		"name":"Macbook Pro",
-		"basePrice" : 1500,
-		"year":"2013",
-		"size":"15 inch",
-		"colors":["Silver"],
-		"material": null,
-		"touchbar": false
+		"colors":["Silver","Space Gray"],
+		"touchbar": true
 	},{
 		"device":"cpu",
 		"name":"Macbook Pro",
-		"basePrice" : 1500,
 		"year":"2017",
 		"size":"13 inch",
 		"material": null,
@@ -101,7 +58,6 @@
 	},{
 		"device": "cpu",
 		"name": "Macbook Pro",
-		"basePrice": 1500,
 		"year": "2017",
 		"size": "13 inch",
 		"material": null,
@@ -109,8 +65,79 @@
 		"touchbar": false
 	},{
 		"device": "cpu",
+		"name": "Macbook Pro",
+		"year": "2016",
+		"size": "15 inch",
+		"material": null,
+		"colors": ["Silver","Space Gray"],
+		"touchbar": true
+	},{
+		"device": "cpu",
+		"name": "Macbook Pro",
+		"year": "2016",
+		"size": "13 inch",
+		"material": null,
+		"colors": ["Silver","Space Gray"],
+		"touchbar": true
+	},{
+		"device": "cpu",
+		"name": "Macbook Pro",
+		"year": "2016",
+		"size": "13 inch",
+		"material": null,
+		"colors": ["Silver","Space Gray"],
+		"touchbar": false
+	},{
+		"device": "cpu",
+		"name":"Macbook Pro",
+		"year":"2015",
+		"size":"15 inch",
+		"material": null,
+    	"colors":["Silver"],
+		"touchbar": false
+	},{
+		"device": "cpu",
+		"name":"Macbook Pro",
+		"year":"2015",
+		"size":"13 inch",
+		"material": null,
+    	"colors":["Silver"],
+		"touchbar": false
+	},{
+		"device": "cpu",
+		"name":"Macbook Pro",
+		"year":"2014",
+		"size":"15 inch",
+		"material": null,
+    	"colors": ["Silver"],
+		"touchbar": false
+	},{
+		"device": "cpu",
+		"name":"Macbook Pro",
+		"year":"2014",
+		"size":"13 inch",
+		"material": null,
+    	"colors": ["Silver"],
+		"touchbar": false
+	},{
+		"device": "cpu",
+		"name":"Macbook Pro",
+		"year":"2013",
+		"size":"15 inch",
+		"colors":["Silver"],
+		"material": null,
+		"touchbar": false
+	},{
+		"device": "cpu",
+		"name":"Macbook Pro",
+		"year":"2013",
+		"size":"13 inch",
+		"colors":["Silver"],
+		"material": null,
+		"touchbar": false
+	},{
+		"device": "cpu",
 		"name":"iMac",
-		"basePrice" : 1500,
 		"year":"2017",
 		"size":"21.5 inch",
 		"material": null,
@@ -119,7 +146,6 @@
 	},{
 		"device": "cpu",
 		"name":"iMac Pro",
-		"basePrice" : 1500,
 		"year":"2017",
 		"size":"27 inch",
 		"material":null,
@@ -128,7 +154,6 @@
 	},{
 		"device": "cpu",
 		"name":"iMac",
-		"basePrice" : 1500,
 		"year":"Early 2015",
 		"size":"21.5 inch",
 		"material":null,
@@ -137,7 +162,6 @@
 	},{
 		"device": "cpu",
 		"name":"iMac",
-		"basePrice" : 1500,
 		"year":"Mid 2015",
 		"size":"21.5 inch",
 		"material": null,
@@ -146,7 +170,6 @@
 	},{
 		"device": "cpu",
 		"name":"iMac",
-		"basePrice" : 1500,
 		"year":"Late 2015",
 		"size":"21.5 inch",
 		"material": null,
@@ -155,7 +178,6 @@
 	},{
 		"device": "cpu",
 		"name":"iMac",
-		"basePrice" : 1500,
 		"year":"2014",
 		"size":"21.5 inch",
 		"material": null,
@@ -164,7 +186,6 @@
 	},{
 		"device": "cpu",
 		"name":"iMac",
-		"basePrice" : 1500,
 		"year":"2014",
 		"size":"27 inch",
 		"material": null,
@@ -173,7 +194,6 @@
 	},{
 		"device": "cpu",
 		"name":"Mac Mini",
-		"basePrice" : 1500,
 		"year":"2018",
 		"size":"No monitor",
 		"material": null,
@@ -182,7 +202,6 @@
 	},{
 		"device": "cpu",
 		"name":"Mac Mini",
-		"basePrice" : 1500,
 		"year":"2014",
 		"size":"No monitor",
 		"material": null,
@@ -191,7 +210,6 @@
 	},{
 		"device": "cpu",
 		"name":"Mac Mini",
-		"basePrice" : 1500,
 		"year":"2012",
 		"size":"No monitor",
 		"material": null,
@@ -200,7 +218,6 @@
 	},{
 		"device": "cpu",
 		"name":"Mac Pro",
-		"basePrice" : 1500,
 		"year":"2013",
 		"size":"No monitor",
 		"material": null,
@@ -209,7 +226,6 @@
 	},{
 		"device":"ipad",
 		"name":"iPad",
-		"basePrice" : 329.99,
 		"year":"2017",
 		"size":"9.7 inch",
 		"material": null,
@@ -218,7 +234,6 @@
 	},{
 		"device":"ipad",
 		"name":"iPad Air",
-		"basePrice" : 329.99,
 		"year":"2013",
 		"size":"9.7 inch",
 		"material": null,
@@ -227,7 +242,6 @@
 	},{
 		"device":"iphone",
 		"name":"iPhone SE",
-		"basePrice" : 329.99,
 		"year":"2016",
 		"size":"4 inch",
 		"material": null,
@@ -236,7 +250,6 @@
 	},{
 		"device":"iphone",
 		"name":"iPhone X",
-		"basePrice" : 329.99,
 		"year":"2017",
 		"size":"4 inch",
 		"material": null,
@@ -245,7 +258,6 @@
 	},{
 		"device":"ipad",
 		"name":"iPad Mini",
-		"basePrice" : 329.99,
 		"year":"2013",
 		"size":"7 inch",
 		"material": null,
@@ -254,7 +266,6 @@
 	},{
 		"device":"watch",
 		"name":"1st Gen",
-		"basePrice" : 329.99,
 		"year":"2015",
 		"size":"38mm",
 		"material":"Stainless Steel",
@@ -263,7 +274,6 @@
 	},{
 		"device":"watch",
 		"name":"1st Gen",
-		"basePrice" : 329.99,
 		"year":"2015",
 		"size":"42mm",
 		"material":"Stainless Steel",
@@ -272,7 +282,6 @@
 	},{
 		"device":"watch",
 		"name":"Sieres 1",
-		"basePrice" : 329.99,
 		"year":"2016",
 		"size":"38mm",
 		"material":"Aluminum",
@@ -281,7 +290,6 @@
 	},{
 		"device":"watch",
 		"name":"Sieres 1",
-		"basePrice" : 329.99,
 		"year":"2016",
 		"size":"42mm",
 		"material":"Aluminum",
@@ -290,7 +298,6 @@
 	},{
 		"device":"watch",
 		"name":"Sieres 2",
-		"basePrice" : 329.99,
 		"year":"2017",
 		"size":"38mm",
 		"material":"Aluminum",
@@ -299,7 +306,6 @@
 	},{
 		"device":"watch",
 		"name":"Sieres 2",
-		"basePrice" : 329.99,
 		"year":"2017",
 		"size":"42mm",
 		"material":"Aluminum",
@@ -308,7 +314,6 @@
 	},{
 		"device":"watch",
 		"name":"Sieres 2",
-		"basePrice" : 329.99,
 		"year":"2017",
 		"size":"38mm",
 		"material":"Stainless Steel",
@@ -317,7 +322,6 @@
 	},{
 		"device":"watch",
 		"name":"Sieres 2",
-		"basePrice" : 329.99,
 		"year":"2017",
 		"size":"42mm",
 		"material":"Stainless Steel",
@@ -326,7 +330,6 @@
 	},{
 		"device":"watch",
 		"name":"Sieres 2",
-		"basePrice" : 329.99,
 		"year":"2017",
 		"size":"38mm",
 		"material":"Ceramic",
@@ -335,7 +338,7 @@
 	},{
 		"device":"watch",
 		"name":"Sieres 2",
-		"basePrice" : 329.99,
+
 		"year":"2017",
 		"size":"42mm",
 		"material":"Ceramic",
