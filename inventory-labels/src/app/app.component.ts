@@ -58,9 +58,18 @@ export class AppComponent {
 	/******
 	 * Form Creation & Validation for labels
 	 ******/
+	DatePickerMax = new Date();
+	DatePickerMin = new Date(this.DatePickerMax.getFullYear() - 3, this.DatePickerMax.getMonth(), this.DatePickerMax.getDate());
 	priceValidator = "^\\$?([0-9]{1,3},([0-9]{3},)*[0-9]{3}|[0-9]+)*\\.[9][0-9]$";
 	labelsForm: FormGroup;
 	matcher = new MyErrorStateMatcher();
+
+	// Prevent Picking of product received dates on sunday
+	sundayFilter = (d: Date) => {
+		const weekday = d.getDay();
+
+		return (weekday !== 0);
+	}
 
 	public constructor(
 		private _FileSaverService: FileSaverService,

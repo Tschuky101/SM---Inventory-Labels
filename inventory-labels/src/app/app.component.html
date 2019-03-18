@@ -62,7 +62,7 @@
 								<mat-card-subtitle *ngIf="labelsForm.value.label[i].condition != null">
 									Received on - <i>
 										<mat-form-field id="date">
-											<input matInput [matDatepickerFilter]="sundayFilter" [matDatepicker]="ReceivedDate" formControlName="receivedOn" (click)="ReceivedDate.open()">
+											<input matInput [min]="DatePickerMin" [max]="DatePickerMax" [matDatepickerFilter]="sundayFilter" [matDatepicker]="ReceivedDate" formControlName="receivedOn" (click)="ReceivedDate.open()">
 											<mat-datepicker-toggle [for]="ReceivedDate" matSuffix></mat-datepicker-toggle>
 											<mat-datepicker #ReceivedDate touchUi></mat-datepicker>
 										</mat-form-field>
@@ -233,9 +233,6 @@
 										<section id="Specs">
 											<div id="sectionTitle">{{ labelsForm.value.label[i].cardType.viewValue }} Specs</div>
 											<mat-slide-toggle id="touchbar">Touchbar</mat-slide-toggle>
-											<mat-form-field id="Processor">
-												<input matInput placeholder="Testing">
-											</mat-form-field>
 										</section>
 
 									</div>
