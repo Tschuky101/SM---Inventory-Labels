@@ -24,7 +24,7 @@
 		"year":"2017",
 		"size":"12 inch",
 		"material": null,
-    	"colors": ["Silver", "Gold", "Space Gray"],
+    	"colors": ["Silver", "Gold", "Space Gray", "Rose Gold"],
 		"touchbar": false
 	},{
 		"device": "cpu",
@@ -37,13 +37,31 @@
 		"touchbar": true
 	},{
 		"device": "cpu",
+		"name": "Macbook Pro",
+		"basePrice": 1500,
+		"year": "2016",
+		"size": "15 inch",
+		"material": null,
+		"colors": ["Silver","Space Gray"],
+		"touchbar": true
+	},{
+		"device": "cpu",
+		"name": "Macbook Pro",
+		"basePrice": 1500,
+		"year": "2016",
+		"size": "13 inch",
+		"material": null,
+		"colors": ["Silver","Space Gray"],
+		"touchbar": true
+	},{
+		"device": "cpu",
 		"name":"Macbook Pro",
 		"basePrice" : 1500,
 		"year":"2014",
 		"size":"15 inch",
 		"material": null,
     	"colors": ["Silver"],
-		"touchbar": true
+		"touchbar": false
 	},{
 		"device": "cpu",
 		"name":"Macbook Pro",
@@ -61,7 +79,7 @@
 		"size":"15 inch",
 		"material": null,
     	"colors":["Silver"],
-		"touchbar": true
+		"touchbar": false
 	},{
 		"device": "cpu",
 		"name":"Macbook Pro",
@@ -70,7 +88,7 @@
 		"size":"15 inch",
 		"colors":["Silver"],
 		"material": null,
-		"touchbar": true
+		"touchbar": false
 	},{
 		"device":"cpu",
 		"name":"Macbook Pro",
@@ -178,7 +196,7 @@
 		"size":"No monitor",
 		"material": null,
 		"colors":["Space Black"],
-		"touchbar": true
+		"touchbar": false
 	},{
 		"device":"ipad",
 		"name":"iPad",
