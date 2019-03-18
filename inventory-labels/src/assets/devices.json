@@ -97,6 +97,15 @@
 		"size":"13 inch",
 		"material": null,
 		"colors":["Silver","Space Gray"],
+		"touchbar": true
+	},{
+		"device": "cpu",
+		"name": "Macbook Pro",
+		"basePrice": 1500,
+		"year": "2017",
+		"size": "13 inch",
+		"material": null,
+		"colors": ["Silver","Space Gray"],
 		"touchbar": false
 	},{
 		"device": "cpu",
