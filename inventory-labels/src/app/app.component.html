@@ -99,134 +99,145 @@
 								</div>
 								<div id="form_container" *ngIf="labelsForm.value.label[i].condition != null">
 									<div id="Computer" *ngIf="labelsForm.value.label[i].cardType.type == 'cpu'">
-										<mat-form-field id="Device" style="width: 135px">
-											<mat-select
-												placeholder="Select {{ labelsForm.value.label[i].cardType.viewValue }}"
-												formControlName="device"
-												(selectionChange)="
-													deviceModelChanged(i, years, sizes, labelsForm.value.label[i].device, labelsForm.value.label[i].year)
-											">
-												<mat-option disabled>
-													-- Select {{ labelsForm.value.label[i].cardType.viewValue }} --
-												</mat-option>
-												<mat-option *ngFor="let option of (models | DisplayModels: 'cpu')" [value]="option.name">
-													{{ option.name }}
-												</mat-option>
-											</mat-select>
-											<mat-error
-												*ngIf="
-													label.controls.device.errors && (
-														label.controls.device.dirty ||
-														label.controls.device.touched
-													)
-											">
-												<span *ngIf="label.controls.device.errors.required">This is Required</span>
-											</mat-error>
-										</mat-form-field>
-										<mat-form-field id="Year" style="width: 135px;">
-											<mat-select
-												placeholder="{{ labelsForm.value.label[i].cardType.viewValue}} Year"
-												formControlName="year"
-												(selectionChange)="disableSizes(i)"
-												[disabled]="(
-														years | FilterYears: labelsForm.value.label[i].device
-													).length == 1 ||
-													labelsForm.value.label[i].device == null"
-											>
-												<mat-option disabled>
-													-- Select {{ labelsForm.value.label[i].device }} Year --
-												</mat-option>
-												<mat-option *ngFor="let option of (years | FilterYears: labelsForm.value.label[i].device)" [value]="option.year">
-													{{ option.year}}
-												</mat-option>
-											</mat-select>
-											<mat-error
-												*ngIf="
-													label.controls.year.errors && (
-														label.controls.year.dirty ||
-														label.controls.year.touched
-													)
-											">
-												<span *ngIf="label.controls.year.errors.required">This is Required</span>
-											</mat-error>
-										</mat-form-field>
-										<mat-form-field id="ScreenSize" style="width: 135px">
-											<mat-select
-												placeholder="{{ labelsForm.value.label[i].cardType.viewValue }} Size"
-												formControlName="size"
-												[disabled]="(
-														sizes | FilterSizes: labelsForm.value.label[i].device: labelsForm.value.label[i].year
-													).length == 1 ||
-													(
-														labelsForm.value.label[i].device == null ||
-														labelsForm.value.label[i].year == null
-													)"
-												(selectionChange)="disableColors(i)"
-											>
-												<mat-option>
-													-- Select {{ labelsForm.value.label[i].device }} Size --
-												</mat-option>
-												<mat-option
-													*ngFor="
-														let option of (
+										<section id="Description">
+											<div id="sectionTitle">{{ labelsForm.value.label[i].cardType.viewValue }} Description</div>
+											<mat-form-field id="Device" style="width: 135px">
+												<mat-select
+													placeholder="Select {{ labelsForm.value.label[i].cardType.viewValue }}"
+													formControlName="device"
+													(selectionChange)="
+														deviceModelChanged(i, years, sizes, labelsForm.value.label[i].device, labelsForm.value.label[i].year)
+												">
+													<mat-option disabled>
+														-- Select {{ labelsForm.value.label[i].cardType.viewValue }} --
+													</mat-option>
+													<mat-option *ngFor="let option of (models | DisplayModels: 'cpu')" [value]="option.name">
+														{{ option.name }}
+													</mat-option>
+												</mat-select>
+												<mat-error
+													*ngIf="
+														label.controls.device.errors && (
+															label.controls.device.dirty ||
+															label.controls.device.touched
+														)
+												">
+													<span *ngIf="label.controls.device.errors.required">This is Required</span>
+												</mat-error>
+											</mat-form-field>
+											<mat-form-field id="Year" style="width: 135px;">
+												<mat-select
+													placeholder="{{ labelsForm.value.label[i].cardType.viewValue}} Year"
+													formControlName="year"
+													(selectionChange)="disableSizes(i)"
+													[disabled]="(
+															years | FilterYears: labelsForm.value.label[i].device
+														).length == 1 ||
+														labelsForm.value.label[i].device == null"
+												>
+													<mat-option disabled>
+														-- Select {{ labelsForm.value.label[i].device }} Year --
+													</mat-option>
+													<mat-option *ngFor="let option of (years | FilterYears: labelsForm.value.label[i].device)" [value]="option.year">
+														{{ option.year}}
+													</mat-option>
+												</mat-select>
+												<mat-error
+													*ngIf="
+														label.controls.year.errors && (
+															label.controls.year.dirty ||
+															label.controls.year.touched
+														)
+												">
+													<span *ngIf="label.controls.year.errors.required">This is Required</span>
+												</mat-error>
+											</mat-form-field>
+											<mat-form-field id="ScreenSize" style="width: 135px">
+												<mat-select
+													placeholder="{{ labelsForm.value.label[i].cardType.viewValue }} Size"
+													formControlName="size"
+													[disabled]="(
 															sizes | FilterSizes: labelsForm.value.label[i].device: labelsForm.value.label[i].year
+														).length == 1 ||
+														(
+															labelsForm.value.label[i].device == null ||
+															labelsForm.value.label[i].year == null
 														)"
-													[value]="option.size">
-													{{ option.size}}
-												</mat-option>
-											</mat-select>
-											<mat-error
-												*ngIf="
-													label.controls.size.errors && (
-														label.controls.size.dirty ||
-														label.controls.size.touched
-													)
-											">
-												<span *ngIf="label.controls.size.errors.required">This is Required</span>
-											</mat-error>
-										</mat-form-field>
-										<mat-form-field id="Color" style="width: 135px">
-											<mat-select
-												id="Colors"
-												placeholder="{{ labelsForm.value.label[i].cardType.viewValue }} Color"
-												formControlName="color"
-												[disabled]="(
-													colors | FilterColors:
+													(selectionChange)="disableColors(i)"
+												>
+													<mat-option>
+														-- Select {{ labelsForm.value.label[i].device }} Size --
+													</mat-option>
+													<mat-option
+														*ngFor="
+															let option of (
+																sizes | FilterSizes: labelsForm.value.label[i].device: labelsForm.value.label[i].year
+															)"
+														[value]="option.size">
+														{{ option.size}}
+													</mat-option>
+												</mat-select>
+												<mat-error
+													*ngIf="
+														label.controls.size.errors && (
+															label.controls.size.dirty ||
+															label.controls.size.touched
+														)
+												">
+													<span *ngIf="label.controls.size.errors.required">This is Required</span>
+												</mat-error>
+											</mat-form-field>
+											<mat-form-field id="Color" style="width: 135px">
+												<mat-select
+													id="Colors"
+													placeholder="{{ labelsForm.value.label[i].cardType.viewValue }} Color"
+													formControlName="color"
+													[disabled]="(
+														colors | FilterColors:
+																	labelsForm.value.label[i].device:
+																	labelsForm.value.label[i].year:
+																	labelsForm.value.label[i].size:
+																	null
+														).length == 1 || (
+															labelsForm.value.label[i].device == null ||
+															labelsForm.value.label[i].year == null ||
+															labelsForm.value.label[i].size == null
+														)"
+												>
+													<mat-option>
+														-- Select {{ labelsForm.value.label[i].cardType.viewValue }} Color --
+													</mat-option>
+													<mat-option
+														[value]="option['name']"
+														*ngFor="
+															let option of colors | FilterColors:
 																labelsForm.value.label[i].device:
 																labelsForm.value.label[i].year:
 																labelsForm.value.label[i].size:
-																null
-													).length == 1 || (
-														labelsForm.value.label[i].device == null ||
-														labelsForm.value.label[i].year == null ||
-														labelsForm.value.label[i].size == null
-													)"
-											>
-												<mat-option>
-													-- Select {{ labelsForm.value.label[i].cardType.viewValue }} Color --
-												</mat-option>
-												<mat-option
-													[value]="option['name']"
-													*ngFor="
-														let option of colors | FilterColors:
-															labelsForm.value.label[i].device:
-															labelsForm.value.label[i].year:
-															labelsForm.value.label[i].size:
-															null"
-												>
-													{{ option.name }}
-												</mat-option>
-											</mat-select>
-											<mat-error
-												*ngIf="
-													label.controls.color.errors && (
-														label.controls.color.dirty ||
-														label.controls.color.touched
-													)
-											">
-												<span *ngIf="label.controls.color.errors.required">This is Required</span>
-											</mat-error>
-										</mat-form-field>
+																null"
+													>
+														{{ option.name }}
+													</mat-option>
+												</mat-select>
+												<mat-error
+													*ngIf="
+														label.controls.color.errors && (
+															label.controls.color.dirty ||
+															label.controls.color.touched
+														)
+												">
+													<span *ngIf="label.controls.color.errors.required">This is Required</span>
+												</mat-error>
+											</mat-form-field>
+										</section>
+										<section id="Specs">
+											<div id="sectionTitle">{{ labelsForm.value.label[i].cardType.viewValue }} Specs</div>
+											<mat-slide-toggle id="touchbar">Touchbar</mat-slide-toggle>
+											<mat-form-field id="Processor">
+												<input matInput placeholder="Testing">
+											</mat-form-field>
+										</section>
+
 									</div>
 									<div id="iPad" *ngIf="labelsForm.value.label[i].cardType.type == 'ipad'">
 										<mat-form-field style="width: 135px">
