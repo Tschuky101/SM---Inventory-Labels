@@ -392,6 +392,7 @@ export class AppComponent {
 			});
 		});
 
+		// Filter the colors Alphabetically
 		this.colors.sort(function(a, b) {
 			const nameA = a['name'].toUpperCase();
 			const nameB = b['name'].toUpperCase();
