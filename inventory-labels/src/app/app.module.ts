@@ -11,6 +11,7 @@ import { DisplayModels } from './pipes/displaymodels.pipe';
 import { FilterYears } from './pipes/filteryears.pipe';
 import { FilterSizes } from './pipes/filtersizes.pipe';
 import { FilterColors } from './pipes/filtercolors.pipe';
+import { FilterTouchbar } from './pipes/filterTouchbar.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
 	MatAutocompleteModule,
@@ -104,13 +105,14 @@ export class MaterialModule {}
     ReactiveFormsModule
   ],
   declarations: [
-    AppComponent,
-    ClearLabelsDialogComponent,
-    LoadJsonComponent,
-    DisplayModels,
-    FilterYears,
+	AppComponent,
+	ClearLabelsDialogComponent,
+	LoadJsonComponent,
+	DisplayModels,
+	FilterYears,
 	FilterSizes,
-	FilterColors
+	FilterColors,
+	FilterTouchbar
   ],
   entryComponents: [
 	ClearLabelsDialogComponent,

@@ -14,8 +14,10 @@ import { DevicesService } from "./services/dataservices.service";
 import { FilterYears } from "./pipes/filteryears.pipe";
 import { FilterSizes } from "./pipes/filtersizes.pipe";
 import { FilterColors } from "./pipes/filtercolors.pipe";
+import { FilterTouchbar } from "./pipes/filterTouchbar.pipe";
 import { LoadJsonComponent } from "./dialogs/load-json.component";
 import { ClearLabelsDialogComponent } from "./dialogs/clear-labels.component";
+import { TemplateBindingParseResult } from "@angular/compiler";
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -28,7 +30,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
-	providers: [ DevicesService, FilterYears, FilterSizes, FilterColors ],
+	providers: [ DevicesService, FilterYears, FilterSizes, FilterColors, FilterTouchbar ],
 	styleUrls: ['./app.component.scss']
 })
 @Injectable()
@@ -53,6 +55,7 @@ export class AppComponent {
 	years: Object[] = [];
 	sizes: Object[] = [];
 	colors: Object[] = [];
+	touchbar: Object[] = [];
 	carriers: Object[] = [ "Unlocked", "Verizon", "AT&T", "Sprint", "T-Mobile"];
 
 	/******
@@ -78,7 +81,8 @@ export class AppComponent {
 		private zone: NgZone,
 		private filterYears: FilterYears,
 		private filterSizes: FilterSizes,
-		private filterColors: FilterColors
+		private filterColors: FilterColors,
+		private filterTouchbar: FilterTouchbar
 	) {
 		// Functions exposed outside of App.
 		// to call function run "window.nameoffunction.zone.run(() => {window.nameoffunction.componentFn();})"
@@ -104,6 +108,7 @@ export class AppComponent {
 			this.getYears();
 			this.getSizes();
 			this.getColors();
+			this.getTouchbar();
 		});
 
 		// Load Pricing information and pass along if we are loading from local or remote data
@@ -410,6 +415,135 @@ export class AppComponent {
 		console.log("Colors Array");
 		console.log(this.colors);
 	}
+	getTouchbar() {
+		// Generate the template for devices with a touchbar, and those without.
+		for (let i = 0; i <= 1; i++) {
+			if (i === 0) {
+				const template = {
+					value: true,
+					devices: []
+				};
+				this.touchbar.push(template);
+			} else {
+				const template = {
+					value: false,
+					devices: []
+				};
+				this.touchbar.push(template);
+			}
+		}
+
+		// Add Devices to either the true or false list if they aren't already added
+		this.devices.forEach(device => {
+			if (device.device === 'cpu') {
+				if (device.touchbar === true) {
+					if (this.touchbar[0]['devices'].length == 0) {
+						const template = {
+							name: device.name,
+							years: []
+						};
+						this.touchbar[0]['devices'].push(template);
+					} else {
+						if (this.touchbar[0]['devices'].findIndex(item => item.name === device.name) > -1) {
+						} else {
+							const template = {
+								name: device.name,
+								years: []
+							};
+							this.touchbar[0]['devices'].push(template);
+						}
+					}
+				} else {
+					if (this.touchbar[1]['devices'].length === 0) {
+						const template = {
+							name: device.name,
+							years: []
+						};
+						this.touchbar[1]['devices'].push(template);
+					} else {
+						if (this.touchbar[1]['devices'].findIndex(item => item.name === device.name) > -1) {
+						} else {
+							const template = {
+								name: device.name,
+								years: []
+							};
+							this.touchbar[1]['devices'].push(template);
+						}
+					}
+				}
+			}
+		});
+
+		// Add the years and sizes for the devices for the true and false array
+		this.devices.forEach(device => {
+			if (device.device === 'cpu') {
+				if (device.touchbar === true) {
+					this.touchbar[0]['devices'].forEach((model, index) => {
+						// const DoesSizeExist = this.touchbar[0]['devices'][index]['sizes'].includes(device.size);
+						if (this.touchbar[0]['devices'][index]['years'].findIndex(item => item.year === device.year) === -1) {
+							// const DoesYearExist = false;
+							if (this.touchbar[0]['devices'][index]['name'] === device.name) {
+								const template = {
+									year: device.year,
+									sizes: []
+								};
+								this.touchbar[0]['devices'][index]['years'].push(template);
+							}
+						}
+					});
+				} else {
+					this.touchbar[1]["devices"].forEach((model, index) => {
+						if (this.touchbar[1]['devices'][index]['years'].findIndex(item => item.year === device.year) === -1) {
+
+							if (this.touchbar[1]['devices'][index]['name'] === device.name) {
+								const template = {
+									year: device.year,
+									sizes: []
+								};
+								this.touchbar[1]['devices'][index]['years'].push(template);
+							}
+						}
+					});
+				}
+			}
+		});
+
+		this.devices.forEach(device => {
+			if (device.device === 'cpu') {
+				if (device.touchbar === true) {
+					this.touchbar[0]['devices'].forEach((model, index) => {
+						if (device.name === model.name) {
+							this.touchbar[0]['devices'][index]['years'].forEach((year, index2) => {
+								if (device.year === year.year) {
+									const DoesSizeExist = this.touchbar[0]['devices'][index]['years'][index2]['sizes'].includes(device.size);
+
+									if (DoesSizeExist === false) {
+										this.touchbar[0]['devices'][index]['years'][index2]['sizes'].push(device.size);
+									}
+								}
+							});
+						}
+					});
+				} else {
+					this.touchbar[1]['devices'].forEach((model, index) => {
+						if (device.name === model.name) {
+							this.touchbar[1]['devices'][index]['years'].forEach((year, index2) => {
+								if (device.year === year.year) {
+									const DoesSizeExist = this.touchbar[1]['devices'][index]['years'][index2]['sizes'].includes(device.size);
+
+									if (DoesSizeExist === false) {
+										this.touchbar[1]['devices'][index]['years'][index2]['sizes'].push(device.size);
+									}
+								}
+							});
+						}
+					});
+				}
+			}
+		});
+		console.log("Touchbar list");
+		console.log(this.touchbar);
+	}
 
 	/******
 	 * Add, Remove, and Duplicate Functions Label functions
@@ -563,6 +697,7 @@ export class AppComponent {
 		this.disableInputYears(index);
 		this.disableSizes(index);
 		this.disableColors(index);
+		this.disableTouchbar(index);
 	}
 	disableInputYears(index) {
 		const device = this.labelsForm.controls.label['controls'][index].get('device').value;
@@ -582,10 +717,12 @@ export class AppComponent {
 			this.labelsForm.controls.label['controls'][index].get('year').setValue(tempdata[0].year);
 			this.disableSizes(index);
 			this.disableColors(index);
+			this.disableTouchbar(index);
 		} else {
 			this.labelsForm.controls.label['controls'][index].get('year').reset();
 			this.disableSizes(index);
 			this.disableColors(index);
+			this.disableTouchbar(index);
 		}
 	}
 	disableSizes(index) {
@@ -597,9 +734,11 @@ export class AppComponent {
 			this.labelsForm.controls.label['controls'][index].get('size').reset();
 			this.labelsForm.controls.label['controls'][index].get('size').setValue(tempdata[0].size);
 			this.disableColors(index);
+			this.disableTouchbar(index);
 		} else {
 			this.labelsForm.controls.label['controls'][index].get('size').reset();
 			this.disableColors(index);
+			this.disableTouchbar(index);
 		}
 	}
 	disableColors(index) {
@@ -611,8 +750,26 @@ export class AppComponent {
 		if (tempdata.length == 1) {
 			this.labelsForm.controls.label['controls'][index].get('color').reset();
 			this.labelsForm.controls.label['controls'][index].get('color').setValue(tempdata[0].name);
+			this.disableTouchbar(index);
 		} else {
 			this.labelsForm.controls.label['controls'][index].get('color').reset();
+			this.disableTouchbar(index);
+		}
+
+	}
+	disableTouchbar(index) {
+		const device = this.labelsForm.controls.label['controls'][index].get('device').value;
+		const year = this.labelsForm.controls.label['controls'][index].get('year').value;
+		const size = this.labelsForm.controls.label['controls'][index].get('size').value;
+		const tempdata = this.filterTouchbar.transform(this.touchbar, device, year, size);
+
+		if (tempdata.length === 0 || tempdata.length >= 2 || tempdata.length === 1 && tempdata[0].value === false) {
+			this.labelsForm.controls.label['controls'][index].get('touchbar').reset();
+			this.labelsForm.controls.label['controls'][index].get('touchbar').setValue(false);
+		}
+		if (tempdata.length === 1 && tempdata[0].value === true) {
+			this.labelsForm.controls.label['controls'][index].get('touchbar').reset();
+			this.labelsForm.controls.label['controls'][index].get('touchbar').setValue(true);
 		}
 
 	}

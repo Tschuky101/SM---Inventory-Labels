@@ -232,7 +232,56 @@
 										</section>
 										<section id="Specs">
 											<div id="sectionTitle">{{ labelsForm.value.label[i].cardType.viewValue }} Specs</div>
-											<mat-slide-toggle id="touchbar">Touchbar</mat-slide-toggle>
+											<mat-slide-toggle
+												*ngIf="(
+														(touchbar | FilterTouchbar:
+															labelsForm.value.label[i].device:
+															labelsForm.value.label[i].year:
+															labelsForm.value.label[i].size
+														).length == 1 && (touchbar | FilterTouchbar:
+															labelsForm.value.label[i].device:
+															labelsForm.value.label[i].year:
+															labelsForm.value.label[i].size
+														)[0].value === true
+													) || (touchbar | FilterTouchbar:
+														labelsForm.value.label[i].device:
+														labelsForm.value.label[i].year:
+														labelsForm.value.label[i].size
+													).length === 2
+												"
+												id="touchbar"
+												formControlName="touchbar"
+												[disabled]="(
+														(touchbar | FilterTouchbar:
+															labelsForm.value.label[i].device:
+															labelsForm.value.label[i].year:
+															labelsForm.value.label[i].size
+														).length == 1 && (touchbar | FilterTouchbar:
+															labelsForm.value.label[i].device:
+															labelsForm.value.label[i].year:
+															labelsForm.value.label[i].size
+														)[0].value === false
+													) || (
+														touchbar | FilterTouchbar:
+															labelsForm.value.label[i].device:
+															labelsForm.value.label[i].year:
+															labelsForm.value.label[i].size
+														).length === 0 ||
+													(
+														(touchbar | FilterTouchbar:
+															labelsForm.value.label[i].device:
+															labelsForm.value.label[i].year:
+															labelsForm.value.label[i].size
+														).length == 1 && (touchbar | FilterTouchbar:
+															labelsForm.value.label[i].device:
+															labelsForm.value.label[i].year:
+															labelsForm.value.label[i].size
+														)[0].value === true
+													)
+												"
+											>
+												Touchbar
+											</mat-slide-toggle>
 										</section>
 
 									</div>
