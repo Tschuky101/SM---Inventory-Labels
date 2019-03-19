@@ -10,6 +10,10 @@ html, body{
 }
 mat-drawer{
 	width: 250px;
+	-webkit-app-region: no-drag;
+}
+mat-drawer-content{
+	-webkit-app-region: drag;
 }
 #label_container{
 	padding: 50px;
@@ -18,6 +22,7 @@ mat-drawer{
 
 	mat-card{
 		width: 800px;
+		-webkit-app-region: no-drag;
 
 		&:not(:first-child){
 			margin-top: 50px;
@@ -56,6 +61,11 @@ mat-drawer{
 		#priceError{
 			font-size: 12px !important;
 			margin-top: -2px !important;
+		}
+		#sectionTitle{
+			text-decoration: underline;
+			font-style: italic;
+			margin-bottom: 10px;
 		}
 		mat-grid-tile{
 			border-radius: 4px;
