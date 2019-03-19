@@ -373,11 +373,11 @@ export class AppComponent {
 				this.colors.forEach((color, index) => {
 					if (deviceColor == color['name']) {
 						this.colors[index]['models'].forEach((model, index2) => {
-							const DoesSizeEsist = this.colors[index]['models'][index2]['sizes'].includes(device.size);
+							const DoesSizeExist = this.colors[index]['models'][index2]['sizes'].includes(device.size);
 							const DoesYearExist = this.colors[index]['models'][index2]['years'].includes(device.year);
 							const DoesMaterialExist = this.colors[index]['models'][index2]['materials'].includes(device.material);
 
-							if (DoesSizeEsist != true && this.colors[index]['models'][index2]['device'] === deviceName) {
+							if (DoesSizeExist != true && this.colors[index]['models'][index2]['device'] === deviceName) {
 								this.colors[index]['models'][index2]['sizes'].push(device.size);
 							}
 							if (DoesYearExist != true && this.colors[index]['models'][index2]['device'] === deviceName) {
