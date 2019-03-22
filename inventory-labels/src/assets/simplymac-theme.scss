@@ -299,6 +299,9 @@ $simplymac-dark-theme: mat-dark-theme(
       // color: lighten(#000, 75%);
     }
   }
+  .LightOrDark{
+	  fill: rgba(0,0,0,0.87);
+  }
   @include angular-material-theme($simplymac-light-theme);
   @include simplymac-theme($simplymac-light-theme);
 }
@@ -320,6 +323,9 @@ $simplymac-dark-theme: mat-dark-theme(
         0px 0px 5px rgba(0, 0, 0, 0.15);
       color: lighten(#000, 75%);
     }
+  }
+  .LightOrDark{
+	  fill: #ffffff;
   }
   @include angular-material-theme($simplymac-dark-theme);
   @include simplymac-theme($simplymac-dark-theme);

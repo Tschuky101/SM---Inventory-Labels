@@ -1,10 +1,35 @@
 [
-	{"value":"cpu", "viewValue":"Computer"},
-	{"value":"ipad", "viewValue":"iPad"},
-	{"value":"iphone", "viewValue":"iPhone"},
-	{"value":"watch", "viewValue":"Apple Watch"},
-	{"value":"tv", "viewValue":"Apple Tv"},
-	{"value":"other", "viewValue":"Apple Pencil"},
-	{"value":"other", "viewValue":"HomePod"},
-	{"value":"other", "viewValue":"AirPods"}
+	{
+		"value":"cpu",
+		"viewValue":"Computer",
+		"icon": "./assets/SVG/computers.svg"
+	},{
+		"value":"ipad",
+		"viewValue":"iPad",
+		"icon": "./assets/SVG/ipads.svg"
+	},{
+		"value":"iphone",
+		"viewValue":"iPhone",
+		"icon": "./assets/SVG/iphones.svg"
+	},{
+		"value":"watch",
+		"viewValue":"Apple Watch",
+		"icon": "./assets/SVG/watch.svg"
+	},{
+		"value":"tv",
+		"viewValue":"Apple Tv",
+		"icon": "./assets/SVG/apple_tv.svg"
+	},{
+		"value":"other",
+		"viewValue":"Apple Pencil",
+		"icon": "./assets/SVG/apple_pencil.svg"
+	},{
+		"value":"other",
+		"viewValue":"HomePod",
+		"icon": "./assets/SVG/homepod.svg"
+	},{
+		"value":"other",
+		"viewValue":"AirPods",
+		"icon": "./assets/SVG/airpods.svg"
+		}
 ]

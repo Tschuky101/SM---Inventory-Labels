@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FileSaverModule } from 'ngx-filesaver';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AngularSvgIconModule } from "angular-svg-icon";
 
 import { AppComponent, } from './app.component';
 import { ClearLabelsDialogComponent } from './dialogs/clear-labels.component';
@@ -93,32 +94,30 @@ import {
 
 export class MaterialModule {}
 @NgModule({
-  imports: [
-    MaterialModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    FileSaverModule,
-    FormsModule,
-    ReactiveFormsModule
-  ],
-  declarations: [
-	AppComponent,
-	ClearLabelsDialogComponent,
-	LoadJsonComponent,
-	DisplayModels,
-	FilterYears,
-	FilterSizes,
-	FilterColors,
-	FilterTouchbar
-  ],
-  entryComponents: [
-	ClearLabelsDialogComponent,
-	LoadJsonComponent
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+	imports: [
+		MaterialModule,
+		BrowserModule,
+		BrowserAnimationsModule,
+		HttpClientModule,
+		MatButtonModule,
+		MatCheckboxModule,
+		FileSaverModule,
+		FormsModule,
+		ReactiveFormsModule,
+		AngularSvgIconModule
+	],
+	declarations: [
+		AppComponent,
+		ClearLabelsDialogComponent,
+		LoadJsonComponent,
+		DisplayModels,
+		FilterYears,
+		FilterSizes,
+		FilterColors,
+		FilterTouchbar
+	],
+	entryComponents: [ClearLabelsDialogComponent, LoadJsonComponent],
+	providers: [],
+	bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

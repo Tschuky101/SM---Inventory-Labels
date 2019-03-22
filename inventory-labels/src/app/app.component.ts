@@ -6,6 +6,7 @@ import { MatDialog } from "@angular/material";
 import { FormControl, FormGroup, FormArray, FormGroupDirective, NgForm, Validators } from "@angular/forms";
 import { FileSaverService } from "ngx-filesaver";
 import { ErrorStateMatcher } from "@angular/material/core";
+import { AngularSvgIconModule } from "angular-svg-icon";
 
 /******
  * Load Services and other compoents for app.component.ts
@@ -17,7 +18,6 @@ import { FilterColors } from "./pipes/filtercolors.pipe";
 import { FilterTouchbar } from "./pipes/filterTouchbar.pipe";
 import { LoadJsonComponent } from "./dialogs/load-json.component";
 import { ClearLabelsDialogComponent } from "./dialogs/clear-labels.component";
-import { TemplateBindingParseResult } from "@angular/compiler";
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -30,7 +30,14 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
-	providers: [ DevicesService, FilterYears, FilterSizes, FilterColors, FilterTouchbar ],
+	providers: [
+		DevicesService,
+		FilterYears,
+		FilterSizes,
+		FilterColors,
+		FilterTouchbar,
+		AngularSvgIconModule
+	],
 	styleUrls: ['./app.component.scss']
 })
 @Injectable()

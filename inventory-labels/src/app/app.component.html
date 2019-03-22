@@ -72,13 +72,23 @@
 							</mat-card-header>
 							<mat-card-content>
 								<div id="AddLabel_ChooseType" formGroupName="cardType" *ngIf="labelsForm.value.label[i].cardType.type == null">
-									<mat-grid-list cols="5" gutterSize="15px" rowHeight="1:1.25">
-										<mat-grid-tile *ngFor="let option of cardTypes" id="{{ option.value }}"
-											(click)="
-												updateValue(i,'cardType','type',option.value);
-												updateValue(i,'cardType','viewValue',option.viewValue)
-										">
-											{{ option.viewValue }}
+									<mat-grid-list cols="4" gutterSize="15px" rowHeight="1:1">
+										<mat-grid-tile *ngFor="let option of cardTypes" id="{{ option.value }}">
+											<div
+												id="click_barrier"
+												(click)="
+													updateValue(i,'cardType','type',option.value);
+													updateValue(i,'cardType','viewValue',option.viewValue)
+												"
+											></div>
+											<div id="icon">
+												<svg-icon [applyCss]="true" src="{{option.icon}}">
+
+												</svg-icon>
+											</div><br>
+											<div id="title">
+												{{ option.viewValue }}
+											</div>
 										</mat-grid-tile>
 									</mat-grid-list>
 								</div>
